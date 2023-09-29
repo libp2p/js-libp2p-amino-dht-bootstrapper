@@ -9,24 +9,42 @@
 
 ## Table of contents <!-- omit in toc -->
 
+- [Bootstrap details](#bootstrap-details)
+  - [Requirements of a bootstrap node](#requirements-of-a-bootstrap-node)
 - [Install](#install)
   - [Browser `<script>` tag](#browser-script-tag)
 - [License](#license)
 - [Contribution](#contribution)
 
-## Install
+## Bootstrap details
+
+EPIC tracking issue: https://github.com/protocol/bifrost-infra/issues/2778
+
+Find more info at https://github.com/protocol/bifrost-infra/blob/master/docs/bootstrap.md
+
+Rust bootstrapper: https://github.com/libp2p/rust-libp2p/tree/master/misc/server
+
+### Requirements of a bootstrap node
+
+* The Peer IDs of the default bootstrap nodes are set explicitly, to assert that you only trust a specific peer at a given ip or dns entry.
+    * This makes it harder for attackers to spoof or otherwise MITM attack, as they would also have to compromise our infrastructure to steal the private key behind the Peer ID.
+* Defaults
+    * The default addresses for the bootstrap nodes are set in the ipfs/go-ipfs-config configuration
+
+## Start the bootstrapper
 
 ```console
-$ npm i @libp2p/amino-dht-bootstrapper
+$ npx @libp2p/amino-dht-bootstrapper
 ```
 
-### Browser `<script>` tag
+### Configuring bootstrapper options
 
-Loading this module through a script tag will make it's exports available as `Libp2pAminoDhtBootstrapper` in the global namespace.
-
-```html
-<script src="https://unpkg.com/@libp2p/amino-dht-bootstrapper/dist/index.min.js"></script>
-```
+Options:
+      --config <CONFIG>              Path to IPFS config file
+      --metrics-path <METRICS_PATH>  Metric endpoint path [default: /metrics]
+      --enable-kademlia              Whether to run the libp2p Kademlia protocol and join the IPFS DHT
+      --enable-autonat               Whether to run the libp2p Autonat protocol
+  -h, --help                         Print help
 
 ## License
 
