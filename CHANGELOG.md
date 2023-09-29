@@ -1,3 +1,15 @@
+## [1.0.1](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.0.0...v1.0.1) (2023-09-29)
+
+
+### Bug Fixes
+
+* add docker-compose ([#5](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/5)) ([3b4c764](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/3b4c764475ecbf28ed0344497743de2a7761ab93))
+
+
+### Trivial Changes
+
+* minor clean up ([e649dfa](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/e649dfa1737d62fcba95485aecbe88706bdc4466))
+
 ## 1.0.0 (2023-09-29)
 
 
