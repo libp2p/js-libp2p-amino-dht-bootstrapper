@@ -11,8 +11,9 @@
 
 - [Bootstrap details](#bootstrap-details)
   - [Requirements of a bootstrap node](#requirements-of-a-bootstrap-node)
-- [Install](#install)
-  - [Browser `<script>` tag](#browser-script-tag)
+- [Start the bootstrapper](#start-the-bootstrapper)
+  - [Configuring bootstrapper options](#configuring-bootstrapper-options)
+  - [Building the Docker Image](#building-the-docker-image)
 - [License](#license)
 - [Contribution](#contribution)
 
@@ -39,12 +40,34 @@ $ npx @libp2p/amino-dht-bootstrapper
 
 ### Configuring bootstrapper options
 
+```sh
 Options:
       --config <CONFIG>              Path to IPFS config file
       --metrics-path <METRICS_PATH>  Metric endpoint path [default: /metrics]
       --enable-kademlia              Whether to run the libp2p Kademlia protocol and join the IPFS DHT
       --enable-autonat               Whether to run the libp2p Autonat protocol
   -h, --help                         Print help
+```
+
+### Building the Docker Image
+
+Building should be straightforward from the root of the repository:
+
+```sh
+$ docker build . --tag amino --file=Dockerfile
+```
+
+Running the docker image (once built):
+
+```sh
+$ docker run -it amino
+```
+
+To pass args:
+
+```sh
+$ docker run -it amino [-- [--enable-kademlia] [--enable-autonat]...]
+```
 
 ## License
 
