@@ -13,7 +13,8 @@
   - [Requirements of a bootstrap node](#requirements-of-a-bootstrap-node)
 - [Start the bootstrapper](#start-the-bootstrapper)
   - [Configuring bootstrapper options](#configuring-bootstrapper-options)
-  - [Building the Docker Image](#building-the-docker-image)
+- [Building the Docker Image](#building-the-docker-image)
+  - [Running the docker image (once built):](#running-the-docker-image-once-built)
 - [License](#license)
 - [Contribution](#contribution)
 
@@ -49,7 +50,7 @@ Options:
   -h, --help                         Print help
 ```
 
-### Building the Docker Image
+## Building the Docker Image
 
 Building should be straightforward from the root of the repository:
 
@@ -57,7 +58,7 @@ Building should be straightforward from the root of the repository:
 $ docker build . --tag amino --file=Dockerfile
 ```
 
-Running the docker image (once built):
+### Running the docker image (once built):
 
 ```sh
 $ docker run -it amino
