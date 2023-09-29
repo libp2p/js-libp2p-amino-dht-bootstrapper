@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 
 /**
- * @packageDoc
+ * @packageDocumentation
  * Health-check that ensures the bootstrapper is running and dialable.
  *
  * This binary can be executed via the docker --health-cmd option, but we automatically execute it
@@ -11,22 +11,22 @@
  * See https://github.com/libp2p/rust-libp2p/tree/master/misc/server for more information
  *
  * - need to execute functionality similar to https://github.com/mxinden/libp2p-lookup/
- *   as used by https://github.com/libp2p/rust-libp2p/tree/master/misc/server
+ * as used by https://github.com/libp2p/rust-libp2p/tree/master/misc/server
  */
 import { parseArgs } from 'node:util'
-import { createLibp2p } from 'libp2p'
-import { webSockets } from '@libp2p/websockets'
-import { tcp } from '@libp2p/tcp'
-import { yamux } from '@chainsafe/libp2p-yamux'
-import { mplex } from '@libp2p/mplex'
 import { noise } from '@chainsafe/libp2p-noise'
-import { multiaddr, type Multiaddr } from '@multiformats/multiaddr'
-import { peerIdFromString } from '@libp2p/peer-id'
+import { yamux } from '@chainsafe/libp2p-yamux'
 import { kadDHT } from '@libp2p/kad-dht'
+import { mplex } from '@libp2p/mplex'
+import { peerIdFromString } from '@libp2p/peer-id'
+import { tcp } from '@libp2p/tcp'
+import { webSockets } from '@libp2p/websockets'
+import { multiaddr, type Multiaddr } from '@multiformats/multiaddr'
+import { createLibp2p } from 'libp2p'
 
 // // @ts-expect-error unused
 const { positionals } = parseArgs({
-  allowPositionals: true,
+  allowPositionals: true
 })
 
 if (positionals.length > 1) {
@@ -38,23 +38,23 @@ let multiaddrs: Multiaddr[] = []
 let peerId = null
 
 try {
-    multiaddrs = [
-      multiaddr(multiaddrOrPeerId)
-    ]
+  multiaddrs = [
+    multiaddr(multiaddrOrPeerId)
+  ]
 } catch (e) {
-    // don't care about error, try peerId
-    console.error('Could not convert input into multiaddr')
+  // don't care about error, try peerId
+  console.error('Could not convert input into multiaddr')
 }
 
 try {
-    peerId = peerIdFromString(multiaddrOrPeerId)
+  peerId = peerIdFromString(multiaddrOrPeerId)
 } catch {
-    // peer id failed, maybe multiaddr didn't?
-    console.error('Could not convert input into PeerId')
+  // peer id failed, maybe multiaddr didn't?
+  console.error('Could not convert input into PeerId')
 }
 
 if (multiaddr == null && peerId == null) {
-    throw new Error('Could not convert input into valid dialable artifact.')
+  throw new Error('Could not convert input into valid dialable artifact.')
 }
 
 const node = await createLibp2p({
@@ -75,15 +75,15 @@ const node = await createLibp2p({
 })
 
 if (peerId != null) {
-    // if we receive a PeerId (which would be a string because its from command line) we need to do:
-    //  * dht lookup
-    //  * dial
-    try {
-        const resolvedPeer = await node.peerRouting.findPeer(peerId)
-        multiaddrs = resolvedPeer.multiaddrs
-    } catch (e) {
-        console.error('Could not find peer via dht lookup')
-    }
+  // if we receive a PeerId (which would be a string because its from command line) we need to do:
+  //  * dht lookup
+  //  * dial
+  try {
+    const resolvedPeer = await node.peerRouting.findPeer(peerId)
+    multiaddrs = resolvedPeer.multiaddrs
+  } catch (e) {
+    console.error('Could not find peer via dht lookup')
+  }
 }
 
 // if we receive a Multiaddr, dial it immediately

@@ -1,18 +1,18 @@
 #! /usr/bin/env node --trace-warnings
 /* eslint-disable no-console */
 
-import { parseArgs } from 'node:util'
 import { createServer } from 'node:http'
-import { createLibp2p } from 'libp2p'
-import { circuitRelayServer } from 'libp2p/circuit-relay'
-import { webSockets } from '@libp2p/websockets'
-import { tcp } from '@libp2p/tcp'
-import { kadDHT } from '@libp2p/kad-dht'
-import { autoNATService } from 'libp2p/autonat'
-import { yamux } from '@chainsafe/libp2p-yamux'
-import { mplex } from '@libp2p/mplex'
+import { parseArgs } from 'node:util'
 import { noise } from '@chainsafe/libp2p-noise'
+import { yamux } from '@chainsafe/libp2p-yamux'
+import { kadDHT } from '@libp2p/kad-dht'
+import { mplex } from '@libp2p/mplex'
 import { prometheusMetrics } from '@libp2p/prometheus-metrics'
+import { tcp } from '@libp2p/tcp'
+import { webSockets } from '@libp2p/websockets'
+import { createLibp2p } from 'libp2p'
+import { autoNATService } from 'libp2p/autonat'
+import { circuitRelayServer } from 'libp2p/circuit-relay'
 import { register } from 'prom-client'
 
 async function main (): Promise<void> {
@@ -49,7 +49,7 @@ async function main (): Promise<void> {
     }
   })
 
-  if (args.values.help) {
+  if (args.values.help === true) {
     console.info('Help!')
     return
   }
@@ -60,11 +60,11 @@ async function main (): Promise<void> {
     })
   }
 
-  if (args.values.enableKademlia) {
+  if (args.values.enableKademlia === true) {
     services.dht = kadDHT()
   }
 
-  if (args.values.enableAutonat) {
+  if (args.values.enableAutonat === true) {
     services.autonat = autoNATService()
   }
 
@@ -90,7 +90,7 @@ async function main (): Promise<void> {
   const metricsServer = createServer((req, res) => {
     if (req.url === args.values.metricsPath && req.method === 'GET') {
       res.writeHead(200, { 'Content-Type': 'text/plain' })
-      register.metrics().then((metrics) => res.end(metrics))
+      void register.metrics().then((metrics) => res.end(metrics))
     } else {
       res.writeHead(404, { 'Content-Type': 'text/plain' })
       res.end('Not Found')
@@ -99,7 +99,6 @@ async function main (): Promise<void> {
   await new Promise<void>((resolve) => metricsServer.listen(parseInt(args.values.metricsPort ?? '8888', 10), '0.0.0.0', resolve))
 
   console.info('Metrics server listening', `0.0.0.0:${args.values.metricsPort}/${args.values.metricsPath}`)
-
 }
 
 main().catch(err => {
