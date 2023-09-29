@@ -1,10 +1,8 @@
-FROM node:18
-
-WORKDIR /app
-ENV CONFIG_FLAGS=""
+FROM node:18-alpine
 
 COPY package*.json .
 RUN npm ci --quiet
-RUN npm run build
 COPY . .
-ENTRYPOINT ["node", "dist/src/index.js", "${CONFIG_FLAGS}"]
+RUN npm run build
+ENTRYPOINT [ "node", "dist/src/index.js" ]
+
