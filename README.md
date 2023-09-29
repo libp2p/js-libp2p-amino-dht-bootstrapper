@@ -86,7 +86,7 @@ Options:
 Building should be straightforward from the root of the repository:
 
 ```sh
-$ docker build . --tag amino --file=Dockerfile
+$ docker build . --tag amino
 ```
 
 ### Running the docker image (once built):
