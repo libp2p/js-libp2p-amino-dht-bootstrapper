@@ -1,6 +1,7 @@
-FROM node:18
+FROM node:18-alpine
 
 WORKDIR /app
+ENV NODE_ENV=production
 ENV CONFIG_FLAGS=""
 
 COPY package*.json .
