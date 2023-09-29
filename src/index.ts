@@ -16,41 +16,43 @@ import { circuitRelayServer } from 'libp2p/circuit-relay'
 import { register } from 'prom-client'
 
 async function main (): Promise<void> {
+  const options = {
+    config: {
+      description: 'Path to IPFS config file',
+      type: 'string'
+    },
+    enableKademlia: {
+      description: 'Whether to run the libp2p Kademlia protocol and join the IPFS DHT',
+      type: 'boolean'
+    },
+    enableAutonat: {
+      description: 'Whether to run the libp2p Autonat protocol',
+      type: 'boolean'
+    },
+    metricsPath: {
+      description: 'Metric endpoint path',
+      default: '/metrics',
+      type: 'string'
+    },
+    metricsPort: {
+      description: 'Port to serve metrics',
+      default: '8888',
+      type: 'string'
+    },
+    help: {
+      description: 'Show help text',
+      type: 'boolean'
+    }
+  } as const
+
   const args = parseArgs({
     allowPositionals: true,
     strict: true,
-    options: {
-      help: {
-        description: 'Show help text',
-        type: 'boolean'
-      },
-      config: {
-        description: 'Path to IPFS config file',
-        type: 'string'
-      },
-      metricsPath: {
-        description: 'Metric endpoint path',
-        default: '/metrics',
-        type: 'string'
-      },
-      metricsPort: {
-        description: 'Port to serve metrics',
-        default: '8888',
-        type: 'string'
-      },
-      enableKademlia: {
-        description: 'Whether to run the libp2p Kademlia protocol and join the IPFS DHT',
-        type: 'boolean'
-      },
-      enableAutonat: {
-        description: 'Whether to run the libp2p Autonat protocol',
-        type: 'boolean'
-      }
-    }
+    options
   })
 
   if (args.values.help === true) {
-    console.info('Help!')
+    console.info(JSON.stringify(options, null, 2))
     return
   }
 
@@ -96,7 +98,8 @@ async function main (): Promise<void> {
       res.end('Not Found')
     }
   })
-  await new Promise<void>((resolve) => metricsServer.listen(parseInt(args.values.metricsPort ?? '8888', 10), '0.0.0.0', resolve))
+  const port = parseInt(args.values.metricsPort ?? options.metricsPort.default, 10)
+  await new Promise<void>((resolve) => metricsServer.listen(port, '0.0.0.0', resolve))
 
   console.info('Metrics server listening', `0.0.0.0:${args.values.metricsPort}/${args.values.metricsPath}`)
 }
