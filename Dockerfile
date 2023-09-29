@@ -7,4 +7,4 @@ COPY package*.json .
 RUN npm ci --quiet
 RUN npm run build
 COPY . .
-ENTRYPOINT [ "node", "dist/index.js", ${CONFIG_FLAGS} ]
+ENTRYPOINT ["node", "dist/src/index.js", "${CONFIG_FLAGS}"]
