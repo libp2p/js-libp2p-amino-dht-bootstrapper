@@ -5,6 +5,7 @@ ENV CONFIG_FLAGS=""
 
 COPY package*.json .
 RUN npm ci --quiet
-RUN npm run build
 COPY . .
-ENTRYPOINT [ "node", "dist/index.js", ${CONFIG_FLAGS} ]
+RUN npm run build
+RUN npm link
+ENTRYPOINT [ "amino", ${CONFIG_FLAGS} ]
