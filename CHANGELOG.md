@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.0.1...v1.0.2) (2023-09-29)
+
+
+### Bug Fixes
+
+* **docker:** Fixing Dockerfile Paths. ([#3](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/3)) ([a36c499](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/a36c499ec45e8d098c5784f5a12db93dc36c14bd))
+
 ## [1.0.1](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.0.0...v1.0.1) (2023-09-29)
 
 
