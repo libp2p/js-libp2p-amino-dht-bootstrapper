@@ -36,10 +36,8 @@ Rust bootstrapper: https://github.com/libp2p/rust-libp2p/tree/master/misc/server
 ## Start the bootstrapper
 
 ```console
-$ npx @libp2p/amino-dht-bootstrapper
+$ npx @libp2p/amino-dht-bootstrapper amino
 ```
-
-### Configuring bootstrapper options
 
 ```sh
 Options:
@@ -48,6 +46,39 @@ Options:
       --enable-kademlia              Whether to run the libp2p Kademlia protocol and join the IPFS DHT
       --enable-autonat               Whether to run the libp2p Autonat protocol
   -h, --help                         Print help
+```
+
+### Configuring bootstrapper options
+
+```
+{
+  "config": {
+    "description": "Path to IPFS config file",
+    "type": "string"
+  },
+  "enableKademlia": {
+    "description": "Whether to run the libp2p Kademlia protocol and join the IPFS DHT",
+    "type": "boolean"
+  },
+  "enableAutonat": {
+    "description": "Whether to run the libp2p Autonat protocol",
+    "type": "boolean"
+  },
+  "metricsPath": {
+    "description": "Metric endpoint path",
+    "default": "/metrics",
+    "type": "string"
+  },
+  "metricsPort": {
+    "description": "Port to serve metrics",
+    "default": "8888",
+    "type": "string"
+  },
+  "help": {
+    "description": "Show help text",
+    "type": "boolean"
+  }
+}
 ```
 
 ## Building the Docker Image

@@ -4,5 +4,5 @@ COPY package*.json .
 RUN npm ci --quiet
 COPY . .
 RUN npm run build
-RUN npm link
 ENTRYPOINT [ "node", "dist/src/index.js" ]
+

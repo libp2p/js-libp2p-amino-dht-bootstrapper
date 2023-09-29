@@ -1,0 +1,10 @@
+services:
+  bootstrapper:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - 8888:8888
+    environment:
+      - CONFIG_FLAGS=""
+    command: node dist/src/index.js
