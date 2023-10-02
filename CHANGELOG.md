@@ -1,3 +1,10 @@
+## [1.1.0](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.0.2...v1.1.0) (2023-10-02)
+
+
+### Features
+
+* use kubo config file for configuration ([#6](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/6)) ([5b2d520](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/5b2d5204ee64daf6b18fc2f42b457d9eddf5b152))
+
 ## [1.0.2](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.0.1...v1.0.2) (2023-09-29)
 
 
