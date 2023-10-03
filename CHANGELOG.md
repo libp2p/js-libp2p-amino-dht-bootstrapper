@@ -1,3 +1,24 @@
+## [1.1.2](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.1.1...v1.1.2) (2023-10-03)
+
+
+### Trivial Changes
+
+* add or force update .github/workflows/js-test-and-release.yml ([#17](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/17)) ([73c77f8](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/73c77f81df119a9fa7f1062643536d6d60666853))
+* delete templates [skip ci] ([#16](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/16)) ([2903b22](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/2903b226981fa73266bfb0f0df52557f4b21a69a))
+* Update .github/pull_request_template.md [skip ci] ([ef06487](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/ef0648715039ad9885eb21504853aea1846b5ba9))
+* Update .github/workflows/semantic-pull-request.yml [skip ci] ([845e03e](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/845e03e10e25c4e385cae69746a63e6c052a3883))
+* Update .github/workflows/stale.yml [skip ci] ([0392196](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/0392196056f6ad361229399ad3b99fdbdf4a1e8e))
+
+
+### Dependencies
+
+* bump @libp2p/bootstrap from 9.0.6 to 9.0.7 ([#13](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/13)) ([9feba97](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/9feba970520a1238fccbe9fd6465cf3d9becb7c1))
+* bump @libp2p/kad-dht from 10.0.7 to 10.0.8 ([#9](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/9)) ([44310b1](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/44310b18d0b940cecca3f57905e8dd3f6483dbae))
+* bump @libp2p/mplex from 9.0.6 to 9.0.7 ([#12](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/12)) ([6ba03f1](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/6ba03f1b88be0f466b1a363c2cec588cac84ade3))
+* bump @libp2p/prometheus-metrics from 2.0.6 to 2.0.7 ([#10](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/10)) ([842099b](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/842099ba9b0b1ea788591de55296e2f40db09e88))
+* bump @libp2p/tcp from 8.0.7 to 8.0.8 ([#14](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/14)) ([5faa456](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/5faa4564f6f9f37f81f249ade21232c012cdd741))
+* bump @libp2p/websockets from 7.0.7 to 7.0.8 ([#15](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/15)) ([476d9d3](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/476d9d3e4422cbf230baf956c76256fd9eac4117))
+
 ## [1.1.1](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.1.0...v1.1.1) (2023-10-02)
 
 
