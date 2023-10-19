@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.1.2...v1.1.3) (2023-10-19)
+
+
+### Dependencies
+
+* bump @babel/traverse and depcheck ([#31](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/31)) ([a390465](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/a390465cf269a68259d3add85191205ee6547a4b))
+
 ## [1.1.2](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.1.1...v1.1.2) (2023-10-03)
 
 
