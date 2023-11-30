@@ -141,7 +141,7 @@
     "@libp2p/interface": "^0.1.2",
     "@libp2p/kad-dht": "^10.0.7",
     "@libp2p/mplex": "^9.0.6",
-    "@libp2p/peer-id": "^3.0.2",
+    "@libp2p/peer-id": "^4.0.1",
     "@libp2p/prometheus-metrics": "^3.0.0",
     "@libp2p/tcp": "^8.0.7",
     "@libp2p/websockets": "^7.0.7",
