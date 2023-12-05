@@ -1,6 +1,6 @@
 {
   "name": "@libp2p/amino-dht-bootstrapper",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Run an Amino DHT boostrapper with js-libp2p",
   "license": "Apache-2.0 OR MIT",
   "homepage": "https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper#readme",
@@ -136,7 +136,7 @@
   "dependencies": {
     "@chainsafe/libp2p-noise": "^13.0.1",
     "@chainsafe/libp2p-yamux": "^5.0.0",
-    "@libp2p/bootstrap": "^9.0.6",
+    "@libp2p/bootstrap": "^10.0.5",
     "@libp2p/crypto": "^2.0.4",
     "@libp2p/interface": "^0.1.2",
     "@libp2p/kad-dht": "^10.0.7",
