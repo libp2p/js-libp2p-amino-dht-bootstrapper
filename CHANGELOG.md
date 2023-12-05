@@ -1,3 +1,10 @@
+## [1.1.5](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.1.4...v1.1.5) (2023-12-05)
+
+
+### Dependencies
+
+* bump @libp2p/bootstrap from 9.0.7 to 10.0.5 ([#79](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/79)) ([e80c125](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/e80c1259d3ec6ee4af77eb496870a15a89ce84b6))
+
 ## [1.1.4](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.1.3...v1.1.4) (2023-11-30)
 
 
