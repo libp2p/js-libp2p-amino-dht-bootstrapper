@@ -1,3 +1,10 @@
+## [1.1.6](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.1.5...v1.1.6) (2023-12-06)
+
+
+### Dependencies
+
+* bump @libp2p/prometheus-metrics from 3.0.0 to 3.0.6 ([#83](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/83)) ([76ee84d](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/76ee84d0cb5d2a80a41f0239b1ab053a1b5bac55))
+
 ## [1.1.5](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.1.4...v1.1.5) (2023-12-05)
 
 
