@@ -1,3 +1,10 @@
+## [1.1.8](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.1.7...v1.1.8) (2023-12-07)
+
+
+### Dependencies
+
+* bump @libp2p/crypto from 2.0.4 to 3.0.1 ([#76](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/76)) ([32b134d](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/32b134d40799a81941943b98c11b2a8c77661ede))
+
 ## [1.1.7](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.1.6...v1.1.7) (2023-12-07)
 
 
