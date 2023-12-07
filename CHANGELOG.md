@@ -1,3 +1,10 @@
+## [1.1.7](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.1.6...v1.1.7) (2023-12-07)
+
+
+### Dependencies
+
+* bump uint8arrays from 4.0.6 to 5.0.0 ([#85](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/85)) ([a550525](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/a550525b1c2e6e479e5cbbb1deefb10e3ebcc538))
+
 ## [1.1.6](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.1.5...v1.1.6) (2023-12-06)
 
 
