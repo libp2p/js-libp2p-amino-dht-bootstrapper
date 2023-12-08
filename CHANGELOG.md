@@ -1,3 +1,10 @@
+## [1.1.9](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.1.8...v1.1.9) (2023-12-08)
+
+
+### Dependencies
+
+* bump @libp2p/interface from 0.1.6 to 1.0.1 ([#87](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/87)) ([c0db809](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/c0db809dbafcad8978f41fbd7f0c163813b4e6a2))
+
 ## [1.1.8](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.1.7...v1.1.8) (2023-12-07)
 
 
