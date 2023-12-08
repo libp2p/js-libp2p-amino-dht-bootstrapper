@@ -1,3 +1,10 @@
+## [1.1.10](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.1.9...v1.1.10) (2023-12-08)
+
+
+### Dependencies
+
+* **dev:** bump aegir from 41.0.0 to 41.1.14 ([#86](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/86)) ([832da23](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/832da2309844a471f7bd2108f4f9b9b971d1ccf1))
+
 ## [1.1.9](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.1.8...v1.1.9) (2023-12-08)
 
 
