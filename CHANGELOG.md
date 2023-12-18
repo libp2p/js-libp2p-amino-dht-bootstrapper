@@ -1,3 +1,10 @@
+## [1.1.11](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.1.10...v1.1.11) (2023-12-18)
+
+
+### Dependencies
+
+* bump prom-client from 14.2.0 to 15.1.0 ([#91](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/91)) ([381941d](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/381941d9e08f8d8cf90907782d2479e7e1e5fab4))
+
 ## [1.1.10](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.1.9...v1.1.10) (2023-12-08)
 
 
