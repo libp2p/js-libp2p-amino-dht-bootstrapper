@@ -1,3 +1,16 @@
+## [1.1.11](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.1.10...v1.1.11) (2023-12-19)
+
+
+### Trivial Changes
+
+* **release:** 1.1.11 [skip ci] ([f5eab2c](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/f5eab2cc98db97f439e922b65f2425d1a65bc0ef)), closes [#91](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/91)
+
+
+### Dependencies
+
+* bump @multiformats/multiaddr from 12.1.10 to 12.1.11 ([#92](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/92)) ([b906bb6](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/b906bb69f00e5f2c1252dead6b903789776d0334))
+* bump prom-client from 14.2.0 to 15.1.0 ([#91](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/91)) ([381941d](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/381941d9e08f8d8cf90907782d2479e7e1e5fab4))
+
 ## [1.1.11](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.1.10...v1.1.11) (2023-12-18)
 
 
