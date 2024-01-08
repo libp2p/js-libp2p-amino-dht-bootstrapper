@@ -146,7 +146,7 @@
     "@libp2p/tcp": "^8.0.7",
     "@libp2p/websockets": "^7.0.7",
     "@multiformats/multiaddr": "^12.1.7",
-    "libp2p": "^0.46.11",
+    "libp2p": "^1.1.1",
     "prom-client": "^15.1.0",
     "uint8arrays": "^5.0.0"
   },
