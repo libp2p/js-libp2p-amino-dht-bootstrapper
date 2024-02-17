@@ -1,3 +1,17 @@
+## [1.1.12](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.1.11...v1.1.12) (2024-02-17)
+
+
+### Trivial Changes
+
+* Update .github/pull_request_template.md [skip ci] ([894628f](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/894628f511630cbc7f8af26858d707cf0ef1d6e8))
+* Update .github/workflows/semantic-pull-request.yml [skip ci] ([75736a4](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/75736a43b66a0a310971ef721192e24a810bf396))
+* Update .github/workflows/stale.yml [skip ci] ([5dfe6f2](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/5dfe6f27bcf206babd3f0c38995e367684aa74f6))
+
+
+### Dependencies
+
+* **dev:** bump undici from 5.25.2 to 5.28.3 ([#109](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/109)) ([5a1e2d9](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/5a1e2d930b2e475a74071045fc6e1eb8108e2493))
+
 ## [1.1.11](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.1.10...v1.1.11) (2023-12-19)
 
 
