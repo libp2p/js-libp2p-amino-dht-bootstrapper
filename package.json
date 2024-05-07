@@ -147,6 +147,7 @@
     "@libp2p/peer-id": "^4.1.1",
     "@libp2p/prometheus-metrics": "^3.0.22",
     "@libp2p/tcp": "^9.0.24",
+    "@libp2p/webrtc": "^4.0.31",
     "@libp2p/websockets": "^8.0.22",
     "@multiformats/multiaddr": "^12.2.1",
     "datastore-level": "^10.1.8",

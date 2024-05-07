@@ -17,6 +17,7 @@ import { mplex } from '@libp2p/mplex'
 import { peerIdFromKeys, peerIdFromString } from '@libp2p/peer-id'
 import { prometheusMetrics } from '@libp2p/prometheus-metrics'
 import { tcp } from '@libp2p/tcp'
+import { webRTC } from '@libp2p/webrtc'
 import { webSockets } from '@libp2p/websockets'
 import { all as wsFilter } from '@libp2p/websockets/filters'
 import { LevelDatastore } from 'datastore-level'
@@ -133,7 +134,8 @@ async function main (): Promise<void> {
       webSockets({
         filter: wsFilter
       }),
-      tcp()
+      tcp(),
+      webRTC()
     ],
     streamMuxers: [
       yamux(),
