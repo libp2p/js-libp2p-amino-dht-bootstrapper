@@ -133,7 +133,7 @@ async function main (): Promise<void> {
   const port = parseInt(args.values.metricsPort ?? options.metricsPort.default, 10)
   await new Promise<void>((resolve) => metricsServer.listen(port, '0.0.0.0', resolve))
 
-  console.info('Metrics server listening', `0.0.0.0:${args.values.metricsPort}/${args.values.metricsPath}`)
+  console.info('Metrics server listening', `0.0.0.0:${args.values.metricsPort}${args.values.metricsPath}`)
 }
 
 main().catch(err => {

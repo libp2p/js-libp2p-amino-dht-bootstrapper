@@ -41,7 +41,7 @@ $ npx @libp2p/amino-dht-bootstrapper amino
 
 ```sh
 Options:
-      --config <CONFIG>              Path to IPFS config file
+      --config <CONFIG>              Path to IPFS config file (required)
       --metrics-path <METRICS_PATH>  Metric endpoint path [default: /metrics]
       --enable-kademlia              Whether to run the libp2p Kademlia protocol and join the IPFS DHT
       --enable-autonat               Whether to run the libp2p Autonat protocol
@@ -92,13 +92,19 @@ $ docker build . --tag amino
 ### Running the docker image (once built):
 
 ```sh
-$ docker run -it amino
+$ docker run -v ./bootstrapper-config.json:/config.json -it amino --config /config.json
 ```
 
 To pass args:
 
 ```sh
-$ docker run -it amino [-- [--enable-kademlia] [--enable-autonat]...]
+$ docker run -v ./bootstrapper-config.json:/config.json -it amino --config /config.json [--enable-kademlia] [--enable-autonat]
+```
+
+To expose the metrics port:
+
+```sh
+$ docker run -v ./bootstrapper-config.json:/config.json -p 8888:8888 -it amino --config /config.json
 ```
 
 ## License
