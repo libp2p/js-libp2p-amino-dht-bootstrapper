@@ -21,6 +21,7 @@ import { LevelDatastore } from 'datastore-level'
 import { createLibp2p, type ServiceFactoryMap } from 'libp2p'
 import { register } from 'prom-client'
 import { fromString as uint8ArrayFromString } from 'uint8arrays/from-string'
+// import { wayTooVerboseLogging } from './way-too-verbose-logging.js'
 import type { PeerId } from '@libp2p/interface'
 
 interface Libp2pServices extends ServiceFactoryMap {
@@ -122,6 +123,16 @@ async function main (): Promise<void> {
 
   console.info('libp2p is running')
   console.info('PeerId', node.peerId.toString())
+  // console.info('libp2p listening on:')
+  setInterval(() => {
+    // output listening addresses every 10 seconds
+    node.getMultiaddrs().forEach((ma) => { console.info(`listening on ${ma.toString()}`) })
+  }, 10000)
+
+  // wayTooVerboseLogging(node)
+  // node.addEventListener('transport:listening', (evt) => {
+  //   console.info('libp2p transport listening', evt)
+  // })
 
   const metricsServer = createServer((req, res) => {
     if (req.url === args.values.metricsPath && req.method === 'GET') {
