@@ -7,7 +7,9 @@ import { isAbsolute, join } from 'node:path'
 import { parseArgs } from 'node:util'
 import { noise } from '@chainsafe/libp2p-noise'
 import { yamux } from '@chainsafe/libp2p-yamux'
+import { autoNAT } from '@libp2p/autonat'
 import { bootstrap } from '@libp2p/bootstrap'
+import { circuitRelayServer } from '@libp2p/circuit-relay-v2'
 import { unmarshalPrivateKey } from '@libp2p/crypto/keys'
 import { kadDHT } from '@libp2p/kad-dht'
 import { mplex } from '@libp2p/mplex'
@@ -15,12 +17,14 @@ import { peerIdFromKeys, peerIdFromString } from '@libp2p/peer-id'
 import { prometheusMetrics } from '@libp2p/prometheus-metrics'
 import { tcp } from '@libp2p/tcp'
 import { webSockets } from '@libp2p/websockets'
-import { createLibp2p } from 'libp2p'
-import { autoNATService } from 'libp2p/autonat'
-import { circuitRelayServer } from 'libp2p/circuit-relay'
+import { createLibp2p, type ServiceFactoryMap } from 'libp2p'
 import { register } from 'prom-client'
 import { fromString as uint8ArrayFromString } from 'uint8arrays/from-string'
-import type { PeerId } from '@libp2p/interface/peer-id'
+import type { PeerId } from '@libp2p/interface'
+
+interface Libp2pServices extends ServiceFactoryMap {
+
+}
 
 async function main (): Promise<void> {
   const options = {
@@ -75,8 +79,8 @@ async function main (): Promise<void> {
     fatal('Config Identity.PeerId doesn\'t match Identity.PrivKey')
   }
 
-  const services: Record<string, any> = {
-    relay: circuitRelayServer({
+  const services: Libp2pServices = {
+    circuitRelay: circuitRelayServer({
       advertise: true
     }),
     bootstrap: bootstrap({
@@ -85,11 +89,11 @@ async function main (): Promise<void> {
   }
 
   if (args.values.enableKademlia === true) {
-    services.dht = kadDHT()
+    services.dht = kadDHT({})
   }
 
   if (args.values.enableAutonat === true) {
-    services.autonat = autoNATService()
+    services.autonat = autoNAT()
   }
 
   const node = await createLibp2p({

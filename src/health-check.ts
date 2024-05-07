@@ -70,7 +70,7 @@ const node = await createLibp2p({
     noise()
   ],
   services: {
-    dht: kadDHT()
+    dht: kadDHT({})
   }
 })
 
