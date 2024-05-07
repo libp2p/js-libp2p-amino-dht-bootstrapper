@@ -17,6 +17,7 @@ import { peerIdFromKeys, peerIdFromString } from '@libp2p/peer-id'
 import { prometheusMetrics } from '@libp2p/prometheus-metrics'
 import { tcp } from '@libp2p/tcp'
 import { webSockets } from '@libp2p/websockets'
+import { all as wsFilter } from '@libp2p/websockets/filters'
 import { LevelDatastore } from 'datastore-level'
 import { createLibp2p, type ServiceFactoryMap } from 'libp2p'
 import { register } from 'prom-client'
@@ -126,7 +127,9 @@ async function main (): Promise<void> {
       noAnnounce: config.Addresses.NoAnnounce
     },
     transports: [
-      webSockets(),
+      webSockets({
+        filter: wsFilter
+      }),
       tcp()
     ],
     streamMuxers: [
