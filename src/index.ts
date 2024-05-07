@@ -147,8 +147,11 @@ async function main (): Promise<void> {
   console.info('PeerId', node.peerId.toString())
   // console.info('libp2p listening on:')
   setInterval(() => {
+    console.info()
+    console.info('libp2p listening on:')
     // output listening addresses every 10 seconds
     node.getMultiaddrs().forEach((ma) => { console.info(`listening on ${ma.toString()}`) })
+    console.info()
   }, 10000)
 
   // wayTooVerboseLogging(node)
