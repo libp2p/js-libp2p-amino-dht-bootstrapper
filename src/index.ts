@@ -11,6 +11,7 @@ import { autoNAT } from '@libp2p/autonat'
 import { bootstrap } from '@libp2p/bootstrap'
 import { circuitRelayServer } from '@libp2p/circuit-relay-v2'
 import { unmarshalPrivateKey } from '@libp2p/crypto/keys'
+import { identify, identifyPush } from '@libp2p/identify'
 import { kadDHT } from '@libp2p/kad-dht'
 import { mplex } from '@libp2p/mplex'
 import { peerIdFromKeys, peerIdFromString } from '@libp2p/peer-id'
@@ -98,7 +99,9 @@ async function main (): Promise<void> {
     }),
     bootstrap: bootstrap({
       list: config.Bootstrap
-    })
+    }),
+    identify: identify(),
+    identifyPush: identifyPush()
   }
 
   if (argEnableKademlia === true) {
