@@ -17,6 +17,7 @@ import { peerIdFromKeys, peerIdFromString } from '@libp2p/peer-id'
 import { prometheusMetrics } from '@libp2p/prometheus-metrics'
 import { tcp } from '@libp2p/tcp'
 import { webSockets } from '@libp2p/websockets'
+import { LevelDatastore } from 'datastore-level'
 import { createLibp2p, type ServiceFactoryMap } from 'libp2p'
 import { register } from 'prom-client'
 import { fromString as uint8ArrayFromString } from 'uint8arrays/from-string'
@@ -97,6 +98,7 @@ async function main (): Promise<void> {
   }
 
   const node = await createLibp2p({
+    datastore: new LevelDatastore('js-libp2p-datastore'),
     peerId,
     addresses: {
       listen: config.Addresses.Swarm,
