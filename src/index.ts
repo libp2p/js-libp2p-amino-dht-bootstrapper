@@ -126,7 +126,10 @@ async function main (): Promise<void> {
           return !isPrivate(nodeAddress)
         })
       },
-      listen: config.Addresses.Swarm,
+      listen: [
+        ...config.Addresses.Swarm,
+        '/webrtc'
+      ],
       announce: config.Addresses.Announce,
       noAnnounce: config.Addresses.NoAnnounce
     },
