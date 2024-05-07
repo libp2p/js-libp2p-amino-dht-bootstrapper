@@ -150,6 +150,7 @@
     "@multiformats/multiaddr": "^12.2.1",
     "datastore-level": "^10.1.8",
     "libp2p": "^1.5.1",
+    "private-ip": "^3.0.2",
     "prom-client": "^15.1.2",
     "uint8arrays": "^5.0.3"
   },

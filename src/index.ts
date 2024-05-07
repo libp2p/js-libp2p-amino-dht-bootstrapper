@@ -22,7 +22,9 @@ import { createLibp2p, type ServiceFactoryMap } from 'libp2p'
 import { register } from 'prom-client'
 import { fromString as uint8ArrayFromString } from 'uint8arrays/from-string'
 // import { wayTooVerboseLogging } from './way-too-verbose-logging.js'
+import { isPrivate } from './utils/is-private-ip.js'
 import type { PeerId } from '@libp2p/interface'
+import type { Multiaddr } from '@multiformats/multiaddr'
 
 interface Libp2pServices extends ServiceFactoryMap {
 
@@ -112,6 +114,13 @@ async function main (): Promise<void> {
     datastore: new LevelDatastore('js-libp2p-datastore'),
     peerId,
     addresses: {
+      announceFilter: (addrs: Multiaddr[]) => {
+        // filter out private IP addresses
+        return addrs.filter((addr) => {
+          const nodeAddress = addr.nodeAddress()
+          return !isPrivate(nodeAddress)
+        })
+      },
       listen: config.Addresses.Swarm,
       announce: config.Addresses.Announce,
       noAnnounce: config.Addresses.NoAnnounce
