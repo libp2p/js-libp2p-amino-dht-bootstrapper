@@ -75,7 +75,7 @@ async function main (): Promise<void> {
   const config = await readConfig(configFilepath)
 
   const peerId = await decodePeerId(config.Identity.PrivKey)
-  if (!peerIdFromString(config.Identity.PeerId).equals(peerId)) {
+  if (!peerIdFromString(config.Identity.PeerID).equals(peerId)) {
     fatal('Config Identity.PeerId doesn\'t match Identity.PrivKey')
   }
 
@@ -154,7 +154,7 @@ interface KuboConfig {
     NoAnnounce: string[]
   }
   Identity: {
-    PeerId: string
+    PeerID: string
     PrivKey: string
   }
 }
@@ -172,7 +172,7 @@ function validateConfig (config: any): config is KuboConfig {
   validateKey(config.Addresses, 'Announce', 'Addresses.Announce')
   validateKey(config.Addresses, 'NoAnnounce', 'Addresses.NoAnnounce')
   validateKey(config, 'Identity', 'Identity')
-  validateKey(config.Identity, 'PeerId', 'Identity.PeerId')
+  validateKey(config.Identity, 'PeerID', 'Identity.PeerID')
   validateKey(config.Identity, 'PrivKey', 'Identity.PrivKey')
   return true
 }
