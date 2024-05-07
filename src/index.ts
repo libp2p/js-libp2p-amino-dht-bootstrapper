@@ -34,20 +34,20 @@ async function main (): Promise<void> {
       description: 'Path to IPFS config file',
       type: 'string'
     },
-    enableKademlia: {
+    'enable-kademlia': {
       description: 'Whether to run the libp2p Kademlia protocol and join the IPFS DHT',
       type: 'boolean'
     },
-    enableAutonat: {
+    'enable-autonat': {
       description: 'Whether to run the libp2p Autonat protocol',
       type: 'boolean'
     },
-    metricsPath: {
+    'metrics-path': {
       description: 'Metric endpoint path',
       default: '/metrics',
       type: 'string'
     },
-    metricsPort: {
+    'metrics-port': {
       description: 'Port to serve metrics',
       default: '8888',
       type: 'string'
@@ -64,12 +64,20 @@ async function main (): Promise<void> {
     options
   })
 
-  if (args.values.help === true) {
+  const {
+    config: configFilename,
+    'enable-kademlia': argEnableKademlia,
+    'enable-autonat': argEnableAutonat,
+    'metrics-path': argMetricsPath,
+    'metrics-port': argMetricsPort,
+    help: argHelp
+  } = args.values
+
+  if (argHelp === true) {
     console.info(JSON.stringify(options, null, 2))
     return
   }
 
-  const configFilename = args.values.config
   if (configFilename == null) {
     fatal('--config must be provided')
   }
@@ -90,11 +98,13 @@ async function main (): Promise<void> {
     })
   }
 
-  if (args.values.enableKademlia === true) {
+  if (argEnableKademlia === true) {
+    console.info('Enabling Kademlia DHT')
     services.dht = kadDHT({})
   }
 
-  if (args.values.enableAutonat === true) {
+  if (argEnableAutonat === true) {
+    console.info('Enabling Autonat')
     services.autonat = autoNAT()
   }
 
@@ -135,7 +145,7 @@ async function main (): Promise<void> {
   // })
 
   const metricsServer = createServer((req, res) => {
-    if (req.url === args.values.metricsPath && req.method === 'GET') {
+    if (req.url === argMetricsPath && req.method === 'GET') {
       res.writeHead(200, { 'Content-Type': 'text/plain' })
       void register.metrics().then((metrics) => res.end(metrics))
     } else {
@@ -143,10 +153,10 @@ async function main (): Promise<void> {
       res.end('Not Found')
     }
   })
-  const port = parseInt(args.values.metricsPort ?? options.metricsPort.default, 10)
+  const port = parseInt(argMetricsPort ?? options['metrics-port'].default, 10)
   await new Promise<void>((resolve) => metricsServer.listen(port, '0.0.0.0', resolve))
 
-  console.info('Metrics server listening', `0.0.0.0:${args.values.metricsPort}${args.values.metricsPath}`)
+  console.info('Metrics server listening', `0.0.0.0:${argMetricsPort}${argMetricsPath}`)
 }
 
 main().catch(err => {

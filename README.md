@@ -43,6 +43,7 @@ $ npx @libp2p/amino-dht-bootstrapper amino
 Options:
       --config <CONFIG>              Path to IPFS config file (required)
       --metrics-path <METRICS_PATH>  Metric endpoint path [default: /metrics]
+      --metrics-port <PORT>          Metric endpoint path [default: /metrics]
       --enable-kademlia              Whether to run the libp2p Kademlia protocol and join the IPFS DHT
       --enable-autonat               Whether to run the libp2p Autonat protocol
   -h, --help                         Print help
