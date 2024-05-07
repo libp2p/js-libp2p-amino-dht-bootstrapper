@@ -151,7 +151,7 @@ async function main (): Promise<void> {
   console.info('libp2p is running')
   console.info('PeerId', node.peerId.toString())
   // console.info('libp2p listening on:')
-  setInterval(() => {
+  setTimeout(() => {
     console.info()
     console.info('libp2p listening on:')
     // output listening addresses every 10 seconds
