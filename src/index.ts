@@ -24,7 +24,6 @@ import { LevelDatastore } from 'datastore-level'
 import { createLibp2p, type ServiceFactoryMap } from 'libp2p'
 import { register } from 'prom-client'
 import { fromString as uint8ArrayFromString } from 'uint8arrays/from-string'
-// import { wayTooVerboseLogging } from './way-too-verbose-logging.js'
 import { isPrivate } from './utils/is-private-ip.js'
 import type { PeerId } from '@libp2p/interface'
 import type { Multiaddr } from '@multiformats/multiaddr'
@@ -126,10 +125,7 @@ async function main (): Promise<void> {
           return !isPrivate(nodeAddress)
         })
       },
-      listen: [
-        ...config.Addresses.Swarm,
-        '/webrtc'
-      ],
+      listen: config.Addresses.Swarm,
       announce: config.Addresses.Announce,
       noAnnounce: config.Addresses.NoAnnounce
     },
@@ -153,19 +149,18 @@ async function main (): Promise<void> {
 
   console.info('libp2p is running')
   console.info('PeerId', node.peerId.toString())
-  // console.info('libp2p listening on:')
-  setTimeout(() => {
+
+  const waitForPublicInterval = setInterval(() => {
+    const maddrs = node.getMultiaddrs()
+    // if (maddrs.length > 0) {
     console.info()
     console.info('libp2p listening on:')
     // output listening addresses every 10 seconds
-    node.getMultiaddrs().forEach((ma) => { console.info(`listening on ${ma.toString()}`) })
+    maddrs.forEach((ma) => { console.info(`${ma.toString()}`) })
     console.info()
+    clearInterval(waitForPublicInterval)
+    // }
   }, 10000)
-
-  // wayTooVerboseLogging(node)
-  // node.addEventListener('transport:listening', (evt) => {
-  //   console.info('libp2p transport listening', evt)
-  // })
 
   const metricsServer = createServer((req, res) => {
     if (req.url === argMetricsPath && req.method === 'GET') {

@@ -1,0 +1,48 @@
+version: '3'
+services:
+  bootstrapper:
+    # docker build . --platform linux/arm64 --tag js-libp2p-amino-dht-bootstrapper:local-arm64
+    image: js-libp2p-amino-dht-bootstrapper:local-arm64
+    # build:
+    #   platforms:
+    #     - 'linux/arm64'
+    #   context: ./
+    #   dockerfile: Dockerfile
+    ports:
+      - 8888:8888
+    environment:
+      - CONFIG_FLAGS=""
+    command: node dist/src/index.js --config /config.json --enable-kademlia --enable-autonat
+    # network_mode: 'host'
+    volumes:
+      - ./local-config.json:/config.json
+
+  prometheus:
+    # build:
+    #   platforms:
+    #     - 'linux/arm64'
+    profiles: ['dashboard'] # only runs with dashboard profile
+    image: prom/prometheus
+    ports:
+      - 9080:9090
+    volumes:
+      - ./config/prometheus:/etc/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    restart: unless-stopped
+    # network_mode: 'host'
+
+  grafana:
+    # build:
+    #   platforms:
+    #     - 'linux/arm64'
+    profiles: ['dashboard'] # only runs with dashboard profile
+    image: grafana/grafana
+    ports:
+      - 9181:3000
+    volumes:
+      - ./config/grafana/datasources:/etc/grafana/provisioning/datasources
+      - ./config/grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/main.yaml
+      - ./config/grafana:/var/lib/grafana
+    restart: unless-stopped
+    # network_mode: 'host'
