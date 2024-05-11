@@ -5,6 +5,7 @@ import { readFile } from 'node:fs/promises'
 import { createServer } from 'node:http'
 import { isAbsolute, join } from 'node:path'
 import { parseArgs } from 'node:util'
+import { writeHeapSnapshot } from 'node:v8'
 import { noise } from '@chainsafe/libp2p-noise'
 import { yamux } from '@chainsafe/libp2p-yamux'
 import { autoNAT } from '@libp2p/autonat'
@@ -56,6 +57,11 @@ async function main (): Promise<void> {
       default: '8888',
       type: 'string'
     },
+    'api-port': {
+      description: 'Port for api endpoint',
+      default: '8899',
+      type: 'string'
+    },
     help: {
       description: 'Show help text',
       type: 'boolean'
@@ -74,6 +80,7 @@ async function main (): Promise<void> {
     'enable-autonat': argEnableAutonat,
     'metrics-path': argMetricsPath,
     'metrics-port': argMetricsPort,
+    'api-port': argApiPort,
     help: argHelp
   } = args.values
 
@@ -173,10 +180,41 @@ async function main (): Promise<void> {
       res.end('Not Found')
     }
   })
-  const port = parseInt(argMetricsPort ?? options['metrics-port'].default, 10)
-  await new Promise<void>((resolve) => metricsServer.listen(port, '0.0.0.0', resolve))
+  const metricsPort = parseInt(argMetricsPort ?? options['metrics-port'].default, 10)
+  await new Promise<void>((resolve) => metricsServer.listen(metricsPort, '0.0.0.0', resolve))
 
   console.info('Metrics server listening', `0.0.0.0:${argMetricsPort}${argMetricsPath}`)
+
+  const apiServer = createServer((req, res) => {
+    if (req.method === 'GET') {
+      if (req.url === '/api/v0/nodejs/gc') {
+        if (globalThis.gc == null) {
+          // maybe we're running in a non-v8 engine or `--expose-gc` wasn't passed
+          res.writeHead(503, { 'Content-Type': 'text/plain' })
+          res.end('Service Unavailable')
+          return
+        }
+        // force nodejs to run garbage collection
+        globalThis.gc?.()
+        res.writeHead(200, { 'Content-Type': 'text/plain' })
+        res.end('OK')
+      } else if (req.url === '/api/v0/nodejs/heapdump') {
+        // force nodejs to generate a heapdump
+        // you can analyze the heapdump with https://github.com/facebook/memlab to get some really useful insights
+        // TODO: make this authenticated so it can't be used to DOS the server
+        const filename = writeHeapSnapshot()
+        res.writeHead(200, { 'Content-Type': 'text/plain' })
+        res.end(`OK ${filename}`)
+      }
+    } else {
+      res.writeHead(404, { 'Content-Type': 'text/plain' })
+      res.end('Not Found')
+    }
+  })
+
+  const apiPort = parseInt(argApiPort ?? options['api-port'].default, 10)
+  await new Promise<void>((resolve) => apiServer.listen(apiPort, '0.0.0.0', resolve))
+  console.info('Metrics server listening', `0.0.0.0:${apiPort}`)
 }
 
 main().catch(err => {
