@@ -9,5 +9,6 @@ This folder is intended to contain various configuration files for the project.
 If you run with the `dashboard` profile, it will enable the grafana and prometheus services.
 
 ```sh
+docker compose --profile dashboard pull
 docker compose --profile dashboard up
 ```
