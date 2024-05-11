@@ -200,9 +200,9 @@ async function main (): Promise<void> {
         res.end('OK')
       } else if (req.url === '/api/v0/nodejs/heapdump') {
         // force nodejs to generate a heapdump
-        // you can analyze the heapdump with https://github.com/facebook/memlab to get some really useful insights
+        // you can analyze the heapdump with https://github.com/facebook/memlab#heap-analysis-and-investigation to get some really useful insights
         // TODO: make this authenticated so it can't be used to DOS the server
-        const filename = writeHeapSnapshot()
+        const filename = writeHeapSnapshot(`./snapshot-dir/${(new Date()).toISOString()}.heapsnapshot`)
         res.writeHead(200, { 'Content-Type': 'text/plain' })
         res.end(`OK ${filename}`)
       }
