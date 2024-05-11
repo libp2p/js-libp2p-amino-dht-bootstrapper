@@ -111,7 +111,9 @@ async function main (): Promise<void> {
 
   if (argEnableAutonat === true) {
     console.info('Enabling Autonat')
-    services.autonat = autoNAT()
+    services.autonat = autoNAT({
+      timeout: 90 * 1000 // i'm getting a lot of timeouts when running this locally
+    })
   }
 
   const node = await createLibp2p({
