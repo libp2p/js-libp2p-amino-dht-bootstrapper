@@ -1,0 +1,42 @@
+version: '3'
+services:
+  bootstrapper:
+    restart: unless-stopped
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - 8888:8888
+      - 8899:8899
+      - 4101:4101
+      - 4102:4102
+    environment:
+      - CONFIG_FLAGS=""
+    volumes:
+      - ./local-config.json:/config.json
+      - ./snapshot-dir:/app/snapshot-dir
+    command: node dist/src/index.js --config /config.json --enable-kademlia --enable-autonat
+
+  prometheus:
+    restart: unless-stopped
+    image: prom/prometheus
+    pull_policy: if_not_present
+    profiles: ['dashboard'] # only runs with dashboard profile
+    ports:
+      - 9080:9090
+    volumes:
+      - ./config/prometheus:/etc/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+
+  grafana:
+    image: grafana/grafana
+    pull_policy: if_not_present
+    profiles: ['dashboard'] # only runs with dashboard profile
+    ports:
+      - 9181:3000
+    volumes:
+      - ./config/grafana/datasources:/etc/grafana/provisioning/datasources
+      - ./config/grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/main.yaml
+      - ./config/grafana:/var/lib/grafana
+    restart: unless-stopped

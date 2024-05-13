@@ -26,4 +26,4 @@ COPY --from=builder /usr/bin/tini /usr/bin/tini
 HEALTHCHECK --interval=12s --timeout=12s --start-period=10s CMD node dist/src/health-check.js
 
 # Use tini to handle signals properly, see https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md#handling-kernel-signals
-ENTRYPOINT ["/usr/bin/tini", "-p", "SIGKILL", "--", "node", "dist/src/index.js" ]
+ENTRYPOINT ["/usr/bin/tini", "-p", "SIGKILL", "--", "node", "--expose-gc", "dist/src/index.js" ]
