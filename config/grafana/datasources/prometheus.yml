@@ -5,7 +5,7 @@ datasources:
     typeName: Prometheus
     typeLogoUrl: public/app/plugins/datasource/prometheus/img/prometheus_logo.svg
     access: proxy
-    url: http://host.docker.internal:9080
+    url: http://127.0.0.1:9080
     user: ""
     database: ""
     basicAuth: false
