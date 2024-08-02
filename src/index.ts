@@ -161,14 +161,16 @@ async function main (): Promise<void> {
 
   const waitForPublicInterval = setInterval(() => {
     const maddrs = node.getMultiaddrs()
-    // if (maddrs.length > 0) {
-    console.info()
-    console.info('libp2p listening on:')
-    // output listening addresses every 10 seconds
-    maddrs.forEach((ma) => { console.info(`${ma.toString()}`) })
-    console.info()
-    clearInterval(waitForPublicInterval)
-    // }
+    if (maddrs.length > 0) {
+      console.info()
+      console.info('libp2p listening on:')
+      // output listening addresses every 10 seconds
+      maddrs.forEach((ma) => { console.info(`${ma.toString()}`) })
+      console.info()
+      clearInterval(waitForPublicInterval)
+    } else {
+      console.info('Waiting for public listening addresses...')
+    }
   }, 10000)
 
   const metricsServer = createServer((req, res) => {

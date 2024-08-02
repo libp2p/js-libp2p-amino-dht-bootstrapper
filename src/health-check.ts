@@ -82,7 +82,7 @@ if (peerId != null) {
     const resolvedPeer = await node.peerRouting.findPeer(peerId)
     multiaddrs = resolvedPeer.multiaddrs
   } catch (e) {
-    console.error('Could not find peer via dht lookup')
+    console.error('Could not find peer via dht lookup', e)
   }
 }
 
