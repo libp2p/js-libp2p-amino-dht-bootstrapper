@@ -217,7 +217,7 @@ async function main (): Promise<void> {
 
   const apiPort = parseInt(argApiPort ?? options['api-port'].default, 10)
   await new Promise<void>((resolve) => apiServer.listen(apiPort, '0.0.0.0', resolve))
-  console.info('Metrics server listening', `0.0.0.0:${apiPort}`)
+  console.info(`RPC api listening on: 0.0.0.0:${apiPort}`)
 }
 
 main().catch(err => {
