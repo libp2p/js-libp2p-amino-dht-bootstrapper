@@ -10,12 +10,14 @@ services:
       - 8899:8899
       - 4101:4101
       - 4102:4102
+      - 4001:4001
+      - 4003:4003
     environment:
       - CONFIG_FLAGS=""
     volumes:
-      - ./local-config.json:/config.json
+      - ./config.json:/config.json
       - ./snapshot-dir:/app/snapshot-dir
-    command: node dist/src/index.js --config /config.json --enable-kademlia --enable-autonat
+    command: node dist/src/index.js --config config.json --enable-kademlia --enable-autonat
 
   prometheus:
     restart: unless-stopped
