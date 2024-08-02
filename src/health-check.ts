@@ -43,14 +43,14 @@ try {
   ]
 } catch (e) {
   // don't care about error, try peerId
-  console.error('Could not convert input into multiaddr')
+  console.error('Could not convert input into multiaddr', e)
 }
 
 try {
   peerId = peerIdFromString(multiaddrOrPeerId)
-} catch {
+} catch (error) {
   // peer id failed, maybe multiaddr didn't?
-  console.error('Could not convert input into PeerId')
+  console.error('Could not convert input into PeerId', error)
 }
 
 if (multiaddr == null && peerId == null) {
