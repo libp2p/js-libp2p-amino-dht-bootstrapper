@@ -23,25 +23,39 @@ import { peerIdFromString } from '@libp2p/peer-id'
 import { tcp } from '@libp2p/tcp'
 import { webSockets } from '@libp2p/websockets'
 import { multiaddr, type Multiaddr } from '@multiformats/multiaddr'
-import { createLibp2p } from 'libp2p'
+import { createLibp2p, type Libp2p } from 'libp2p'
+import type { PeerId } from '@libp2p/interface'
 
-async function main (multiaddrOrPeerId: string): Promise<void> {
+async function getMaddrFromPeerId (node: Libp2p, peerId: PeerId): Promise<Multiaddr[]> {
+  /**
+   * if we receive a PeerId (which would be a string because its from command line) we need to do:
+   * * dht lookup
+   * * dial
+   */
+  const resolvedPeer = await node.peerRouting.findPeer(peerId)
+
+  return resolvedPeer.multiaddrs
+}
+
+async function tryToDialMaddrOrPeerId (multiaddrOrPeerId: string): Promise<void> {
   let multiaddrs: Multiaddr[] = []
   let peerId = null
+  let maddr: Multiaddr | null = null
 
   try {
-    multiaddrs = [
-      multiaddr(multiaddrOrPeerId)
-    ]
+    maddr = multiaddr(multiaddrOrPeerId)
+    multiaddrs = [maddr]
   } catch (e) {
-  // don't care about error, try peerId
+    // don't care about error, try peerId
     console.error('Could not convert input into multiaddr', e)
   }
 
   try {
-    peerId = peerIdFromString(multiaddrOrPeerId)
+    if (maddr == null) {
+      // don't try to parse peerId if we already have a multiaddr, to prevent flooding output with unnecessary errors
+      peerId = peerIdFromString(multiaddrOrPeerId)
+    }
   } catch (error) {
-    console.info('multiaddrOrPeerId: ', multiaddrOrPeerId)
     // peer id failed, maybe multiaddr didn't?
     console.error('Could not convert input into PeerId', error)
   }
@@ -68,22 +82,11 @@ async function main (multiaddrOrPeerId: string): Promise<void> {
   })
 
   if (peerId != null) {
-  // if we receive a PeerId (which would be a string because its from command line) we need to do:
-  //  * dht lookup
-  //  * dial
-    try {
-      const resolvedPeer = await node.peerRouting.findPeer(peerId)
-      multiaddrs = resolvedPeer.multiaddrs
-    } catch (e) {
-      console.error('Could not find peer via dht lookup', e)
-    }
+    multiaddrs = await getMaddrFromPeerId(node, peerId)
   }
 
   // if we receive a Multiaddr, dial it immediately
   await node.dial(multiaddrs)
-
-  // it works!
-  process.exit(0)
 }
 
 const { positionals } = parseArgs({
@@ -97,13 +100,15 @@ if (positionals.length > 1) {
 const multiaddrOrPeerId = positionals[0]
 
 if (multiaddrOrPeerId != null) {
-  await main(multiaddrOrPeerId)
+  await tryToDialMaddrOrPeerId(multiaddrOrPeerId)
 } else {
   // read from file
   const listeningAddrs = await readFile('listening-addrs.txt', 'utf8')
   const addrs = listeningAddrs.split('\n')
   try {
-    await Promise.any(addrs.map(async (addr) => main(addr)))
+    await Promise.any(addrs.map(async (addr) => tryToDialMaddrOrPeerId(addr)))
+    // it works!
+    process.exit(0)
   } catch (e) {
     console.error('Could not dial any of the listening addresses', e)
     process.exit(1)
