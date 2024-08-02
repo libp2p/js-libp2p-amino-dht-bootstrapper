@@ -6,7 +6,7 @@ scrape_configs:
   - job_name: 'js-libp2p-amino-dht-bootstrapper'
     metrics_path: '/metrics'
     static_configs:
-      - targets: ['127.0.0.1:8888']
+      - targets: ['host.docker.internal:8888']
 
 rule_files:
   - "rules/*.yml"  # This line tells Prometheus where to find the rule files.
