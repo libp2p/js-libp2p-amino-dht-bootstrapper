@@ -1,7 +1,7 @@
 #! /usr/bin/env node --trace-warnings
 /* eslint-disable no-console */
 
-import { readFile } from 'node:fs/promises'
+import { readFile, writeFile } from 'node:fs/promises'
 import { createServer } from 'node:http'
 import { isAbsolute, join } from 'node:path'
 import { parseArgs } from 'node:util'
@@ -168,6 +168,7 @@ async function main (): Promise<void> {
       maddrs.forEach((ma) => { console.info(`${ma.toString()}`) })
       console.info()
       clearInterval(waitForPublicInterval)
+      writeListeningAddrsToFile(maddrs).catch(fatal)
     } else {
       console.info('Waiting for public listening addresses...')
     }
@@ -275,4 +276,10 @@ async function decodePeerId (privkeyStr: string): Promise<PeerId> {
   } catch (e) {
     fatal('Invalid peer-id private key')
   }
+}
+
+async function writeListeningAddrsToFile (maddrs: Multiaddr[]): Promise<void> {
+  const addrs = maddrs.map((ma) => ma.toString())
+  const addrsString = addrs.join('\n')
+  await writeFile('listening-addrs.txt', addrsString, 'utf8')
 }
