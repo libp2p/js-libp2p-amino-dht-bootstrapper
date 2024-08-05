@@ -9,7 +9,7 @@ If you encounter any issues while using the application, please refer to the fol
 First, go through this checklist to ensure things are set up correctly:
 
 1. Ensure that the metrics endpoint is up and running. You should be able to access metrics at <hostIp/dns>:8888/metrics.
-2. Check that prometheus is configured to scrape the metrics endpoint. You can verify that it's connected by going to <hostIp/dns>:9080/targets.
+2. Check that prometheus is configured to scrape the js-libp2p-bootstrapper metrics endpoint. You can verify that it's connected by going to <hostIp/dns>:9080/targets.
 3. Check that Grafana is configured to use Prometheus as a data source. You can verify this by going to <hostIp/dns>:9181/explore. Ensure that "Prometheus" is selected as the datasource, and that the metrics explorer is showing libp2p_* metrics.
 
 If 1 checks out, but 2 doesn't, then the issue may be related to docker networking. We have `host.docker.internal` configured as the Prometheus target, which doesn't seem super reliable. You can apply the below change, replacing `xxx.xxx.xxx.xxx` with your host IP address, or use a DNS identifier:
@@ -41,3 +41,52 @@ index 351418b..c5557ba 100644
 ```
 
 If 2 or 3 are not working, then the issue may be related to the configuration of the respective services. Check the configuration files for Prometheus and Grafana to ensure that they are correctly configured. Please open an issue if you found a bug in our configuration, or a PR if you have a fix!
+
+### Docker metrics are not being exported
+
+You need to modify your Docker config or start the Docker daemon with the `--metrics-addr` flag to enable the metrics endpoint. You can do this by modifying the Docker daemon configuration file, or by starting the Docker daemon with the `--metrics-addr` flag. For more information, refer to the [Docker documentation](https://docs.docker.com/config/daemon/prometheus/).
+
+
+## Commands
+
+### Docker
+### build container for mac
+
+```
+docker build . --platform linux/arm64 --tag js-libp2p-amino-dht-bootstrapper:local-arm64
+
+docker build . --tag amino
+```
+
+### run container
+
+```
+docker run -v ./local-config.json:/config.json -p 8888:8888 -p 4101:4101 -p 4102:4102 -it js-libp2p-amino-dht-bootstrapper:local-arm64 --config /config.json --enable-kademlia
+
+docker run -v ./local-config.json:/config.json -p 8888:8888 -p 4101:4101 -p 4102:4102 -it amino --config /config.json --enable-kademlia
+```
+
+### shell in container
+
+```
+docker run --rm -it --entrypoint bash js-libp2p-amino-dht-bootstrapper:local-arm64
+
+docker run --rm -it --entrypoint bash amino
+```
+
+### docker compose
+
+```
+docker compose --profile dashboard pull
+docker compose --profile dashboard build
+docker compose --profile dashboard up -d
+docker compose --profile dashboard down
+```
+
+### clear grafana data
+
+This can come in handy if you need to reset the data in Grafana. Keep in mind that all dashboards and data will be lost.
+
+```
+rm config/grafana/grafana.db
+```

@@ -7,3 +7,6 @@ node_modules
 yarn.lock
 .vscode
 snapshot-dir
+config/grafana/grafana.db
+config/grafana/alerting
+js-libp2p-datastore
