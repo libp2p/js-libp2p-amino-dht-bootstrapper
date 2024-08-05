@@ -17,7 +17,7 @@ services:
     volumes:
       - ./config.json:/config.json
       - ./snapshot-dir:/app/snapshot-dir
-    command: node --expose-gc dist/src/index.js --config config.json --enable-kademlia --enable-autonat
+    command: node dist/src/index.js --config config.json --enable-kademlia --enable-autonat
     network_mode: host
 
   prometheus:
