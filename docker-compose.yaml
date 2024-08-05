@@ -25,6 +25,8 @@ services:
     image: prom/prometheus
     pull_policy: if_not_present
     profiles: ['dashboard'] # only runs with dashboard profile
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
       - 9080:9090
     volumes:
@@ -36,6 +38,8 @@ services:
     image: grafana/grafana
     pull_policy: if_not_present
     profiles: ['dashboard'] # only runs with dashboard profile
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
       - 9181:3000
     volumes:
