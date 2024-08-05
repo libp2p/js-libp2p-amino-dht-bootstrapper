@@ -4,6 +4,26 @@ If you encounter any issues while using the application, please refer to the fol
 
 ## Common issues
 
+### How do I get libp2p logs from the bootstrapper?
+
+First, you want to modify `docker-compose.yaml` to set the `DEBUG` environment variable. This will enable debug logging for the bootstrapper. You can then view the logs by running `docker logs <container_id>`.
+
+E.g.
+
+```diff
+diff --git a/docker-compose.yaml b/docker-compose.yaml
+index dc2dc69..5a5b286 100644
+--- a/docker-compose.yaml
++++ b/docker-compose.yaml
+@@ -14,6 +14,7 @@ services:
+       - 4003:4003
+     environment:
+       - CONFIG_FLAGS=""
++      - DEBUG="libp2p:websockets*,libp2p:websockets*:trace,libp2p:tcp*,libp2p:tcp*:trace"
+```
+
+More information about getting logs can be found at https://github.com/libp2p/js-libp2p/blob/main/doc/GETTING_STARTED.md#node. You can search for logging prefixes for js-libp2p at https://github.com/search?q=repo%3Alibp2p%2Fjs-libp2p%20%22libp2p%3A%22&type=code.
+
 ### Grafana / Prometheus are not connecting to the metrics endpoint.
 
 First, go through this checklist to ensure things are set up correctly:
@@ -50,43 +70,53 @@ You need to modify your Docker config or start the Docker daemon with the `--met
 ## Commands
 
 ### Docker
-### build container for mac
+#### build container for mac
 
-```
+```sh
 docker build . --platform linux/arm64 --tag js-libp2p-amino-dht-bootstrapper:local-arm64
 
 docker build . --tag amino
 ```
 
-### run container
+#### run container
 
-```
+```sh
 docker run -v ./local-config.json:/config.json -p 8888:8888 -p 4101:4101 -p 4102:4102 -it js-libp2p-amino-dht-bootstrapper:local-arm64 --config /config.json --enable-kademlia
 
 docker run -v ./local-config.json:/config.json -p 8888:8888 -p 4101:4101 -p 4102:4102 -it amino --config /config.json --enable-kademlia
 ```
 
-### shell in container
+#### shell in container
 
-```
+```sh
 docker run --rm -it --entrypoint bash js-libp2p-amino-dht-bootstrapper:local-arm64
 
 docker run --rm -it --entrypoint bash amino
 ```
 
-### docker compose
+#### docker compose
 
-```
+```sh
 docker compose --profile dashboard pull
 docker compose --profile dashboard build
 docker compose --profile dashboard up -d
 docker compose --profile dashboard down
 ```
 
-### clear grafana data
+#### clear grafana data
 
 This can come in handy if you need to reset the data in Grafana. Keep in mind that all dashboards and data will be lost.
 
-```
+```sh
 rm config/grafana/grafana.db
+```
+
+#### copy&paste commands for bootstrapper when started with docker compose:
+
+```sh
+# View the healthcheck logs
+docker inspect --format "{{json .State.Health }}" $(docker container ls  | grep 'js-libp2p-amino-dht-bootstrapper-bootstrapper' | awk '{print $1}') | jq
+
+# view the container logs
+docker logs $(docker container ls  | grep 'js-libp2p-amino-dht-bootstrapper-bootstrapper' | awk '{print $1}')
 ```
