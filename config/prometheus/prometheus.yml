@@ -8,5 +8,9 @@ scrape_configs:
     static_configs:
       - targets: ['host.docker.internal:8888']
 
+  - job_name: docker
+    static_configs:
+      - targets: ["host.docker.internal:9323"]
+
 rule_files:
   - "rules/*.yml"  # This line tells Prometheus where to find the rule files.
