@@ -108,6 +108,12 @@ To expose the metrics port:
 $ docker run -v ./bootstrapper-config.json:/config.json -p 8888:8888 -it amino --config /config.json
 ```
 
+### Running the docker image with monitoring:
+
+```sh
+$ docker compose --profile dashboard up -d
+```
+
 ## License
 
 Licensed under either of

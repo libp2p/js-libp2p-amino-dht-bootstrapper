@@ -10,5 +10,5 @@ If you run with the `dashboard` profile, it will enable the grafana and promethe
 
 ```sh
 docker compose --profile dashboard pull
-docker compose --profile dashboard up
+docker compose --profile dashboard up -d
 ```

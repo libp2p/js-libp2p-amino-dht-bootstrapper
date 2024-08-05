@@ -77,7 +77,7 @@ async function tryToDialMaddrOrPeerId (multiaddrOrPeerId: string): Promise<void>
       noise()
     ],
     services: {
-      dht: kadDHT({})
+      dht: kadDHT({ clientMode: true })
     }
   })
 
@@ -86,7 +86,28 @@ async function tryToDialMaddrOrPeerId (multiaddrOrPeerId: string): Promise<void>
   }
 
   // if we receive a Multiaddr, dial it immediately
-  await node.dial(multiaddrs)
+  const conn = await node.dial(multiaddrs)
+  console.info('Successfully dialed server', multiaddrs)
+  // close the connection
+  await conn.close()
+
+  // shut the node down
+  await node.stop()
+}
+
+async function tryToDialListeningAddrs (): Promise<void> {
+  // read from file
+  const listeningAddrs = await readFile('listening-addrs.txt', 'utf8')
+  const addrs = listeningAddrs.split('\n')
+  console.info('Trying to dial listening addresses:', addrs)
+  try {
+    await Promise.any(addrs.map(async (addr) => tryToDialMaddrOrPeerId(addr)))
+    // it works!
+    process.exit(0)
+  } catch (e) {
+    console.error('Could not dial any of the listening addresses', e)
+    process.exit(1)
+  }
 }
 
 const { positionals } = parseArgs({
@@ -100,17 +121,13 @@ if (positionals.length > 1) {
 const multiaddrOrPeerId = positionals[0]
 
 if (multiaddrOrPeerId != null) {
-  await tryToDialMaddrOrPeerId(multiaddrOrPeerId)
-} else {
-  // read from file
-  const listeningAddrs = await readFile('listening-addrs.txt', 'utf8')
-  const addrs = listeningAddrs.split('\n')
   try {
-    await Promise.any(addrs.map(async (addr) => tryToDialMaddrOrPeerId(addr)))
-    // it works!
-    process.exit(0)
+    await tryToDialMaddrOrPeerId(multiaddrOrPeerId)
   } catch (e) {
-    console.error('Could not dial any of the listening addresses', e)
-    process.exit(1)
+    console.error('Could not dial', e)
+    console.info('Trying to dial listening addresses')
+    await tryToDialListeningAddrs()
   }
+} else {
+  await tryToDialListeningAddrs()
 }
