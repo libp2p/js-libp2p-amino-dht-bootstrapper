@@ -1,4 +1,7 @@
-version: '3'
+volumes:
+  prometheus_data: {}
+  grafana_data: {}
+
 services:
   bootstrapper:
     restart: unless-stopped
@@ -17,7 +20,7 @@ services:
     volumes:
       - ./config.json:/config.json
       - ./snapshot-dir:/app/snapshot-dir
-    command: node dist/src/index.js --config config.json --enable-kademlia --enable-autonat
+    command: node dist/src/index.js --config /config.json --enable-kademlia --enable-autonat
     network_mode: host
 
   prometheus:
@@ -30,9 +33,13 @@ services:
     ports:
       - 9080:9090
     volumes:
-      - ./config/prometheus:/etc/prometheus
+      - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
 
   grafana:
     image: grafana/grafana
@@ -44,6 +51,6 @@ services:
       - 9181:3000
     volumes:
       - ./config/grafana/datasources:/etc/grafana/provisioning/datasources
-      - ./config/grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/main.yaml
-      - ./config/grafana:/var/lib/grafana
+      - ./config/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - grafana_data:/var/lib/grafana
     restart: unless-stopped
