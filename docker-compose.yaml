@@ -50,7 +50,6 @@ services:
     ports:
       - 9181:3000
     volumes:
-      - ./config/grafana/datasources/:/etc/grafana/provisioning/datasources/
-      - ./config/grafana/dashboards/:/etc/grafana/provisioning/dashboards/
+      - ./config/grafana/:/etc/grafana/provisioning/
       - grafana_data:/var/lib/grafana
     restart: unless-stopped
