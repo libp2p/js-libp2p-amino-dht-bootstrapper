@@ -33,7 +33,7 @@ services:
     ports:
       - 9080:9090
     volumes:
-      - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./config/prometheus/:/etc/prometheus/
       - prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -50,7 +50,7 @@ services:
     ports:
       - 9181:3000
     volumes:
-      - ./config/grafana/datasources:/etc/grafana/provisioning/datasources
-      - ./config/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./config/grafana/datasources/:/etc/grafana/provisioning/datasources/
+      - ./config/grafana/dashboards/:/etc/grafana/provisioning/dashboards/
       - grafana_data:/var/lib/grafana
     restart: unless-stopped
