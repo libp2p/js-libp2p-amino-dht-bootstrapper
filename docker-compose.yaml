@@ -1,4 +1,11 @@
-version: '3'
+volumes:
+  prometheus_data: {}
+  grafana_data: {}
+
+networks:
+  front-tier:
+  back-tier:
+
 services:
   bootstrapper:
     restart: unless-stopped
@@ -31,8 +38,14 @@ services:
       - 9080:9090
     volumes:
       - ./config/prometheus:/etc/prometheus
+      - prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    networks:
+      - back-tier
 
   grafana:
     image: grafana/grafana
@@ -44,6 +57,49 @@ services:
       - 9181:3000
     volumes:
       - ./config/grafana/datasources:/etc/grafana/provisioning/datasources
-      - ./config/grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/main.yaml
-      - ./config/grafana:/var/lib/grafana
+      - ./config/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      # - ./config/grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/main.yaml
+      # - ./config/grafana:/var/lib/grafana
+      - grafana_data:/var/lib/grafana
     restart: unless-stopped
+    networks:
+      - back-tier
+      - front-tier
+
+  node-exporter:
+    image: quay.io/prometheus/node-exporter:latest
+    profiles: ['linux'] # only runs with linux profile
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+      - /:/host:ro,rslave
+    command:
+      - '--path.rootfs=/host'
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - --collector.filesystem.ignored-mount-points
+      - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
+    ports:
+      - 9100:9100
+    networks:
+      - back-tier
+    restart: always
+    deploy:
+      mode: global
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor
+    profiles: ['linux'] # only runs with linux profile
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    ports:
+      - 8080:8080
+    networks:
+      - back-tier
+    restart: always
+    deploy:
+      mode: global
