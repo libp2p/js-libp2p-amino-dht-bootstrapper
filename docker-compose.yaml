@@ -24,7 +24,7 @@ services:
     volumes:
       - ./config.json:/config.json
       - ./snapshot-dir:/app/snapshot-dir
-    command: node dist/src/index.js --config config.json --enable-kademlia --enable-autonat
+    command: node dist/src/index.js --config /config.json --enable-kademlia --enable-autonat
     network_mode: host
 
   prometheus:
@@ -37,7 +37,7 @@ services:
     ports:
       - 9080:9090
     volumes:
-      - ./config/prometheus:/etc/prometheus
+      - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -46,6 +46,7 @@ services:
       - '--web.console.templates=/usr/share/prometheus/consoles'
     networks:
       - back-tier
+      - default
 
   grafana:
     image: grafana/grafana
@@ -90,7 +91,7 @@ services:
 
   cadvisor:
     image: gcr.io/cadvisor/cadvisor
-    profiles: ['linux'] # only runs with linux profile
+    profiles: ['dashboard'] # only runs with dashboard profile
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:rw
