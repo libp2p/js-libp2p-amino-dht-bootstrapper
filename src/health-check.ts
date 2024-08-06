@@ -86,7 +86,11 @@ async function tryToDialMaddrOrPeerId (multiaddrOrPeerId: string): Promise<void>
   }
 
   // if we receive a Multiaddr, dial it immediately
-  const conn = await node.dial(multiaddrs)
+  const conn = await node.dial(multiaddrs, {
+    onProgress: (evt) => {
+      console.info(evt.type, evt.detail)
+    }
+  })
   console.info('Successfully dialed server', multiaddrs)
   // close the connection
   await conn.close()
