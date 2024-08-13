@@ -117,6 +117,9 @@ rm config/grafana/grafana.db
 # View the healthcheck logs
 docker inspect --format "{{json .State.Health }}" $(docker container ls  | grep 'js-libp2p-amino-dht-bootstrapper-bootstrapper' | awk '{print $1}') | jq
 
+# cleaner healthcheck logs:
+docker inspect --format "{{json .State.Health }}" $(docker container ls  | grep 'js-libp2p-amino-dht-bootstrapper-bootstrapper' | awk '{print $1}') | jq '.Log | .[] | .Output' | awk 'NR>1{print "-------"} {print}' | while IFS= read -r line; do echo -e "${line//\\n/\\n}"; done
+
 # view the container logs
 docker logs $(docker container ls  | grep 'js-libp2p-amino-dht-bootstrapper-bootstrapper' | awk '{print $1}')
 ```

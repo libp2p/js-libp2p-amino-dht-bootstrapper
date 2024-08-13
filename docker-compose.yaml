@@ -2,10 +2,6 @@ volumes:
   prometheus_data: {}
   grafana_data: {}
 
-networks:
-  front-tier:
-  back-tier:
-
 services:
   bootstrapper:
     restart: unless-stopped
@@ -37,16 +33,13 @@ services:
     ports:
       - 9080:9090
     volumes:
-      - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./config/prometheus/:/etc/prometheus/
       - prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
       - '--web.console.libraries=/usr/share/prometheus/console_libraries'
       - '--web.console.templates=/usr/share/prometheus/consoles'
-    networks:
-      - back-tier
-      - default
 
   grafana:
     image: grafana/grafana
@@ -57,15 +50,9 @@ services:
     ports:
       - 9181:3000
     volumes:
-      - ./config/grafana/datasources:/etc/grafana/provisioning/datasources
-      - ./config/grafana/dashboards:/etc/grafana/provisioning/dashboards
-      # - ./config/grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/main.yaml
-      # - ./config/grafana:/var/lib/grafana
+      - ./config/grafana/:/etc/grafana/provisioning/
       - grafana_data:/var/lib/grafana
     restart: unless-stopped
-    networks:
-      - back-tier
-      - front-tier
 
   node-exporter:
     image: quay.io/prometheus/node-exporter:latest
@@ -83,8 +70,6 @@ services:
       - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
     ports:
       - 9100:9100
-    networks:
-      - back-tier
     restart: always
     deploy:
       mode: global
@@ -99,8 +84,6 @@ services:
       - /var/lib/docker/:/var/lib/docker:ro
     ports:
       - 8080:8080
-    networks:
-      - back-tier
     restart: always
     deploy:
       mode: global
