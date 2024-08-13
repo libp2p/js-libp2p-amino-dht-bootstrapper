@@ -1,27 +1,33 @@
 #! /usr/bin/env node --trace-warnings
 /* eslint-disable no-console */
 
-import { readFile } from 'node:fs/promises'
+import { readFile, writeFile } from 'node:fs/promises'
 import { createServer } from 'node:http'
 import { isAbsolute, join } from 'node:path'
 import { parseArgs } from 'node:util'
+import { writeHeapSnapshot } from 'node:v8'
 import { noise } from '@chainsafe/libp2p-noise'
 import { yamux } from '@chainsafe/libp2p-yamux'
 import { autoNAT } from '@libp2p/autonat'
 import { bootstrap } from '@libp2p/bootstrap'
 import { circuitRelayServer } from '@libp2p/circuit-relay-v2'
 import { unmarshalPrivateKey } from '@libp2p/crypto/keys'
+import { identify, identifyPush } from '@libp2p/identify'
 import { kadDHT } from '@libp2p/kad-dht'
 import { mplex } from '@libp2p/mplex'
 import { peerIdFromKeys, peerIdFromString } from '@libp2p/peer-id'
 import { prometheusMetrics } from '@libp2p/prometheus-metrics'
 import { tcp } from '@libp2p/tcp'
+import { webRTC } from '@libp2p/webrtc'
 import { webSockets } from '@libp2p/websockets'
+import { all as wsFilter } from '@libp2p/websockets/filters'
 import { LevelDatastore } from 'datastore-level'
 import { createLibp2p, type ServiceFactoryMap } from 'libp2p'
 import { register } from 'prom-client'
 import { fromString as uint8ArrayFromString } from 'uint8arrays/from-string'
+import { isPrivate } from './utils/is-private-ip.js'
 import type { PeerId } from '@libp2p/interface'
+import type { Multiaddr } from '@multiformats/multiaddr'
 
 interface Libp2pServices extends ServiceFactoryMap {
 
@@ -33,22 +39,27 @@ async function main (): Promise<void> {
       description: 'Path to IPFS config file',
       type: 'string'
     },
-    enableKademlia: {
+    'enable-kademlia': {
       description: 'Whether to run the libp2p Kademlia protocol and join the IPFS DHT',
       type: 'boolean'
     },
-    enableAutonat: {
+    'enable-autonat': {
       description: 'Whether to run the libp2p Autonat protocol',
       type: 'boolean'
     },
-    metricsPath: {
+    'metrics-path': {
       description: 'Metric endpoint path',
       default: '/metrics',
       type: 'string'
     },
-    metricsPort: {
+    'metrics-port': {
       description: 'Port to serve metrics',
       default: '8888',
+      type: 'string'
+    },
+    'api-port': {
+      description: 'Port for api endpoint',
+      default: '8899',
       type: 'string'
     },
     help: {
@@ -63,12 +74,21 @@ async function main (): Promise<void> {
     options
   })
 
-  if (args.values.help === true) {
+  const {
+    config: configFilename,
+    'enable-kademlia': argEnableKademlia,
+    'enable-autonat': argEnableAutonat,
+    'metrics-path': argMetricsPath,
+    'metrics-port': argMetricsPort,
+    'api-port': argApiPort,
+    help: argHelp
+  } = args.values
+
+  if (argHelp === true) {
     console.info(JSON.stringify(options, null, 2))
     return
   }
 
-  const configFilename = args.values.config
   if (configFilename == null) {
     fatal('--config must be provided')
   }
@@ -86,28 +106,44 @@ async function main (): Promise<void> {
     }),
     bootstrap: bootstrap({
       list: config.Bootstrap
-    })
+    }),
+    identify: identify(),
+    identifyPush: identifyPush()
   }
 
-  if (args.values.enableKademlia === true) {
+  if (argEnableKademlia === true) {
+    console.info('Enabling Kademlia DHT')
     services.dht = kadDHT({})
   }
 
-  if (args.values.enableAutonat === true) {
-    services.autonat = autoNAT()
+  if (argEnableAutonat === true) {
+    console.info('Enabling Autonat')
+    services.autonat = autoNAT({
+      timeout: 90 * 1000 // i'm getting a lot of timeouts when running this locally
+    })
   }
 
   const node = await createLibp2p({
     datastore: new LevelDatastore('js-libp2p-datastore'),
     peerId,
     addresses: {
+      announceFilter: (addrs: Multiaddr[]) => {
+        // filter out private IP addresses
+        return addrs.filter((addr) => {
+          const nodeAddress = addr.nodeAddress()
+          return !isPrivate(nodeAddress)
+        })
+      },
       listen: config.Addresses.Swarm,
       announce: config.Addresses.Announce,
       noAnnounce: config.Addresses.NoAnnounce
     },
     transports: [
-      webSockets(),
-      tcp()
+      webSockets({
+        filter: wsFilter
+      }),
+      tcp(),
+      webRTC()
     ],
     streamMuxers: [
       yamux(),
@@ -123,8 +159,23 @@ async function main (): Promise<void> {
   console.info('libp2p is running')
   console.info('PeerId', node.peerId.toString())
 
+  const waitForPublicInterval = setInterval(() => {
+    const maddrs = node.getMultiaddrs()
+    if (maddrs.length > 0) {
+      console.info()
+      console.info('libp2p listening on:')
+      // output listening addresses every 10 seconds
+      maddrs.forEach((ma) => { console.info(`${ma.toString()}`) })
+      console.info()
+      clearInterval(waitForPublicInterval)
+      writeListeningAddrsToFile(maddrs).catch(fatal)
+    } else {
+      console.info('Waiting for public listening addresses...')
+    }
+  }, 10000)
+
   const metricsServer = createServer((req, res) => {
-    if (req.url === args.values.metricsPath && req.method === 'GET') {
+    if (req.url === argMetricsPath && req.method === 'GET') {
       res.writeHead(200, { 'Content-Type': 'text/plain' })
       void register.metrics().then((metrics) => res.end(metrics))
     } else {
@@ -132,10 +183,41 @@ async function main (): Promise<void> {
       res.end('Not Found')
     }
   })
-  const port = parseInt(args.values.metricsPort ?? options.metricsPort.default, 10)
-  await new Promise<void>((resolve) => metricsServer.listen(port, '0.0.0.0', resolve))
+  const metricsPort = parseInt(argMetricsPort ?? options['metrics-port'].default, 10)
+  await new Promise<void>((resolve) => metricsServer.listen(metricsPort, '0.0.0.0', resolve))
 
-  console.info('Metrics server listening', `0.0.0.0:${args.values.metricsPort}${args.values.metricsPath}`)
+  console.info('Metrics server listening', `0.0.0.0:${argMetricsPort}${argMetricsPath}`)
+
+  const apiServer = createServer((req, res) => {
+    if (req.method === 'GET') {
+      if (req.url === '/api/v0/nodejs/gc') {
+        if (globalThis.gc == null) {
+          // maybe we're running in a non-v8 engine or `--expose-gc` wasn't passed
+          res.writeHead(503, { 'Content-Type': 'text/plain' })
+          res.end('Service Unavailable')
+          return
+        }
+        // force nodejs to run garbage collection
+        globalThis.gc?.()
+        res.writeHead(200, { 'Content-Type': 'text/plain' })
+        res.end('OK')
+      } else if (req.url === '/api/v0/nodejs/heapdump') {
+        // force nodejs to generate a heapdump
+        // you can analyze the heapdump with https://github.com/facebook/memlab#heap-analysis-and-investigation to get some really useful insights
+        // TODO: make this authenticated so it can't be used to DOS the server
+        const filename = writeHeapSnapshot(`./snapshot-dir/${(new Date()).toISOString()}.heapsnapshot`)
+        res.writeHead(200, { 'Content-Type': 'text/plain' })
+        res.end(`OK ${filename}`)
+      }
+    } else {
+      res.writeHead(404, { 'Content-Type': 'text/plain' })
+      res.end('Not Found')
+    }
+  })
+
+  const apiPort = parseInt(argApiPort ?? options['api-port'].default, 10)
+  await new Promise<void>((resolve) => apiServer.listen(apiPort, '0.0.0.0', resolve))
+  console.info(`RPC api listening on: 0.0.0.0:${apiPort}`)
 }
 
 main().catch(err => {
@@ -194,4 +276,10 @@ async function decodePeerId (privkeyStr: string): Promise<PeerId> {
   } catch (e) {
     fatal('Invalid peer-id private key')
   }
+}
+
+async function writeListeningAddrsToFile (maddrs: Multiaddr[]): Promise<void> {
+  const addrs = maddrs.map((ma) => ma.toString())
+  const addrsString = addrs.join('\n')
+  await writeFile('listening-addrs.txt', addrsString, 'utf8')
 }
