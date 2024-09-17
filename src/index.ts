@@ -24,6 +24,7 @@ import { all as wsFilter } from '@libp2p/websockets/filters'
 import { LevelDatastore } from 'datastore-level'
 import { createLibp2p, type ServiceFactoryMap } from 'libp2p'
 import { register } from 'prom-client'
+import gcStats from 'prometheus-gc-stats'
 import { fromString as uint8ArrayFromString } from 'uint8arrays/from-string'
 import { isPrivate } from './utils/is-private-ip.js'
 import type { PeerId } from '@libp2p/interface'
@@ -184,6 +185,7 @@ async function main (): Promise<void> {
     }
   })
   const metricsPort = parseInt(argMetricsPort ?? options['metrics-port'].default, 10)
+  gcStats(register)()
   await new Promise<void>((resolve) => metricsServer.listen(metricsPort, '0.0.0.0', resolve))
 
   console.info('Metrics server listening', `0.0.0.0:${argMetricsPort}${argMetricsPath}`)
