@@ -73,7 +73,7 @@ async function tryToDialMaddrOrPeerId (multiaddrOrPeerId: string): Promise<void>
       yamux(),
       mplex()
     ],
-    connectionEncryption: [
+    connectionEncrypters: [
       noise()
     ],
     services: {
