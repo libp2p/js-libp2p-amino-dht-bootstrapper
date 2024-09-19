@@ -10,14 +10,14 @@ import { noise } from '@chainsafe/libp2p-noise'
 import { yamux } from '@chainsafe/libp2p-yamux'
 import { autoNAT } from '@libp2p/autonat'
 import { bootstrap } from '@libp2p/bootstrap'
-import { circuitRelayServer } from '@libp2p/circuit-relay-v2'
-import { unmarshalPrivateKey } from '@libp2p/crypto/keys'
+import { circuitRelayServer, circuitRelayTransport } from '@libp2p/circuit-relay-v2'
+import { privateKeyFromProtobuf } from '@libp2p/crypto/keys'
 import { identify, identifyPush } from '@libp2p/identify'
 import { kadDHT } from '@libp2p/kad-dht'
-import { mplex } from '@libp2p/mplex'
-import { peerIdFromKeys, peerIdFromString } from '@libp2p/peer-id'
+import { peerIdFromPrivateKey, peerIdFromString } from '@libp2p/peer-id'
 import { prometheusMetrics } from '@libp2p/prometheus-metrics'
 import { tcp } from '@libp2p/tcp'
+import { tls } from '@libp2p/tls'
 import { webRTC } from '@libp2p/webrtc'
 import { webSockets } from '@libp2p/websockets'
 import { all as wsFilter } from '@libp2p/websockets/filters'
@@ -27,7 +27,7 @@ import { register } from 'prom-client'
 import gcStats from 'prometheus-gc-stats'
 import { fromString as uint8ArrayFromString } from 'uint8arrays/from-string'
 import { isPrivate } from './utils/is-private-ip.js'
-import type { PeerId } from '@libp2p/interface'
+import type { PrivateKey } from '@libp2p/interface'
 import type { Multiaddr } from '@multiformats/multiaddr'
 
 interface Libp2pServices extends ServiceFactoryMap {
@@ -96,15 +96,13 @@ async function main (): Promise<void> {
   const configFilepath = isAbsolute(configFilename) ? configFilename : join(process.cwd(), configFilename)
   const config = await readConfig(configFilepath)
 
-  const peerId = await decodePeerId(config.Identity.PrivKey)
-  if (!peerIdFromString(config.Identity.PeerID).equals(peerId)) {
+  const privateKey = decodePeerId(config.Identity.PrivKey)
+  if (!peerIdFromString(config.Identity.PeerID).equals(peerIdFromPrivateKey(privateKey))) {
     fatal('Config Identity.PeerId doesn\'t match Identity.PrivKey')
   }
 
   const services: Libp2pServices = {
-    circuitRelay: circuitRelayServer({
-      advertise: true
-    }),
+    circuitRelay: circuitRelayServer(),
     bootstrap: bootstrap({
       list: config.Bootstrap
     }),
@@ -126,7 +124,7 @@ async function main (): Promise<void> {
 
   const node = await createLibp2p({
     datastore: new LevelDatastore('js-libp2p-datastore'),
-    peerId,
+    privateKey,
     addresses: {
       announceFilter: (addrs: Multiaddr[]) => {
         // filter out private IP addresses
@@ -144,14 +142,15 @@ async function main (): Promise<void> {
         filter: wsFilter
       }),
       tcp(),
-      webRTC()
+      webRTC(),
+      circuitRelayTransport()
     ],
     streamMuxers: [
-      yamux(),
-      mplex()
+      yamux()
     ],
-    connectionEncryption: [
-      noise()
+    connectionEncrypters: [
+      noise(),
+      tls()
     ],
     metrics: prometheusMetrics(),
     services
@@ -270,14 +269,9 @@ async function readConfig (filepath: string): Promise<KuboConfig> {
   return config
 }
 
-async function decodePeerId (privkeyStr: string): Promise<PeerId> {
-  try {
-    const privkeyBytes = uint8ArrayFromString(privkeyStr, 'base64pad')
-    const privkey = await unmarshalPrivateKey(privkeyBytes)
-    return await peerIdFromKeys(privkey.public.bytes, privkey.bytes)
-  } catch (e) {
-    fatal('Invalid peer-id private key')
-  }
+function decodePeerId (privkeyStr: string): PrivateKey {
+  const privkeyBytes = uint8ArrayFromString(privkeyStr, 'base64pad')
+  return privateKeyFromProtobuf(privkeyBytes)
 }
 
 async function writeListeningAddrsToFile (maddrs: Multiaddr[]): Promise<void> {
