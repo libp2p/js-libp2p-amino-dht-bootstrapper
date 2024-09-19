@@ -36,7 +36,7 @@ Rust bootstrapper: https://github.com/libp2p/rust-libp2p/tree/master/misc/server
 ## Start the bootstrapper
 
 ```console
-$ npx @libp2p/amino-dht-bootstrapper amino
+$ npx --package=@libp2p/amino-dht-bootstrapper -- amino
 ```
 
 ```sh

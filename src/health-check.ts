@@ -1,4 +1,3 @@
-#! /usr/bin/env node --trace-warnings
 /* eslint-disable no-console */
 
 /**
