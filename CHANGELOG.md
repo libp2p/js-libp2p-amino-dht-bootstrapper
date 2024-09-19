@@ -1,3 +1,25 @@
+## [1.2.0](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.1.13...v1.2.0) (2024-09-19)
+
+### Features
+
+* bootstrapper ready alpha use/testing in deployed env ([#135](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/135)) ([4faa2bd](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/4faa2bdb3f5935dabcd5c77d7d1944c8de996e22))
+
+### Bug Fixes
+
+* docker build & docs ([#133](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/133)) ([4ffc788](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/4ffc78884c6d54d1072fba4a184f99e59f2372dc))
+* use correct casing for Identity.PeerID ([ffe222a](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/ffe222a0061044f0550a9463901f6c2125ed2368))
+* use persistent datastore ([#134](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/134)) ([1574195](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/1574195fc29d932bfb40dacf72c1b04e8207a1b6))
+
+### Trivial Changes
+
+* recreate lockfile ([#141](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/141)) ([2df90f0](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/2df90f0a04aea79ec2f285ed56cc23af7220b81c))
+* update lockfile ([69efe2e](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/69efe2ee7770321305c06eba12be6e8b73284824))
+* use libp2p@2.0 ([#139](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/139)) ([6ecb7c6](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/6ecb7c6ce7e335cf817f2b94745fce809c8597ef))
+
+### Dependencies
+
+* update all deps ([01611b9](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/01611b91a2799925ac955ba42bade947c55728b1))
+
 ## [1.1.13](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.1.12...v1.1.13) (2024-02-19)
 
 
