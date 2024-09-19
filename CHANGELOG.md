@@ -1,3 +1,13 @@
+## [1.3.0](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.2.0...v1.3.0) (2024-09-19)
+
+### Features
+
+* RPC API server listens on loopback by default ([#142](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/142)) ([ac52598](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/ac52598b7a0ee4b5281da695652070e51d2a134b))
+
+### Trivial Changes
+
+* **ci:** add git commit hash to docker tags ([#144](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/144)) ([ba0a5af](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/ba0a5afac7ad47cda963d85aadb8f30de065cb93))
+
 ## [1.2.0](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.1.13...v1.2.0) (2024-09-19)
 
 ### Features
