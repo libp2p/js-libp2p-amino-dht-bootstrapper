@@ -10,7 +10,7 @@ import { noise } from '@chainsafe/libp2p-noise'
 import { yamux } from '@chainsafe/libp2p-yamux'
 import { autoNAT } from '@libp2p/autonat'
 import { bootstrap } from '@libp2p/bootstrap'
-import { circuitRelayServer } from '@libp2p/circuit-relay-v2'
+import { circuitRelayServer, circuitRelayTransport } from '@libp2p/circuit-relay-v2'
 import { privateKeyFromProtobuf } from '@libp2p/crypto/keys'
 import { identify, identifyPush } from '@libp2p/identify'
 import { kadDHT } from '@libp2p/kad-dht'
@@ -141,7 +141,8 @@ async function main (): Promise<void> {
         filter: wsFilter
       }),
       tcp(),
-      webRTC()
+      webRTC(),
+      circuitRelayTransport()
     ],
     streamMuxers: [
       yamux()
