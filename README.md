@@ -63,7 +63,7 @@ $ curl http://${HOST}:${RPC_PORT}/api/v0/nodejs/gc
 $ curl http://${HOST}:${RPC_PORT}/api/v0/nodejs/heapdump
 ```
 
-Note that the RPC API server only listens on the loopback interface (127.0.0.1) by default. If you change the `api-host` option, you should ensure that the RPC API server is only being used for development purposed, or not accessible publicly.
+Please note that the RPC API server only listens on the loopback interface (127.0.0.1) by default. If you decide to change the `api-host` option, please make sure that the RPC API server is only used for development purposes and is not accessible publicly.
 
 ### Configuring bootstrapper options
 
