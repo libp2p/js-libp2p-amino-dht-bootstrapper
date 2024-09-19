@@ -14,10 +14,10 @@ import { circuitRelayServer } from '@libp2p/circuit-relay-v2'
 import { privateKeyFromProtobuf } from '@libp2p/crypto/keys'
 import { identify, identifyPush } from '@libp2p/identify'
 import { kadDHT } from '@libp2p/kad-dht'
-import { mplex } from '@libp2p/mplex'
 import { peerIdFromPrivateKey, peerIdFromString } from '@libp2p/peer-id'
 import { prometheusMetrics } from '@libp2p/prometheus-metrics'
 import { tcp } from '@libp2p/tcp'
+import { tls } from '@libp2p/tls'
 import { webRTC } from '@libp2p/webrtc'
 import { webSockets } from '@libp2p/websockets'
 import { all as wsFilter } from '@libp2p/websockets/filters'
@@ -144,11 +144,11 @@ async function main (): Promise<void> {
       webRTC()
     ],
     streamMuxers: [
-      yamux(),
-      mplex()
+      yamux()
     ],
     connectionEncrypters: [
-      noise()
+      noise(),
+      tls()
     ],
     metrics: prometheusMetrics(),
     services

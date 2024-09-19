@@ -18,7 +18,6 @@ import { parseArgs } from 'node:util'
 import { noise } from '@chainsafe/libp2p-noise'
 import { yamux } from '@chainsafe/libp2p-yamux'
 import { kadDHT } from '@libp2p/kad-dht'
-import { mplex } from '@libp2p/mplex'
 import { peerIdFromString } from '@libp2p/peer-id'
 import { tcp } from '@libp2p/tcp'
 import { webSockets } from '@libp2p/websockets'
@@ -70,8 +69,7 @@ async function tryToDialMaddrOrPeerId (multiaddrOrPeerId: string): Promise<void>
       tcp()
     ],
     streamMuxers: [
-      yamux(),
-      mplex()
+      yamux()
     ],
     connectionEncrypters: [
       noise()
