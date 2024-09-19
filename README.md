@@ -49,6 +49,26 @@ Options:
   -h, --help                         Print help
 ```
 
+### RPC API
+
+In order to start the RPC api, you will need to set some environment variables for the basic auth credentials used to authenticate RPC API calls. Those two environment variables are `RPC_USERNAME` and `RPC_PASSWORD`.
+
+```sh
+$ RPC_USERNAME=foo RPC_PASSWORD=bar npx @libp2p/amino-dht-bootstrapper amino
+```
+
+If these environment variables are not set, the RPC API will not be started.
+
+To make a request via CURL, you can use the following command:
+
+```sh
+# run garbage collection
+$ curl -u $RPC_USERNAME:$RPC_PASSWORD http://${HOST}:$RPC_PORT/api/v0/nodejs/gc
+
+# execute a heapdump
+$ curl -u $RPC_USERNAME:$RPC_PASSWORD http://${HOST}:$RPC_PORT/api/v0/nodejs/heapdump
+```
+
 ### Configuring bootstrapper options
 
 ```
