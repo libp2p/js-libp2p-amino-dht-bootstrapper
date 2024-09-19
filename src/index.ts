@@ -62,6 +62,11 @@ async function main (): Promise<void> {
       default: '8899',
       type: 'string'
     },
+    'api-host': {
+      description: 'The listen address hostname for the RPC API server',
+      default: '127.0.0.1',
+      type: 'string'
+    },
     help: {
       description: 'Show help text',
       type: 'boolean'
@@ -81,6 +86,7 @@ async function main (): Promise<void> {
     'metrics-path': argMetricsPath,
     'metrics-port': argMetricsPort,
     'api-port': argApiPort,
+    'api-host': argApiHost,
     help: argHelp
   } = args.values
 
@@ -187,7 +193,7 @@ async function main (): Promise<void> {
 
   console.info('Metrics server listening', `0.0.0.0:${argMetricsPort}${argMetricsPath}`)
 
-  await createRpcServer({ apiPort: parseInt(argApiPort ?? options['api-port'].default, 10) })
+  await createRpcServer({ apiPort: parseInt(argApiPort ?? options['api-port'].default, 10), apiHost: argApiHost })
 }
 
 main().catch(err => {

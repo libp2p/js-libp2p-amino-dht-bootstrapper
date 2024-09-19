@@ -43,31 +43,27 @@ $ npx @libp2p/amino-dht-bootstrapper amino
 Options:
       --config <CONFIG>              Path to IPFS config file (required)
       --metrics-path <METRICS_PATH>  Metric endpoint path [default: /metrics]
-      --metrics-port <PORT>          Metric endpoint path [default: /metrics]
+      --metrics-port <PORT>          Metric endpoint path [default: 8888]
       --enable-kademlia              Whether to run the libp2p Kademlia protocol and join the IPFS DHT
       --enable-autonat               Whether to run the libp2p Autonat protocol
+      --api-port <PORT>              Port to serve the RPC API [default: 8899]
+      --api-host <HOST>              Host to serve the RPC API on [default: 127.0.0.1]
   -h, --help                         Print help
 ```
 
 ### RPC API
 
-In order to start the RPC api, you will need to set some environment variables for the basic auth credentials used to authenticate RPC API calls. Those two environment variables are `RPC_USERNAME` and `RPC_PASSWORD`.
-
-```sh
-$ RPC_USERNAME=foo RPC_PASSWORD=bar npx @libp2p/amino-dht-bootstrapper amino
-```
-
-If these environment variables are not set, the RPC API will not be started.
-
 To make a request via CURL, you can use the following command:
 
 ```sh
 # run garbage collection
-$ curl -u $RPC_USERNAME:$RPC_PASSWORD http://${HOST}:$RPC_PORT/api/v0/nodejs/gc
+$ curl http://${HOST}:${RPC_PORT}/api/v0/nodejs/gc
 
 # execute a heapdump
-$ curl -u $RPC_USERNAME:$RPC_PASSWORD http://${HOST}:$RPC_PORT/api/v0/nodejs/heapdump
+$ curl http://${HOST}:${RPC_PORT}/api/v0/nodejs/heapdump
 ```
+
+Note that the RPC API server only listens on the loopback interface (127.0.0.1) by default. If you change the `api-host` option, you should ensure that the RPC API server is only being used for development purposed, or not accessible publicly.
 
 ### Configuring bootstrapper options
 
@@ -77,29 +73,38 @@ $ curl -u $RPC_USERNAME:$RPC_PASSWORD http://${HOST}:$RPC_PORT/api/v0/nodejs/hea
     "description": "Path to IPFS config file",
     "type": "string"
   },
-  "enableKademlia": {
+  "enable-kademlia": {
     "description": "Whether to run the libp2p Kademlia protocol and join the IPFS DHT",
     "type": "boolean"
   },
-  "enableAutonat": {
+  "enable-autonat": {
     "description": "Whether to run the libp2p Autonat protocol",
     "type": "boolean"
   },
-  "metricsPath": {
+  "metrics-path": {
     "description": "Metric endpoint path",
     "default": "/metrics",
     "type": "string"
   },
-  "metricsPort": {
+  "metrics-port": {
     "description": "Port to serve metrics",
     "default": "8888",
+    "type": "string"
+  },
+  "api-port": {
+    "description": "Port for api endpoint",
+    "default": "8899",
+    "type": "string"
+  },
+  "api-host": {
+    "description": "The listen address hostname for the RPC API server",
+    "default": "127.0.0.1",
     "type": "string"
   },
   "help": {
     "description": "Show help text",
     "type": "boolean"
   }
-}
 ```
 
 ## Building the Docker Image

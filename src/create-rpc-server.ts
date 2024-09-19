@@ -3,45 +3,16 @@ import { writeHeapSnapshot } from 'node:v8'
 
 export interface RpcServerOptions {
   apiPort?: number
+  apiHost?: string
 }
 
-export async function createRpcServer ({ apiPort }: RpcServerOptions): Promise<void> {
-  const rpcUsername = process.env.RPC_USERNAME
-  const rpcPassword = process.env.RPC_PASSWORD
-
-  if (rpcUsername == null || rpcPassword == null) {
+export async function createRpcServer ({ apiPort, apiHost }: RpcServerOptions): Promise<void> {
+  if (apiHost !== '127.0.0.1') {
     // eslint-disable-next-line no-console
-    console.info('RPC_USERNAME and RPC_PASSWORD are not set. Not starting the RPC server.')
-    return
+    console.info('Warning: The RPC API host has been changed from 127.0.0.1. The RPC server is now running in insecure mode. This may expose critical control to external sources. Ensure that you implement proper authentication and authorization measures.')
   }
 
   const apiServer = createServer((req, res) => {
-    const authenticate = (): void => {
-      res.writeHead(401, { 'WWW-Authenticate': 'Basic realm="Secure Area"' })
-      res.end('Unauthorized')
-    }
-
-    const checkAuth = (): boolean => {
-      const authHeader = req.headers.authorization
-      if (authHeader == null) {
-        return false
-      }
-
-      const [scheme, encoded] = authHeader.split(' ')
-      if (scheme !== 'Basic' || encoded == null) {
-        return false
-      }
-
-      const decoded = Buffer.from(encoded, 'base64').toString('utf8')
-      const [username, password] = decoded.split(':')
-
-      return username === rpcUsername && password === rpcPassword
-    }
-
-    if (!checkAuth()) {
-      authenticate()
-      return
-    }
     if (req.method === 'GET') {
       if (req.url === '/api/v0/nodejs/gc') {
         if (globalThis.gc == null) {
@@ -67,8 +38,8 @@ export async function createRpcServer ({ apiPort }: RpcServerOptions): Promise<v
     }
   })
 
-  await new Promise<void>((resolve) => apiServer.listen(apiPort, '0.0.0.0', resolve))
+  await new Promise<void>((resolve) => apiServer.listen(apiPort, apiHost, resolve))
 
   // eslint-disable-next-line no-console
-  console.info(`RPC api listening on: 0.0.0.0:${apiPort}`)
+  console.info(`RPC api listening on: ${apiHost}:${apiPort}`)
 }
