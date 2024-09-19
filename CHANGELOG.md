@@ -1,3 +1,9 @@
+## [1.3.1](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.3.0...v1.3.1) (2024-09-19)
+
+### Bug Fixes
+
+* bin is mapped correctly and executable ([#145](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/145)) ([ca1b2e5](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/ca1b2e592998fd5a24ca452c461161307bb9b802)), closes [#143](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/143)
+
 ## [1.3.0](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.2.0...v1.3.0) (2024-09-19)
 
 ### Features
