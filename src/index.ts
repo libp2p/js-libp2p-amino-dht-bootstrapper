@@ -5,7 +5,6 @@ import { readFile, writeFile } from 'node:fs/promises'
 import { createServer } from 'node:http'
 import { isAbsolute, join } from 'node:path'
 import { parseArgs } from 'node:util'
-import { writeHeapSnapshot } from 'node:v8'
 import { noise } from '@chainsafe/libp2p-noise'
 import { yamux } from '@chainsafe/libp2p-yamux'
 import { autoNAT } from '@libp2p/autonat'
@@ -25,6 +24,7 @@ import { LevelDatastore } from 'datastore-level'
 import { createLibp2p, type ServiceFactoryMap } from 'libp2p'
 import { register } from 'prom-client'
 import { fromString as uint8ArrayFromString } from 'uint8arrays/from-string'
+import { createRpcServer } from './create-rpc-server.js'
 import { isPrivate } from './utils/is-private-ip.js'
 import type { PrivateKey } from '@libp2p/interface'
 import type { Multiaddr } from '@multiformats/multiaddr'
@@ -62,6 +62,11 @@ async function main (): Promise<void> {
       default: '8899',
       type: 'string'
     },
+    'api-host': {
+      description: 'The listen address hostname for the RPC API server',
+      default: '127.0.0.1',
+      type: 'string'
+    },
     help: {
       description: 'Show help text',
       type: 'boolean'
@@ -81,6 +86,7 @@ async function main (): Promise<void> {
     'metrics-path': argMetricsPath,
     'metrics-port': argMetricsPort,
     'api-port': argApiPort,
+    'api-host': argApiHost,
     help: argHelp
   } = args.values
 
@@ -187,36 +193,7 @@ async function main (): Promise<void> {
 
   console.info('Metrics server listening', `0.0.0.0:${argMetricsPort}${argMetricsPath}`)
 
-  const apiServer = createServer((req, res) => {
-    if (req.method === 'GET') {
-      if (req.url === '/api/v0/nodejs/gc') {
-        if (globalThis.gc == null) {
-          // maybe we're running in a non-v8 engine or `--expose-gc` wasn't passed
-          res.writeHead(503, { 'Content-Type': 'text/plain' })
-          res.end('Service Unavailable')
-          return
-        }
-        // force nodejs to run garbage collection
-        globalThis.gc?.()
-        res.writeHead(200, { 'Content-Type': 'text/plain' })
-        res.end('OK')
-      } else if (req.url === '/api/v0/nodejs/heapdump') {
-        // force nodejs to generate a heapdump
-        // you can analyze the heapdump with https://github.com/facebook/memlab#heap-analysis-and-investigation to get some really useful insights
-        // TODO: make this authenticated so it can't be used to DOS the server
-        const filename = writeHeapSnapshot(`./snapshot-dir/${(new Date()).toISOString()}.heapsnapshot`)
-        res.writeHead(200, { 'Content-Type': 'text/plain' })
-        res.end(`OK ${filename}`)
-      }
-    } else {
-      res.writeHead(404, { 'Content-Type': 'text/plain' })
-      res.end('Not Found')
-    }
-  })
-
-  const apiPort = parseInt(argApiPort ?? options['api-port'].default, 10)
-  await new Promise<void>((resolve) => apiServer.listen(apiPort, '0.0.0.0', resolve))
-  console.info(`RPC api listening on: 0.0.0.0:${apiPort}`)
+  await createRpcServer({ apiPort: parseInt(argApiPort ?? options['api-port'].default, 10), apiHost: argApiHost })
 }
 
 main().catch(err => {
