@@ -110,7 +110,9 @@ async function main (): Promise<void> {
     bootstrap: bootstrap({
       list: config.Bootstrap
     }),
-    identify: identify(),
+    identify: identify({
+      agentVersion: 'js-libp2p-bootstrapper'
+    }),
     identifyPush: identifyPush(),
     ping: ping()
   }
