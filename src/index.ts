@@ -151,7 +151,6 @@ async function main (): Promise<void> {
         filter: wsFilter
       }),
       tcp(),
-      circuitRelayTransport()
     ],
     streamMuxers: [
       yamux()
