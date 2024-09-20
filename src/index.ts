@@ -13,6 +13,7 @@ import { privateKeyFromProtobuf } from '@libp2p/crypto/keys'
 import { identify, identifyPush } from '@libp2p/identify'
 import { kadDHT } from '@libp2p/kad-dht'
 import { peerIdFromPrivateKey, peerIdFromString } from '@libp2p/peer-id'
+import { ping } from '@libp2p/ping'
 import { prometheusMetrics } from '@libp2p/prometheus-metrics'
 import { tcp } from '@libp2p/tcp'
 import { tls } from '@libp2p/tls'
@@ -110,7 +111,8 @@ async function main (): Promise<void> {
       list: config.Bootstrap
     }),
     identify: identify(),
-    identifyPush: identifyPush()
+    identifyPush: identifyPush(),
+    ping: ping()
   }
 
   if (argEnableKademlia === true) {

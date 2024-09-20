@@ -145,6 +145,7 @@
     "@libp2p/interface": "^2.0.1",
     "@libp2p/kad-dht": "^13.0.1",
     "@libp2p/peer-id": "^5.0.1",
+    "@libp2p/ping": "^2.0.1",
     "@libp2p/prometheus-metrics": "^4.0.1",
     "@libp2p/tcp": "^10.0.1",
     "@libp2p/tls": "^2.0.1",
