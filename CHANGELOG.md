@@ -1,3 +1,9 @@
+## [1.4.1](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.4.0...v1.4.1) (2024-09-20)
+
+### Bug Fixes
+
+* add required identify dependency ([#148](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/148)) ([5cecc40](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/5cecc408a82e890b2376440e89b472e7424ceebe))
+
 ## [1.4.0](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.3.1...v1.4.0) (2024-09-20)
 
 ### Features
