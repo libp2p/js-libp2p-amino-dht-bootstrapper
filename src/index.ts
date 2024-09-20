@@ -27,6 +27,7 @@ import { createRpcServer } from './create-rpc-server.js'
 import { isPrivate } from './utils/is-private-ip.js'
 import type { PrivateKey } from '@libp2p/interface'
 import type { Multiaddr } from '@multiformats/multiaddr'
+import type { ConnectionManagerInit } from 'libp2p/connection-manager'
 
 interface Libp2pServices extends ServiceFactoryMap {
 
@@ -144,6 +145,7 @@ async function main (): Promise<void> {
       announce: config.Addresses.Announce,
       noAnnounce: config.Addresses.NoAnnounce
     },
+    connectionManager: config.connectionManager,
     transports: [
       webSockets({
         filter: wsFilter
@@ -220,13 +222,17 @@ interface KuboConfig {
   }
 }
 
+type BootstrapConfig = KuboConfig & {
+  connectionManager: ConnectionManagerInit
+}
+
 function validateKey (config: any, key: string, path: string): void {
   if (config[key] == null) {
     fatal(`Config key missing: ${path}`)
   }
 }
 
-function validateConfig (config: any): config is KuboConfig {
+function validateKuboConfig (config: any): config is KuboConfig {
   validateKey(config, 'Bootstrap', 'Bootstrap')
   validateKey(config, 'Addresses', 'Addresses')
   validateKey(config.Addresses, 'Swarm', 'Addresses.Swarm')
@@ -238,10 +244,10 @@ function validateConfig (config: any): config is KuboConfig {
   return true
 }
 
-async function readConfig (filepath: string): Promise<KuboConfig> {
+async function readConfig (filepath: string): Promise<BootstrapConfig> {
   const configString = await readFile(filepath, 'utf8')
   const config = JSON.parse(configString)
-  validateConfig(config)
+  validateKuboConfig(config)
   return config
 }
 

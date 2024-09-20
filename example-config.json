@@ -21,5 +21,10 @@
   "Identity": {
     "PeerID": "Generate with `ipfs init` and then grab from ~/.ipfs/config",
     "PrivKey": "Generate with `ipfs init` and then grab from ~/.ipfs/config"
+  },
+  "connectionManager": {
+    "inboundConnectionThreshold": 100,
+    "maxIncomingPendingConnections": 100,
+    "maxConnections": 500
   }
 }
