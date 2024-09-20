@@ -149,7 +149,6 @@
     "@libp2p/prometheus-metrics": "^4.0.1",
     "@libp2p/tcp": "^10.0.1",
     "@libp2p/tls": "^2.0.1",
-    "@libp2p/webrtc": "^5.0.2",
     "@libp2p/websockets": "9.0.1",
     "@multiformats/multiaddr": "^12.3.1",
     "datastore-level": "^11.0.1",
