@@ -1,3 +1,9 @@
+## [1.4.0](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.3.1...v1.4.0) (2024-09-20)
+
+### Features
+
+* remove webrtc and and ping and connection manager config ([#147](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/147)) ([dc17960](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/dc17960d373cde46e28955e0a6944246b8925b89))
+
 ## [1.3.1](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.3.0...v1.3.1) (2024-09-19)
 
 ### Bug Fixes
