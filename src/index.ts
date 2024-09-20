@@ -150,7 +150,7 @@ async function main (): Promise<void> {
       webSockets({
         filter: wsFilter
       }),
-      tcp(),
+      tcp()
     ],
     streamMuxers: [
       yamux()
