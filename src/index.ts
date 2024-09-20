@@ -16,7 +16,6 @@ import { peerIdFromPrivateKey, peerIdFromString } from '@libp2p/peer-id'
 import { prometheusMetrics } from '@libp2p/prometheus-metrics'
 import { tcp } from '@libp2p/tcp'
 import { tls } from '@libp2p/tls'
-import { webRTC } from '@libp2p/webrtc'
 import { webSockets } from '@libp2p/websockets'
 import { all as wsFilter } from '@libp2p/websockets/filters'
 import { LevelDatastore } from 'datastore-level'
@@ -146,7 +145,6 @@ async function main (): Promise<void> {
         filter: wsFilter
       }),
       tcp(),
-      webRTC(),
       circuitRelayTransport()
     ],
     streamMuxers: [
