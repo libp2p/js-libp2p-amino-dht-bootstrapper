@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-import { readFile, writeFile } from 'node:fs/promises'
+import { writeFile } from 'node:fs/promises'
 import { createServer } from 'node:http'
 import { isAbsolute, join } from 'node:path'
 import { parseArgs } from 'node:util'
@@ -9,7 +9,6 @@ import { yamux } from '@chainsafe/libp2p-yamux'
 import { autoNAT } from '@libp2p/autonat'
 import { bootstrap } from '@libp2p/bootstrap'
 import { circuitRelayServer, circuitRelayTransport } from '@libp2p/circuit-relay-v2'
-import { privateKeyFromProtobuf } from '@libp2p/crypto/keys'
 import { identify, identifyPush } from '@libp2p/identify'
 import { kadDHT } from '@libp2p/kad-dht'
 import { peerIdFromPrivateKey, peerIdFromString } from '@libp2p/peer-id'
@@ -22,10 +21,12 @@ import { all as wsFilter } from '@libp2p/websockets/filters'
 import { LevelDatastore } from 'datastore-level'
 import { createLibp2p, type ServiceFactoryMap } from 'libp2p'
 import { register } from 'prom-client'
-import { fromString as uint8ArrayFromString } from 'uint8arrays/from-string'
 import { createRpcServer } from './create-rpc-server.js'
+import { autoConfig } from './utils/auto-config.js'
+import { readConfig, type KuboConfig } from './utils/config.js'
+import { fatal } from './utils/errors.js'
 import { isPrivate } from './utils/is-private-ip.js'
-import type { PrivateKey } from '@libp2p/interface'
+import { decodePrivateKey } from './utils/peer-id.js'
 import type { Multiaddr } from '@multiformats/multiaddr'
 
 interface Libp2pServices extends ServiceFactoryMap {
@@ -79,7 +80,7 @@ async function main (): Promise<void> {
   })
 
   const {
-    config: configFilename,
+    config: argConfigFilename,
     'enable-kademlia': argEnableKademlia,
     'enable-autonat': argEnableAutonat,
     'metrics-path': argMetricsPath,
@@ -94,13 +95,9 @@ async function main (): Promise<void> {
     return
   }
 
-  if (configFilename == null) {
-    fatal('--config must be provided')
-  }
-  const configFilepath = isAbsolute(configFilename) ? configFilename : join(process.cwd(), configFilename)
-  const config = await readConfig(configFilepath)
+  const config = await autoConfig(argConfigFilename)
 
-  const privateKey = decodePeerId(config.Identity.PrivKey)
+  const privateKey = decodePrivateKey(config.Identity.PrivKey)
   if (!peerIdFromString(config.Identity.PeerID).equals(peerIdFromPrivateKey(privateKey))) {
     fatal('Config Identity.PeerId doesn\'t match Identity.PrivKey')
   }
@@ -198,55 +195,6 @@ async function main (): Promise<void> {
 main().catch(err => {
   fatal(err)
 })
-
-function fatal (msg?: any): never {
-  console.error(msg)
-  process.exit(1)
-}
-
-/** Subset of options that we care about from an kubo config */
-interface KuboConfig {
-  Bootstrap: string[]
-  Addresses: {
-    Swarm: string[]
-    Announce: string[]
-    NoAnnounce: string[]
-  }
-  Identity: {
-    PeerID: string
-    PrivKey: string
-  }
-}
-
-function validateKey (config: any, key: string, path: string): void {
-  if (config[key] == null) {
-    fatal(`Config key missing: ${path}`)
-  }
-}
-
-function validateConfig (config: any): config is KuboConfig {
-  validateKey(config, 'Bootstrap', 'Bootstrap')
-  validateKey(config, 'Addresses', 'Addresses')
-  validateKey(config.Addresses, 'Swarm', 'Addresses.Swarm')
-  validateKey(config.Addresses, 'Announce', 'Addresses.Announce')
-  validateKey(config.Addresses, 'NoAnnounce', 'Addresses.NoAnnounce')
-  validateKey(config, 'Identity', 'Identity')
-  validateKey(config.Identity, 'PeerID', 'Identity.PeerID')
-  validateKey(config.Identity, 'PrivKey', 'Identity.PrivKey')
-  return true
-}
-
-async function readConfig (filepath: string): Promise<KuboConfig> {
-  const configString = await readFile(filepath, 'utf8')
-  const config = JSON.parse(configString)
-  validateConfig(config)
-  return config
-}
-
-function decodePeerId (privkeyStr: string): PrivateKey {
-  const privkeyBytes = uint8ArrayFromString(privkeyStr, 'base64pad')
-  return privateKeyFromProtobuf(privkeyBytes)
-}
 
 async function writeListeningAddrsToFile (maddrs: Multiaddr[]): Promise<void> {
   const addrs = maddrs.map((ma) => ma.toString())

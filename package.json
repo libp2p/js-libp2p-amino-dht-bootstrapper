@@ -21,6 +21,7 @@
     "src",
     "dist",
     "bin",
+    "example-config.json",
     "!dist/test",
     "!**/*.tsbuildinfo"
   ],
