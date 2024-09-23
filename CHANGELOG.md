@@ -1,3 +1,31 @@
+## [1.4.1](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.4.0...v1.4.1) (2024-09-20)
+
+### Bug Fixes
+
+* add required identify dependency ([#148](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/148)) ([5cecc40](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/5cecc408a82e890b2376440e89b472e7424ceebe))
+
+## [1.4.0](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.3.1...v1.4.0) (2024-09-20)
+
+### Features
+
+* remove webrtc and and ping and connection manager config ([#147](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/147)) ([dc17960](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/dc17960d373cde46e28955e0a6944246b8925b89))
+
+## [1.3.1](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.3.0...v1.3.1) (2024-09-19)
+
+### Bug Fixes
+
+* bin is mapped correctly and executable ([#145](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/145)) ([ca1b2e5](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/ca1b2e592998fd5a24ca452c461161307bb9b802)), closes [#143](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/143)
+
+## [1.3.0](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.2.0...v1.3.0) (2024-09-19)
+
+### Features
+
+* RPC API server listens on loopback by default ([#142](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/142)) ([ac52598](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/ac52598b7a0ee4b5281da695652070e51d2a134b))
+
+### Trivial Changes
+
+* **ci:** add git commit hash to docker tags ([#144](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/144)) ([ba0a5af](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/ba0a5afac7ad47cda963d85aadb8f30de065cb93))
+
 ## [1.2.0](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.1.13...v1.2.0) (2024-09-19)
 
 ### Features

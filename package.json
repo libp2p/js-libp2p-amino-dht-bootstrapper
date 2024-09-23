@@ -1,6 +1,6 @@
 {
   "name": "@libp2p/amino-dht-bootstrapper",
-  "version": "1.2.0",
+  "version": "1.4.1",
   "description": "Run an Amino DHT boostrapper with js-libp2p",
   "license": "Apache-2.0 OR MIT",
   "homepage": "https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper#readme",
@@ -12,14 +12,15 @@
     "url": "https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues"
   },
   "bin": {
-    "amino": "./dist/src/index.js",
-    "health-check": "./dist/src/health-check.js"
+    "amino": "./bin/amino.js",
+    "health-check": "./bin/amino-health-check.js"
   },
   "type": "module",
   "types": "./dist/src/index.d.ts",
   "files": [
     "src",
     "dist",
+    "bin",
     "!dist/test",
     "!**/*.tsbuildinfo"
   ],
@@ -144,10 +145,10 @@
     "@libp2p/interface": "^2.0.1",
     "@libp2p/kad-dht": "^13.0.1",
     "@libp2p/peer-id": "^5.0.1",
+    "@libp2p/ping": "^2.0.1",
     "@libp2p/prometheus-metrics": "^4.0.1",
     "@libp2p/tcp": "^10.0.1",
     "@libp2p/tls": "^2.0.1",
-    "@libp2p/webrtc": "^5.0.2",
     "@libp2p/websockets": "9.0.1",
     "@multiformats/multiaddr": "^12.3.1",
     "datastore-level": "^11.0.1",

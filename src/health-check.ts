@@ -1,4 +1,3 @@
-#! /usr/bin/env node --trace-warnings
 /* eslint-disable no-console */
 
 /**
@@ -17,6 +16,7 @@ import { readFile } from 'node:fs/promises'
 import { parseArgs } from 'node:util'
 import { noise } from '@chainsafe/libp2p-noise'
 import { yamux } from '@chainsafe/libp2p-yamux'
+import { identify } from '@libp2p/identify'
 import { kadDHT } from '@libp2p/kad-dht'
 import { peerIdFromString } from '@libp2p/peer-id'
 import { tcp } from '@libp2p/tcp'
@@ -75,7 +75,8 @@ async function tryToDialMaddrOrPeerId (multiaddrOrPeerId: string): Promise<void>
       noise()
     ],
     services: {
-      dht: kadDHT({ clientMode: true })
+      dht: kadDHT({ clientMode: true }),
+      identify: identify()
     }
   })
 

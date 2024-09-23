@@ -1,4 +1,3 @@
-#! /usr/bin/env node --trace-warnings
 /* eslint-disable no-console */
 
 import { readFile, writeFile } from 'node:fs/promises'
@@ -9,15 +8,15 @@ import { noise } from '@chainsafe/libp2p-noise'
 import { yamux } from '@chainsafe/libp2p-yamux'
 import { autoNAT } from '@libp2p/autonat'
 import { bootstrap } from '@libp2p/bootstrap'
-import { circuitRelayServer, circuitRelayTransport } from '@libp2p/circuit-relay-v2'
+import { circuitRelayServer } from '@libp2p/circuit-relay-v2'
 import { privateKeyFromProtobuf } from '@libp2p/crypto/keys'
 import { identify, identifyPush } from '@libp2p/identify'
 import { kadDHT } from '@libp2p/kad-dht'
 import { peerIdFromPrivateKey, peerIdFromString } from '@libp2p/peer-id'
+import { ping } from '@libp2p/ping'
 import { prometheusMetrics } from '@libp2p/prometheus-metrics'
 import { tcp } from '@libp2p/tcp'
 import { tls } from '@libp2p/tls'
-import { webRTC } from '@libp2p/webrtc'
 import { webSockets } from '@libp2p/websockets'
 import { all as wsFilter } from '@libp2p/websockets/filters'
 import { LevelDatastore } from 'datastore-level'
@@ -29,6 +28,7 @@ import { createRpcServer } from './create-rpc-server.js'
 import { isPrivate } from './utils/is-private-ip.js'
 import type { PrivateKey } from '@libp2p/interface'
 import type { Multiaddr } from '@multiformats/multiaddr'
+import type { ConnectionManagerInit } from 'libp2p/connection-manager'
 
 interface Libp2pServices extends ServiceFactoryMap {
 
@@ -112,8 +112,11 @@ async function main (): Promise<void> {
     bootstrap: bootstrap({
       list: config.Bootstrap
     }),
-    identify: identify(),
-    identifyPush: identifyPush()
+    identify: identify({
+      agentVersion: 'js-libp2p-bootstrapper'
+    }),
+    identifyPush: identifyPush(),
+    ping: ping()
   }
 
   if (argEnableKademlia === true) {
@@ -143,13 +146,12 @@ async function main (): Promise<void> {
       announce: config.Addresses.Announce,
       noAnnounce: config.Addresses.NoAnnounce
     },
+    connectionManager: config.connectionManager,
     transports: [
       webSockets({
         filter: wsFilter
       }),
-      tcp(),
-      webRTC(),
-      circuitRelayTransport()
+      tcp()
     ],
     streamMuxers: [
       yamux()
@@ -221,13 +223,17 @@ interface KuboConfig {
   }
 }
 
+type BootstrapConfig = KuboConfig & {
+  connectionManager: ConnectionManagerInit
+}
+
 function validateKey (config: any, key: string, path: string): void {
   if (config[key] == null) {
     fatal(`Config key missing: ${path}`)
   }
 }
 
-function validateConfig (config: any): config is KuboConfig {
+function validateKuboConfig (config: any): config is KuboConfig {
   validateKey(config, 'Bootstrap', 'Bootstrap')
   validateKey(config, 'Addresses', 'Addresses')
   validateKey(config.Addresses, 'Swarm', 'Addresses.Swarm')
@@ -239,10 +245,10 @@ function validateConfig (config: any): config is KuboConfig {
   return true
 }
 
-async function readConfig (filepath: string): Promise<KuboConfig> {
+async function readConfig (filepath: string): Promise<BootstrapConfig> {
   const configString = await readFile(filepath, 'utf8')
   const config = JSON.parse(configString)
-  validateConfig(config)
+  validateKuboConfig(config)
   return config
 }
 
