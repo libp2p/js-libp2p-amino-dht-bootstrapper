@@ -1,4 +1,5 @@
 import { readFile } from 'node:fs/promises'
+import { parse, type ParseError } from 'jsonc-parser'
 import { fatal } from './errors.js'
 import type { ConnectionManagerInit } from 'libp2p/connection-manager'
 
@@ -39,7 +40,13 @@ function validateKuboConfig (config: any): config is KuboConfig {
 
 export async function readConfig (filepath: string): Promise<BootstrapConfig> {
   const configString = await readFile(filepath, 'utf8')
-  const config = JSON.parse(configString)
+  const parsingErrors: ParseError[] = []
+  const config = parse(configString, parsingErrors, { allowTrailingComma: true, disallowComments: false, allowEmptyContent: false })
+  if (parsingErrors.length > 0) {
+    // eslint-disable-next-line no-console
+    console.error('Error parsing config file', parsingErrors)
+    throw new Error('Error parsing config file')
+  }
   validateKuboConfig(config)
   return config
 }

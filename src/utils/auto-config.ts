@@ -10,6 +10,7 @@ import { join, dirname, isAbsolute } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { generateKeyPair } from '@libp2p/crypto/keys'
 import { peerIdFromPrivateKey } from '@libp2p/peer-id'
+import { parse, type ParseError } from 'jsonc-parser'
 import { readConfig, type BootstrapConfig } from './config.js'
 import { encodePrivateKey } from './peer-id.js'
 
@@ -65,7 +66,12 @@ export async function autoConfig (configPathArg?: string): Promise<BootstrapConf
     const exampleConfigPath = join(__dirname, '..', '..', '..', 'example-config.json')
     console.info('Getting config template from %s', exampleConfigPath)
     const configString = await readFile(exampleConfigPath, 'utf8')
-    const configJson = JSON.parse(configString)
+    const parsingErrors: ParseError[] = []
+    const configJson = parse(configString, parsingErrors, { allowTrailingComma: true, disallowComments: false, allowEmptyContent: false })
+    if (parsingErrors.length > 0) {
+      console.error('Error parsing example config file', parsingErrors)
+      throw new Error('Error parsing example config file')
+    }
 
     console.info('Generating private key and peer ID...')
     const libp2pGeneratedPrivateKey = await generateKeyPair('Ed25519')
