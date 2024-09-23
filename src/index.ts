@@ -2,20 +2,19 @@
 
 import { writeFile } from 'node:fs/promises'
 import { createServer } from 'node:http'
-import { isAbsolute, join } from 'node:path'
 import { parseArgs } from 'node:util'
 import { noise } from '@chainsafe/libp2p-noise'
 import { yamux } from '@chainsafe/libp2p-yamux'
 import { autoNAT } from '@libp2p/autonat'
 import { bootstrap } from '@libp2p/bootstrap'
-import { circuitRelayServer, circuitRelayTransport } from '@libp2p/circuit-relay-v2'
+import { circuitRelayServer } from '@libp2p/circuit-relay-v2'
 import { identify, identifyPush } from '@libp2p/identify'
 import { kadDHT } from '@libp2p/kad-dht'
 import { peerIdFromPrivateKey, peerIdFromString } from '@libp2p/peer-id'
+import { ping } from '@libp2p/ping'
 import { prometheusMetrics } from '@libp2p/prometheus-metrics'
 import { tcp } from '@libp2p/tcp'
 import { tls } from '@libp2p/tls'
-import { webRTC } from '@libp2p/webrtc'
 import { webSockets } from '@libp2p/websockets'
 import { all as wsFilter } from '@libp2p/websockets/filters'
 import { LevelDatastore } from 'datastore-level'
@@ -23,7 +22,6 @@ import { createLibp2p, type ServiceFactoryMap } from 'libp2p'
 import { register } from 'prom-client'
 import { createRpcServer } from './create-rpc-server.js'
 import { autoConfig } from './utils/auto-config.js'
-import { readConfig, type KuboConfig } from './utils/config.js'
 import { fatal } from './utils/errors.js'
 import { isPrivate } from './utils/is-private-ip.js'
 import { decodePrivateKey } from './utils/peer-id.js'
@@ -107,8 +105,11 @@ async function main (): Promise<void> {
     bootstrap: bootstrap({
       list: config.Bootstrap
     }),
-    identify: identify(),
-    identifyPush: identifyPush()
+    identify: identify({
+      agentVersion: 'js-libp2p-bootstrapper'
+    }),
+    identifyPush: identifyPush(),
+    ping: ping()
   }
 
   if (argEnableKademlia === true) {
@@ -138,13 +139,12 @@ async function main (): Promise<void> {
       announce: config.Addresses.Announce,
       noAnnounce: config.Addresses.NoAnnounce
     },
+    connectionManager: config.connectionManager,
     transports: [
       webSockets({
         filter: wsFilter
       }),
-      tcp(),
-      webRTC(),
-      circuitRelayTransport()
+      tcp()
     ],
     streamMuxers: [
       yamux()

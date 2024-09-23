@@ -10,7 +10,7 @@ import { join, dirname, isAbsolute } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { generateKeyPair } from '@libp2p/crypto/keys'
 import { peerIdFromPrivateKey } from '@libp2p/peer-id'
-import { readConfig, type KuboConfig } from './config.js'
+import { readConfig, type BootstrapConfig } from './config.js'
 import { encodePrivateKey } from './peer-id.js'
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -28,9 +28,9 @@ export async function getConfigPath (): Promise<string> {
  * if not, copy example-config.json to ~/.config.json
  * create a private key and peer ID and add it to the config
  *
- * @returns {Promise<KuboConfig>} The parsed config object
+ * @returns {Promise<BootstrapConfig>} The parsed config object
  */
-export async function autoConfig (configPathArg?: string): Promise<KuboConfig> {
+export async function autoConfig (configPathArg?: string): Promise<BootstrapConfig> {
   if (configPathArg != null) {
     console.info('Attempting to use config file from %s', configPathArg)
     /**
