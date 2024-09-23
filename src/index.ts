@@ -183,8 +183,15 @@ async function main (): Promise<void> {
 
   const metricsServer = createServer((req, res) => {
     if (req.url === argMetricsPath && req.method === 'GET') {
-      res.writeHead(200, { 'Content-Type': 'text/plain' })
-      void register.metrics().then((metrics) => res.end(metrics))
+      register.metrics()
+        .then((metrics) => {
+          res.writeHead(200, { 'Content-Type': 'text/plain' })
+          res.end(metrics)
+        }, (err) => {
+          console.error('could not read metrics', err)
+          res.writeHead(500, { 'Content-Type': 'text/plain' })
+          res.end('Internal Server Error')
+        })
     } else {
       res.writeHead(404, { 'Content-Type': 'text/plain' })
       res.end('Not Found')
