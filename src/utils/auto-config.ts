@@ -19,7 +19,7 @@ const __dirname = import.meta.dirname ?? dirname(fileURLToPath(import.meta.url))
 
 export const DEFAULT_CONFIG_NAME = 'config.json'
 
-export const CONFIG_FOLDER = join(homedir(), '.config', 'amino')
+export const CONFIG_FOLDER = join(homedir(), '.config', '@libp2p', 'amino-dht-bootstrapper')
 export async function getConfigPath (): Promise<string> {
   return join(CONFIG_FOLDER, DEFAULT_CONFIG_NAME)
 }
