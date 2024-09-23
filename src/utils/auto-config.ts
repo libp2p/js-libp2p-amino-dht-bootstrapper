@@ -16,9 +16,9 @@ import { encodePrivateKey } from './peer-id.js'
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const __dirname = import.meta.dirname ?? dirname(fileURLToPath(import.meta.url))
 
-export const DEFAULT_CONFIG_NAME = 'amino-bootstrapper-config.json'
+export const DEFAULT_CONFIG_NAME = 'config.json'
 
-export const CONFIG_FOLDER = join(homedir(), '.js-libp2p')
+export const CONFIG_FOLDER = join(homedir(), '.config', 'amino')
 export async function getConfigPath (): Promise<string> {
   return join(CONFIG_FOLDER, DEFAULT_CONFIG_NAME)
 }
