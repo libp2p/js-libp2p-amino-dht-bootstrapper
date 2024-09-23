@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.4.1...v1.4.2) (2024-09-23)
+
+### Bug Fixes
+
+* handle fatal metrics error ([#150](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/150)) ([7edbbcd](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/7edbbcd0e56357709a14a7922ea6f1fc9ea3ae23))
+* only start one libp2p node for healthcheck ([#149](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/149)) ([2fe378b](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/2fe378b3994b62458b0cf7bba745c93b713d44af))
+
 ## [1.4.1](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.4.0...v1.4.1) (2024-09-20)
 
 ### Bug Fixes
