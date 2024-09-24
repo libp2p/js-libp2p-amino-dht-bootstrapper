@@ -2,7 +2,7 @@ FROM --platform=${BUILDPLATFORM} node:20-slim as builder
 
 # Install dependencies required for building the app
 RUN apt-get update && \
-    apt-get install -y tini && \
+    apt-get install -y tini curl && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

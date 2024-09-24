@@ -1,9 +1,59 @@
+/* eslint-disable no-console */
+
 import { createServer } from 'node:http'
+import { decode } from 'node:querystring'
 import { writeHeapSnapshot } from 'node:v8'
+import { enable } from '@libp2p/logger'
 
 export interface RpcServerOptions {
   apiPort?: number
   apiHost?: string
+}
+
+const resources: Record<string, Record<string, Parameters<typeof createServer>[1]>> = {
+  '/api/v0/nodejs/gc': {
+    GET: (req, res) => {
+      if (globalThis.gc == null) {
+        // maybe we're running in a non-v8 engine or `--expose-gc` wasn't passed
+        res.writeHead(503, { 'Content-Type': 'text/plain' })
+        res.end('Service Unavailable')
+
+        return
+      }
+
+      // force nodejs to run garbage collection
+      globalThis.gc?.()
+      res.writeHead(200, { 'Content-Type': 'text/plain' })
+      res.end('OK')
+    }
+  },
+  '/api/v0/nodejs/heapdump': {
+    GET: (req, res) => {
+      // force nodejs to generate a heapdump
+      // you can analyze the heapdump with https://github.com/facebook/memlab#heap-analysis-and-investigation to get some really useful insights
+      const filename = writeHeapSnapshot(`./snapshot-dir/${(new Date()).toISOString()}.heapsnapshot`)
+      res.writeHead(200, { 'Content-Type': 'text/plain' })
+      res.end(`OK ${filename}`)
+    }
+  },
+  '/api/v0/nodejs/debug': {
+    GET: (req, res) => {
+      const query = decode(req.url?.split('?').pop() ?? '')
+
+      if (!(typeof query.namespace === 'string')) {
+        res.writeHead(400, { 'Content-Type': 'text/plain' })
+        res.end('Bad Request')
+
+        return
+      }
+
+      enable(query.namespace)
+
+      // change the logging settings
+      res.writeHead(200, { 'Content-Type': 'text/plain' })
+      res.end('OK')
+    }
+  }
 }
 
 export async function createRpcServer ({ apiPort, apiHost }: RpcServerOptions): Promise<void> {
@@ -13,33 +63,44 @@ export async function createRpcServer ({ apiPort, apiHost }: RpcServerOptions): 
   }
 
   const apiServer = createServer((req, res) => {
-    if (req.method === 'GET') {
-      if (req.url === '/api/v0/nodejs/gc') {
-        if (globalThis.gc == null) {
-          // maybe we're running in a non-v8 engine or `--expose-gc` wasn't passed
-          res.writeHead(503, { 'Content-Type': 'text/plain' })
-          res.end('Service Unavailable')
-          return
-        }
-        // force nodejs to run garbage collection
-        globalThis.gc?.()
-        res.writeHead(200, { 'Content-Type': 'text/plain' })
-        res.end('OK')
-      } else if (req.url === '/api/v0/nodejs/heapdump') {
-        // force nodejs to generate a heapdump
-        // you can analyze the heapdump with https://github.com/facebook/memlab#heap-analysis-and-investigation to get some really useful insights
-        const filename = writeHeapSnapshot(`./snapshot-dir/${(new Date()).toISOString()}.heapsnapshot`)
-        res.writeHead(200, { 'Content-Type': 'text/plain' })
-        res.end(`OK ${filename}`)
-      }
-    } else {
+    if (req.url == null || req.method == null) {
+      res.writeHead(400, { 'Content-Type': 'text/plain' })
+      res.end('Bad Request')
+
+      return
+    }
+
+    // remove query string
+    const path = req.url.split('?')[0]
+    const resource = resources[path]
+
+    if (resource == null) {
       res.writeHead(404, { 'Content-Type': 'text/plain' })
       res.end('Not Found')
+
+      return
+    }
+
+    // find the handler for the method
+    const handler = resource[req.method]
+
+    if (handler == null) {
+      res.writeHead(405, { 'Content-Type': 'text/plain' })
+      res.end('Method Not Allowed')
+
+      return
+    }
+
+    try {
+      handler(req, res)
+    } catch (err) {
+      console.error('Error handling', req.method, req.url, err)
+      res.writeHead(500, { 'Content-Type': 'text/plain' })
+      res.end('InternalServer Error')
     }
   })
 
   await new Promise<void>((resolve) => apiServer.listen(apiPort, apiHost, resolve))
 
-  // eslint-disable-next-line no-console
   console.info(`RPC api listening on: ${apiHost}:${apiPort}`)
 }
