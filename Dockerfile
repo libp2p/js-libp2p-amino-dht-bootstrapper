@@ -1,10 +1,5 @@
 FROM --platform=${BUILDPLATFORM} node:20-slim as builder
 
-# Install dependencies required for building the app
-RUN apt-get update && \
-    apt-get install -y tini curl && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
@@ -17,12 +12,16 @@ RUN npm prune --omit=dev
 
 FROM --platform=${BUILDPLATFORM} node:20-slim as app
 
+# Install dependencies required for running the app
+RUN apt-get update && \
+    apt-get install -y tini curl && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 ENV NODE_ENV production
 WORKDIR /app
 
 COPY --from=builder /app ./
-COPY --from=builder /usr/bin/tini /usr/bin/tini
-COPY --from=builder /usr/bin/curl /usr/bin/curl
 
 HEALTHCHECK --interval=60s --timeout=30s --start-period=10s CMD node dist/src/health-check.js
 
