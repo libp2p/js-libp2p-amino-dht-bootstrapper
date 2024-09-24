@@ -2,7 +2,7 @@
 
 import { createServer } from 'node:http'
 import { decode } from 'node:querystring'
-import { writeHeapSnapshot } from 'node:v8'
+import { getHeapSnapshot } from 'node:v8'
 import { enable } from '@libp2p/logger'
 
 export interface RpcServerOptions {
@@ -31,9 +31,23 @@ const resources: Record<string, Record<string, Parameters<typeof createServer>[1
     GET: (req, res) => {
       // force nodejs to generate a heapdump
       // you can analyze the heapdump with https://github.com/facebook/memlab#heap-analysis-and-investigation to get some really useful insights
-      const filename = writeHeapSnapshot(`./snapshot-dir/${(new Date()).toISOString()}.heapsnapshot`)
       res.writeHead(200, { 'Content-Type': 'text/plain' })
-      res.end(`OK ${filename}`)
+
+      const stream = getHeapSnapshot()
+      res.on('drain', () => {
+        stream.resume()
+      })
+      stream.on('data', (buf) => {
+        const sendMore = res.write(buf)
+
+        // respect backpressure
+        if (!sendMore) {
+          stream.pause()
+        }
+      })
+      stream.on('end', () => {
+        res.end()
+      })
     }
   },
   '/api/v0/nodejs/log': {
