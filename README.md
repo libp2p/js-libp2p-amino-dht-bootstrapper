@@ -112,7 +112,7 @@ Please note that the RPC API server only listens on the loopback interface (127.
 Building should be straightforward from the root of the repository:
 
 ```sh
-$ docker build . --tag amino-bootstrapper
+$ docker build . --tag amino
 ```
 
 ### Running the docker image (once built):
