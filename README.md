@@ -112,25 +112,25 @@ Please note that the RPC API server only listens on the loopback interface (127.
 Building should be straightforward from the root of the repository:
 
 ```sh
-$ docker build . --tag amino
+$ docker build . --tag amino-bootstrapper
 ```
 
 ### Running the docker image (once built):
 
 ```sh
-$ docker run -v ./bootstrapper-config.json:/config.json -it amino --config /config.json
+$ docker run -v $(pwd)/bootstrapper-config.json:/config.json -it amino --config /config.json
 ```
 
 To pass args:
 
 ```sh
-$ docker run -v ./bootstrapper-config.json:/config.json -it amino --config /config.json [--enable-kademlia] [--enable-autonat]
+$ docker run -v $(pwd)/bootstrapper-config.json:/config.json -it amino --config /config.json [--enable-kademlia] [--enable-autonat]
 ```
 
 To expose the metrics port:
 
 ```sh
-$ docker run -v ./bootstrapper-config.json:/config.json -p 8888:8888 -it amino --config /config.json
+$ docker run -v $(pwd)/bootstrapper-config.json:/config.json -p 8888:8888 -it amino --config /config.json
 ```
 
 ### Running the docker image with monitoring:
