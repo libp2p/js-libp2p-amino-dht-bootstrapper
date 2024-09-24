@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.0...v1.5.1) (2024-09-24)
+
+### Bug Fixes
+
+* download heapdump instead of writing to disk ([#153](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/153)) ([38cf657](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/38cf657f5d6d91e783214279285b8f4cea2cb482))
+* simplify docker image with single stage build ([#154](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/154)) ([1921e35](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/1921e3566ba79f1d5dae926a2821c12c1ed7debb))
+
 ## [1.5.0](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.4.2...v1.5.0) (2024-09-24)
 
 ### Features
