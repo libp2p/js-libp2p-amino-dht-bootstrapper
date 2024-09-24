@@ -31,7 +31,7 @@ const resources: Record<string, Record<string, Parameters<typeof createServer>[1
     GET: (req, res) => {
       // force nodejs to generate a heapdump
       // you can analyze the heapdump with https://github.com/facebook/memlab#heap-analysis-and-investigation to get some really useful insights
-      res.writeHead(200, { 'Content-Type': 'text/plain' })
+      res.writeHead(200, { 'Content-Type': 'application/json', `Content-Disposition`: `attachment; filename=`${(new Date()).toISOString()}.heapsnapshot` })
 
       const stream = getHeapSnapshot()
       res.on('drain', () => {
