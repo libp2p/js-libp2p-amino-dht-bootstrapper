@@ -36,7 +36,7 @@ const resources: Record<string, Record<string, Parameters<typeof createServer>[1
       res.end(`OK ${filename}`)
     }
   },
-  '/api/v0/nodejs/debug': {
+  '/api/v0/nodejs/log': {
     GET: (req, res) => {
       const query = decode(req.url?.split('?').pop() ?? '')
 
