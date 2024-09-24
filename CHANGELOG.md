@@ -1,3 +1,9 @@
+## [1.5.0](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.4.2...v1.5.0) (2024-09-24)
+
+### Features
+
+* add dynamic logging to js bootstrapper ([#152](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/152)) ([2493b1b](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/2493b1bce9e3a0cbb433b02c0859e8920c24c1ec))
+
 ## [1.4.2](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.4.1...v1.4.2) (2024-09-23)
 
 ### Bug Fixes
