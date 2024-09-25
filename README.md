@@ -12,9 +12,11 @@
 - [Bootstrap details](#bootstrap-details)
   - [Requirements of a bootstrap node](#requirements-of-a-bootstrap-node)
 - [Start the bootstrapper](#start-the-bootstrapper)
+  - [RPC API](#rpc-api)
   - [Configuring bootstrapper options](#configuring-bootstrapper-options)
 - [Building the Docker Image](#building-the-docker-image)
   - [Running the docker image (once built):](#running-the-docker-image-once-built)
+  - [Running the docker image with monitoring:](#running-the-docker-image-with-monitoring)
 - [License](#license)
 - [Contribution](#contribution)
 
@@ -61,13 +63,16 @@ $ curl http://${HOST}:${RPC_PORT}/api/v0/nodejs/gc
 
 # execute a heapdump
 $ curl http://${HOST}:${RPC_PORT}/api/v0/nodejs/heapdump
+
+# change the log level
+$ curl http://${HOST}:${RPC_PORT}/api/v0/nodejs/log?namespace=libp2p:*
 ```
 
 Please note that the RPC API server only listens on the loopback interface (127.0.0.1) by default. If you decide to change the `api-host` option, please make sure that the RPC API server is only used for development purposes and is not accessible publicly.
 
 ### Configuring bootstrapper options
 
-```
+```json
 {
   "config": {
     "description": "Path to IPFS config file",
