@@ -25,8 +25,11 @@ import { createLibp2p, type ServiceFactoryMap } from 'libp2p'
 import { register } from 'prom-client'
 import { fromString as uint8ArrayFromString } from 'uint8arrays/from-string'
 import { createRpcServer } from './create-rpc-server.js'
+import { connectionsByEncrypterMetrics } from './services/connections-by-encrypter-metrics.js'
+import { connectionsByMultiplexerMetrics } from './services/connections-by-multiplexer-metrics.js'
 import { connectionsByTransportMetrics } from './services/connections-by-transport-metrics.js'
-import { peersByAgentMetrics } from './services/peers-by-agent.js'
+import { peersByAgentMetrics } from './services/peers-by-agent-metrics.js'
+import { versionsMetrics } from './services/versions-metrics.js'
 import type { PrivateKey } from '@libp2p/interface'
 import type { Multiaddr } from '@multiformats/multiaddr'
 import type { ConnectionManagerInit } from 'libp2p/connection-manager'
@@ -122,7 +125,10 @@ async function main (): Promise<void> {
 
     // extra metrics
     connectionsByTransportMetrics: connectionsByTransportMetrics(),
-    peersByAgentMetrics: peersByAgentMetrics()
+    connectionsByEncrypterMetrics: connectionsByEncrypterMetrics(),
+    connectionsByMultiplexerMetrics: connectionsByMultiplexerMetrics(),
+    peersByAgentMetrics: peersByAgentMetrics(),
+    versionsMetrics: versionsMetrics()
   }
 
   if (argEnableKademlia === true) {
