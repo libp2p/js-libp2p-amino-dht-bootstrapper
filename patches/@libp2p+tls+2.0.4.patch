@@ -1,0 +1,98 @@
+diff --git a/node_modules/@libp2p/tls/dist/src/tls.d.ts.map b/node_modules/@libp2p/tls/dist/src/tls.d.ts.map
+index da60231..e04e546 100644
+--- a/node_modules/@libp2p/tls/dist/src/tls.d.ts.map
++++ b/node_modules/@libp2p/tls/dist/src/tls.d.ts.map
+@@ -1 +1 @@
+-{"version":3,"file":"tls.d.ts","sourceRoot":"","sources":["../../src/tls.ts"],"names":[],"mappings":"AAAA;;;;;;;;;;;;;;;;;;GAkBG;AAGH,OAAO,EAAE,mBAAmB,EAAE,MAAM,mBAAmB,CAAA;AAIvD,OAAO,KAAK,EAAE,aAAa,EAAE,MAAM,YAAY,CAAA;AAC/C,OAAO,KAAK,EAAE,mBAAmB,EAAE,mBAAmB,EAAE,iBAAiB,EAAU,uBAAuB,EAAc,MAAM,mBAAmB,CAAA;AACjJ,OAAO,KAAK,EAAE,MAAM,EAAE,MAAM,iBAAiB,CAAA;AAC7C,OAAO,KAAK,EAAE,cAAc,EAAE,MAAM,gBAAgB,CAAA;AAEpD,qBAAa,GAAI,YAAW,mBAAmB;IACtC,QAAQ,EAAE,MAAM,CAAW;IAClC,OAAO,CAAC,QAAQ,CAAC,GAAG,CAAQ;IAC5B,OAAO,CAAC,QAAQ,CAAC,UAAU,CAAY;gBAE1B,UAAU,EAAE,aAAa;IAKtC,QAAQ,CAAC,CAAC,MAAM,CAAC,WAAW,CAAC,iBAAgB;IAE7C,QAAQ,CAAC,CAAC,mBAAmB,CAAC,EAAE,MAAM,EAAE,CAEvC;IAEK,aAAa,CAAE,MAAM,SAAS,MAAM,CAAC,cAAc,CAAC,UAAU,GAAG,cAAc,CAAC,CAAC,GAAG,mBAAmB,EAAG,IAAI,EAAE,MAAM,EAAE,OAAO,CAAC,EAAE,uBAAuB,GAAG,OAAO,CAAC,iBAAiB,CAAC,MAAM,CAAC,CAAC;IAI9L,cAAc,CAAE,MAAM,SAAS,MAAM,CAAC,cAAc,CAAC,UAAU,GAAG,cAAc,CAAC,CAAC,GAAG,mBAAmB,EAAG,IAAI,EAAE,MAAM,EAAE,OAAO,CAAC,EAAE,uBAAuB,GAAG,OAAO,CAAC,iBAAiB,CAAC,MAAM,CAAC,CAAC;IAIrM;;OAEG;IACG,QAAQ,CAAE,MAAM,SAAS,MAAM,CAAC,cAAc,CAAC,UAAU,GAAG,cAAc,CAAC,CAAC,GAAG,mBAAmB,EAAG,IAAI,EAAE,MAAM,EAAE,QAAQ,EAAE,OAAO,EAAE,OAAO,CAAC,EAAE,uBAAuB,GAAG,OAAO,CAAC,iBAAiB,CAAC,MAAM,CAAC,CAAC;CA4DnN"}
+\ No newline at end of file
++{"version":3,"file":"tls.d.ts","sourceRoot":"","sources":["../../src/tls.ts"],"names":[],"mappings":"AAAA;;;;;;;;;;;;;;;;;;GAkBG;AAGH,OAAO,EAAE,mBAAmB,EAAE,MAAM,mBAAmB,CAAA;AAIvD,OAAO,KAAK,EAAE,aAAa,EAAE,MAAM,YAAY,CAAA;AAC/C,OAAO,KAAK,EAAE,mBAAmB,EAAE,mBAAmB,EAAE,iBAAiB,EAAU,uBAAuB,EAAc,MAAM,mBAAmB,CAAA;AACjJ,OAAO,KAAK,EAAE,MAAM,EAAE,MAAM,iBAAiB,CAAA;AAC7C,OAAO,KAAK,EAAE,cAAc,EAAE,MAAM,gBAAgB,CAAA;AAEpD,qBAAa,GAAI,YAAW,mBAAmB;IACtC,QAAQ,EAAE,MAAM,CAAW;IAClC,OAAO,CAAC,QAAQ,CAAC,GAAG,CAAQ;IAC5B,OAAO,CAAC,QAAQ,CAAC,UAAU,CAAY;gBAE1B,UAAU,EAAE,aAAa;IAKtC,QAAQ,CAAC,CAAC,MAAM,CAAC,WAAW,CAAC,iBAAgB;IAE7C,QAAQ,CAAC,CAAC,mBAAmB,CAAC,EAAE,MAAM,EAAE,CAEvC;IAEK,aAAa,CAAE,MAAM,SAAS,MAAM,CAAC,cAAc,CAAC,UAAU,GAAG,cAAc,CAAC,CAAC,GAAG,mBAAmB,EAAG,IAAI,EAAE,MAAM,EAAE,OAAO,CAAC,EAAE,uBAAuB,GAAG,OAAO,CAAC,iBAAiB,CAAC,MAAM,CAAC,CAAC;IAI9L,cAAc,CAAE,MAAM,SAAS,MAAM,CAAC,cAAc,CAAC,UAAU,GAAG,cAAc,CAAC,CAAC,GAAG,mBAAmB,EAAG,IAAI,EAAE,MAAM,EAAE,OAAO,CAAC,EAAE,uBAAuB,GAAG,OAAO,CAAC,iBAAiB,CAAC,MAAM,CAAC,CAAC;IAIrM;;OAEG;IACG,QAAQ,CAAE,MAAM,SAAS,MAAM,CAAC,cAAc,CAAC,UAAU,GAAG,cAAc,CAAC,CAAC,GAAG,mBAAmB,EAAG,IAAI,EAAE,MAAM,EAAE,QAAQ,EAAE,OAAO,EAAE,OAAO,CAAC,EAAE,uBAAuB,GAAG,OAAO,CAAC,iBAAiB,CAAC,MAAM,CAAC,CAAC;CAkEnN"}
+\ No newline at end of file
+diff --git a/node_modules/@libp2p/tls/dist/src/tls.js b/node_modules/@libp2p/tls/dist/src/tls.js
+index 48c61ad..2544962 100644
+--- a/node_modules/@libp2p/tls/dist/src/tls.js
++++ b/node_modules/@libp2p/tls/dist/src/tls.js
+@@ -69,7 +69,9 @@ export class TLS {
+         }
+         return new Promise((resolve, reject) => {
+             options?.signal?.addEventListener('abort', () => {
+-                socket.destroy(new HandshakeTimeoutError());
++                const err = new HandshakeTimeoutError();
++                socket.destroy(err);
++                reject(err);
+             });
+             const verifyRemote = () => {
+                 const remote = socket.getPeerCertificate();
+@@ -91,10 +93,14 @@ export class TLS {
+             socket.on('error', (err) => {
+                 reject(err);
+             });
+-            socket.once('secure', (evt) => {
++            socket.once('secure', () => {
+                 this.log('verifying remote certificate');
+                 verifyRemote();
+             });
++        })
++            .catch(err => {
++            socket.destroy(err);
++            throw err;
+         });
+     }
+ }
+diff --git a/node_modules/@libp2p/tls/dist/src/tls.js.map b/node_modules/@libp2p/tls/dist/src/tls.js.map
+index 59cc5b1..34f70e0 100644
+--- a/node_modules/@libp2p/tls/dist/src/tls.js.map
++++ b/node_modules/@libp2p/tls/dist/src/tls.js.map
+@@ -1 +1 @@
+-{"version":3,"file":"tls.js","sourceRoot":"","sources":["../../src/tls.ts"],"names":[],"mappings":"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"}
+\ No newline at end of file
++{"version":3,"file":"tls.js","sourceRoot":"","sources":["../../src/tls.ts"],"names":[],"mappings":"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"}
+\ No newline at end of file
+diff --git a/node_modules/@libp2p/tls/dist/typedoc-urls.json b/node_modules/@libp2p/tls/dist/typedoc-urls.json
+deleted file mode 100644
+index 1bdb3a0..0000000
+--- a/node_modules/@libp2p/tls/dist/typedoc-urls.json
++++ /dev/null
+@@ -1,8 +0,0 @@
+-{
+-  "TLSComponents": "https://libp2p.github.io/js-libp2p/interfaces/_libp2p_tls.TLSComponents.html",
+-  ".:TLSComponents": "https://libp2p.github.io/js-libp2p/interfaces/_libp2p_tls.TLSComponents.html",
+-  "PROTOCOL": "https://libp2p.github.io/js-libp2p/variables/_libp2p_tls.PROTOCOL.html",
+-  ".:PROTOCOL": "https://libp2p.github.io/js-libp2p/variables/_libp2p_tls.PROTOCOL.html",
+-  "tls": "https://libp2p.github.io/js-libp2p/functions/_libp2p_tls.tls.html",
+-  ".:tls": "https://libp2p.github.io/js-libp2p/functions/_libp2p_tls.tls.html"
+-}
+\ No newline at end of file
+diff --git a/node_modules/@libp2p/tls/src/tls.ts b/node_modules/@libp2p/tls/src/tls.ts
+index 96d4e86..e2de04e 100644
+--- a/node_modules/@libp2p/tls/src/tls.ts
++++ b/node_modules/@libp2p/tls/src/tls.ts
+@@ -81,9 +81,11 @@ export class TLS implements ConnectionEncrypter {
+       })
+     }
+ 
+-    return new Promise((resolve, reject) => {
++    return new Promise<SecuredConnection<Stream>>((resolve, reject) => {
+       options?.signal?.addEventListener('abort', () => {
+-        socket.destroy(new HandshakeTimeoutError())
++        const err = new HandshakeTimeoutError()
++        socket.destroy(err)
++        reject(err)
+       })
+ 
+       const verifyRemote = (): void => {
+@@ -109,10 +111,14 @@ export class TLS implements ConnectionEncrypter {
+       socket.on('error', (err: Error) => {
+         reject(err)
+       })
+-      socket.once('secure', (evt) => {
++      socket.once('secure', () => {
+         this.log('verifying remote certificate')
+         verifyRemote()
+       })
+     })
++      .catch(err => {
++        socket.destroy(err)
++        throw err
++      })
+   }
+ }

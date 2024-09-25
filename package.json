@@ -152,6 +152,7 @@
     "@libp2p/ping": "^2.0.4",
     "@libp2p/prometheus-metrics": "^4.1.2",
     "@libp2p/tcp": "^10.0.4",
+    "@libp2p/tls": "^2.0.4",
     "@libp2p/utils": "^6.0.4",
     "@libp2p/websockets": "^9.0.4",
     "@multiformats/multiaddr": "^12.3.1",
