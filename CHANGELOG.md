@@ -1,3 +1,10 @@
+## [1.5.3](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.2...v1.5.3) (2024-09-25)
+
+### Bug Fixes
+
+* patch libp2p to have quieter logging, enable extra metrics ([#156](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/156)) ([4d7729e](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/4d7729ef73875563df28ea455d569470f03c81a7))
+* restore host networking ([013cb04](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/013cb04c132bbb409f225587dd439e8d3626148e))
+
 ## [1.5.2](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.1...v1.5.2) (2024-09-24)
 
 ### Bug Fixes
