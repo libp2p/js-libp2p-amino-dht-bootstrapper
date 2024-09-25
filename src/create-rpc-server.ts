@@ -64,6 +64,12 @@ const resources: Record<string, Record<string, Parameters<typeof createServer>[1
         return
       }
 
+      if (query.namespace.trim() === '') {
+        console.info('Disable logging')
+      } else {
+        console.info('Enable logging with namespace', query.namespace)
+      }
+
       enable(query.namespace)
 
       // change the logging settings

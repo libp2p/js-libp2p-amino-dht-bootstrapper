@@ -10,21 +10,22 @@ import { autoNAT } from '@libp2p/autonat'
 import { bootstrap } from '@libp2p/bootstrap'
 import { circuitRelayServer } from '@libp2p/circuit-relay-v2'
 import { privateKeyFromProtobuf } from '@libp2p/crypto/keys'
+import { dcutr } from '@libp2p/dcutr'
 import { identify, identifyPush } from '@libp2p/identify'
-import { kadDHT } from '@libp2p/kad-dht'
+import { kadDHT, removePrivateAddressesMapper } from '@libp2p/kad-dht'
 import { peerIdFromPrivateKey, peerIdFromString } from '@libp2p/peer-id'
 import { ping } from '@libp2p/ping'
 import { prometheusMetrics } from '@libp2p/prometheus-metrics'
 import { tcp } from '@libp2p/tcp'
-import { tls } from '@libp2p/tls'
+import { isPrivateIp } from '@libp2p/utils/private-ip'
 import { webSockets } from '@libp2p/websockets'
-import { all as wsFilter } from '@libp2p/websockets/filters'
 import { LevelDatastore } from 'datastore-level'
 import { createLibp2p, type ServiceFactoryMap } from 'libp2p'
 import { register } from 'prom-client'
 import { fromString as uint8ArrayFromString } from 'uint8arrays/from-string'
 import { createRpcServer } from './create-rpc-server.js'
-import { isPrivate } from './utils/is-private-ip.js'
+import { connectionsByTransportMetrics } from './services/connections-by-transport-metrics.js'
+import { peersByAgentMetrics } from './services/peers-by-agent.js'
 import type { PrivateKey } from '@libp2p/interface'
 import type { Multiaddr } from '@multiformats/multiaddr'
 import type { ConnectionManagerInit } from 'libp2p/connection-manager'
@@ -115,30 +116,36 @@ async function main (): Promise<void> {
       agentVersion: 'js-libp2p-bootstrapper'
     }),
     identifyPush: identifyPush(),
-    ping: ping()
+    ping: ping(),
+    dcutr: dcutr(),
+
+    // extra metrics
+    connectionsByTransportMetrics: connectionsByTransportMetrics(),
+    peersByAgentMetrics: peersByAgentMetrics()
   }
 
   if (argEnableKademlia === true) {
     console.info('Enabling Kademlia DHT')
-    services.dht = kadDHT({})
+    services.dht = kadDHT({
+      protocol: '/ipfs/kad/1.0.0',
+      peerInfoMapper: removePrivateAddressesMapper
+    })
   }
 
   if (argEnableAutonat === true) {
     console.info('Enabling Autonat')
-    services.autonat = autoNAT({
-      timeout: 90 * 1000 // i'm getting a lot of timeouts when running this locally
-    })
+    services.autonat = autoNAT()
   }
 
   const node = await createLibp2p({
     datastore: new LevelDatastore('js-libp2p-datastore'),
     privateKey,
     addresses: {
-      announceFilter: (addrs: Multiaddr[]) => {
+      announceFilter: (addrs) => {
         // filter out private IP addresses
         return addrs.filter((addr) => {
           const nodeAddress = addr.nodeAddress()
-          return !isPrivate(nodeAddress)
+          return isPrivateIp(nodeAddress.address) !== true
         })
       },
       listen: config.Addresses.Swarm,
@@ -146,18 +153,22 @@ async function main (): Promise<void> {
       noAnnounce: config.Addresses.NoAnnounce
     },
     connectionManager: config.connectionManager,
+    connectionGater: {
+      // do not try to dial private addresses
+      denyDialMultiaddr (multiaddr) {
+        const nodeAddress = multiaddr.nodeAddress()
+        return isPrivateIp(nodeAddress.address) === true
+      }
+    },
     transports: [
-      webSockets({
-        filter: wsFilter
-      }),
+      webSockets(),
       tcp()
     ],
     streamMuxers: [
       yamux()
     ],
     connectionEncrypters: [
-      noise(),
-      tls()
+      noise()
     ],
     metrics: prometheusMetrics(),
     services
@@ -179,7 +190,7 @@ async function main (): Promise<void> {
     } else {
       console.info('Waiting for public listening addresses...')
     }
-  }, 10000)
+  }, 1000)
 
   const metricsServer = createServer((req, res) => {
     if (req.url === argMetricsPath && req.method === 'GET') {

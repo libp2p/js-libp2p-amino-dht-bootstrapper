@@ -9,7 +9,9 @@ RUN apt-get update && \
 WORKDIR /app
 
 COPY package*.json ./
+COPY patches ./patches
 RUN npm ci --quiet
+RUN npm run postinstall
 
 ENV NODE_ENV production
 
