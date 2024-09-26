@@ -1,4 +1,4 @@
-import { WebSockets, WebRTC, WebRTCDirect, WebTransport, TCP, QUIC, Circuit } from '@multiformats/multiaddr-matcher'
+import { WebSockets, WebRTC, WebRTCDirect, WebTransport, WebSocketsSecure, TCP, QUIC, Circuit } from '@multiformats/multiaddr-matcher'
 import type { Libp2pEvents, Metrics, TypedEventTarget } from '@libp2p/interface'
 
 interface Components {
@@ -22,6 +22,8 @@ export function connectionsByTransportMetrics (): (components: Components) => un
 
       if (WebSockets.matches(conn.remoteAddr)) {
         metrics.increment({ WebSockets: true })
+      } else if (WebSocketsSecure.matches(conn.remoteAddr)) {
+        metrics.increment({ WebSocketsSecure: true })
       } else if (WebRTC.matches(conn.remoteAddr)) {
         metrics.increment({ WebRTC: true })
       } else if (WebRTCDirect.matches(conn.remoteAddr)) {
@@ -42,6 +44,8 @@ export function connectionsByTransportMetrics (): (components: Components) => un
 
       if (WebSockets.matches(conn.remoteAddr)) {
         metrics.decrement({ WebSockets: true })
+      } else if (WebSocketsSecure.matches(conn.remoteAddr)) {
+        metrics.decrement({ WebSocketsSecure: true })
       } else if (WebRTC.matches(conn.remoteAddr)) {
         metrics.decrement({ WebRTC: true })
       } else if (WebRTCDirect.matches(conn.remoteAddr)) {
