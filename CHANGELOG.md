@@ -1,3 +1,9 @@
+## [1.5.7](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.6...v1.5.7) (2024-09-26)
+
+### Bug Fixes
+
+* patch libp2p to test for connection status before storing ([#158](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/158)) ([3447856](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/3447856f14480c5792d15b9cbecde612f9667127))
+
 ## [1.5.6](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.5...v1.5.6) (2024-09-25)
 
 ### Bug Fixes
