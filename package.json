@@ -132,7 +132,8 @@
     "test:firefox": "aegir test -t browser -- --browser firefox",
     "test:firefox-webworker": "aegir test -t webworker -- --browser firefox",
     "release": "aegir release",
-    "dep-check": "aegir dep-check"
+    "dep-check": "aegir dep-check",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@chainsafe/libp2p-noise": "^16.0.0",
@@ -162,6 +163,7 @@
     "uint8arrays": "^5.1.0"
   },
   "devDependencies": {
-    "aegir": "^44.1.1"
+    "aegir": "^44.1.1",
+    "patch-package": "^8.0.0"
   }
 }
