@@ -1,3 +1,9 @@
+## [1.5.8](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.7...v1.5.8) (2024-09-26)
+
+### Bug Fixes
+
+* add wss to transport count ([4a3667d](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/4a3667d33a5cd7a1a54edaa3fd5a74f7f57734fe))
+
 ## [1.5.7](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.6...v1.5.7) (2024-09-26)
 
 ### Bug Fixes
