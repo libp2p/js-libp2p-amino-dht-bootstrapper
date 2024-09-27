@@ -16,9 +16,11 @@ services:
       - 4001:4001
       - 4003:4003
       - 9229:9229
+    environment:
+      - NODE_OPTIONS="--inspect=0.0.0.0"
     volumes:
       - ./config.json:/config.json
-    command: node dist/src/index.js --config /config.json --enable-kademlia --enable-autonat
+    command: node --config /config.json --enable-kademlia --enable-autonat --api-host=0.0.0.0
 
   prometheus:
     restart: unless-stopped

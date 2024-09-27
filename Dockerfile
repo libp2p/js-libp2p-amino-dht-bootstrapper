@@ -29,5 +29,4 @@ EXPOSE 8888
 EXPOSE 8899
 
 # Use tini to handle signals properly, see https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md#handling-kernel-signals
-# to enable attaching a debugger, add "--inspect=0.0.0.0" before "--expose-gc"
 ENTRYPOINT ["/usr/bin/tini", "-p", "SIGKILL", "--", "node", "--expose-gc", "dist/src/index.js" ]
