@@ -232,14 +232,3 @@ await new Promise<void>((resolve) => metricsServer.listen(metricsPort, '0.0.0.0'
 console.info('Metrics server listening', `0.0.0.0:${argMetricsPort}${argMetricsPath}`)
 
 await createRpcServer({ apiPort: parseInt(argApiPort ?? options['api-port'].default, 10), apiHost: argApiHost })
-
-setInterval(() => {
-  // set a breakpoint on the next line if you want to inspect the running node
-  node.peerId.toString()
-
-  for (const conn of node.getConnections()) {
-    if (conn.status === 'closed') {
-      console.info('how did this happen?!')
-    }
-  }
-}, 5000).unref()

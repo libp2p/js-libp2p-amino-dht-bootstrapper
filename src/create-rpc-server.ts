@@ -4,6 +4,8 @@ import { createServer } from 'node:http'
 import { decode } from 'node:querystring'
 import { getHeapSnapshot } from 'node:v8'
 import { enable } from '@libp2p/logger'
+// @ts-expect-error no types
+import log from 'why-is-node-running'
 
 export interface RpcServerOptions {
   apiPort?: number
@@ -70,9 +72,17 @@ const resources: Record<string, Record<string, Parameters<typeof createServer>[1
         console.info('Enable logging with namespace', query.namespace)
       }
 
+      // change the logging settings
       enable(query.namespace)
 
-      // change the logging settings
+      res.writeHead(200, { 'Content-Type': 'text/plain' })
+      res.end('OK')
+    }
+  },
+  '/api/v0/nodejs/handles': {
+    GET: (req, res) => {
+      log()
+
       res.writeHead(200, { 'Content-Type': 'text/plain' })
       res.end('OK')
     }
