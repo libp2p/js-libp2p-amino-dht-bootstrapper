@@ -1,3 +1,9 @@
+## [1.5.9](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.8...v1.5.9) (2024-09-27)
+
+### Bug Fixes
+
+* add rpc endpoint for logging active resources ([#160](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/160)) ([bde4ea1](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/bde4ea19f3df1c6ab36c21053d62546a436d8402))
+
 ## [1.5.8](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.7...v1.5.8) (2024-09-26)
 
 ### Bug Fixes
