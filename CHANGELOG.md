@@ -1,3 +1,9 @@
+## [1.5.10](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.9...v1.5.10) (2024-09-28)
+
+### Bug Fixes
+
+* disable tls ([5ea7176](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/5ea717667dc7145b2233ea4ea208e376c556a028))
+
 ## [1.5.9](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.8...v1.5.9) (2024-09-27)
 
 ### Bug Fixes
