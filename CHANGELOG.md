@@ -1,3 +1,9 @@
+## [1.5.13](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.12...v1.5.13) (2024-09-28)
+
+### Bug Fixes
+
+* patch tcp to not half-close, just destroy ([5492131](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/5492131682b99be26e53012071f4241b6993cc99))
+
 ## [1.5.12](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.11...v1.5.12) (2024-09-28)
 
 ### Bug Fixes
