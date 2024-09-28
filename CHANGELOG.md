@@ -1,3 +1,9 @@
+## [1.5.14](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.13...v1.5.14) (2024-09-28)
+
+### Bug Fixes
+
+* patch tcp to destroy sockets without remote addr/port ([5d90b55](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/5d90b55d27293d4fcb122eef9714752723b377fb))
+
 ## [1.5.13](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.12...v1.5.13) (2024-09-28)
 
 ### Bug Fixes
