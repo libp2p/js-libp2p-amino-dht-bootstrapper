@@ -1,3 +1,9 @@
+## [1.5.12](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.11...v1.5.12) (2024-09-28)
+
+### Bug Fixes
+
+* patch tcp to disable keepalive ([64f261e](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/64f261edbae11384cffae8aeea99603002a7b48d))
+
 ## [1.5.11](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.10...v1.5.11) (2024-09-28)
 
 ### Bug Fixes
