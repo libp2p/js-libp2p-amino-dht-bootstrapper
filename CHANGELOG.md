@@ -1,3 +1,10 @@
+## [1.5.11](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.10...v1.5.11) (2024-09-28)
+
+### Bug Fixes
+
+* patch tcp to reduce default timeout ([104fe15](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/104fe158c8f8042b060c5bf6a42c130cf0f227dc))
+* patch tcp to report socket connect ([0e935bb](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/0e935bb8a0a8d2dc2dbf1aaeeb5b42af09b2ac44))
+
 ## [1.5.10](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.9...v1.5.10) (2024-09-28)
 
 ### Bug Fixes
