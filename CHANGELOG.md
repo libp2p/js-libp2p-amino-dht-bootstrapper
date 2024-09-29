@@ -1,3 +1,10 @@
+## [1.5.17](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.16...v1.5.17) (2024-09-29)
+
+### Bug Fixes
+
+* add patches ([7fac58a](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/7fac58a0611cee86b0fb4b54734def74960558fc))
+* patch libp2p to report pending outgoing ([b8a056a](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/b8a056a9e770f8ff1d44e45e1162077de2896ef8))
+
 ## [1.5.16](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.15...v1.5.16) (2024-09-29)
 
 ### Bug Fixes
