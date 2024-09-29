@@ -1,3 +1,9 @@
+## [1.5.15](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.14...v1.5.15) (2024-09-29)
+
+### Bug Fixes
+
+* patch tcp to destroy sockets on connect error ([2fd0d94](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/2fd0d9442fe69eb7e28878b500285e0bc0764fd4))
+
 ## [1.5.14](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.13...v1.5.14) (2024-09-28)
 
 ### Bug Fixes
