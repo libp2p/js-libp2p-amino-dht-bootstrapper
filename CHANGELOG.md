@@ -1,3 +1,9 @@
+## [1.5.16](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.15...v1.5.16) (2024-09-29)
+
+### Bug Fixes
+
+* patch tcp for simpler closing and count outbound pending conns ([1ebf1ea](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/1ebf1ea755067ebbde7186ee624d507c2ed771b1))
+
 ## [1.5.15](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.14...v1.5.15) (2024-09-29)
 
 ### Bug Fixes
