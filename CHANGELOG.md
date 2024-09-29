@@ -1,3 +1,9 @@
+## [1.5.18](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.17...v1.5.18) (2024-09-29)
+
+### Bug Fixes
+
+* patch tcp to add error handler early ([61cf659](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/61cf659e64fbf9927d0bd9d2fb78e34c906c07bb))
+
 ## [1.5.17](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.16...v1.5.17) (2024-09-29)
 
 ### Bug Fixes
