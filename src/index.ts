@@ -17,6 +17,7 @@ import { peerIdFromPrivateKey, peerIdFromString } from '@libp2p/peer-id'
 import { ping } from '@libp2p/ping'
 import { prometheusMetrics } from '@libp2p/prometheus-metrics'
 import { tcp } from '@libp2p/tcp'
+import { tls } from '@libp2p/tls'
 import { isPrivateIp } from '@libp2p/utils/private-ip'
 import { webSockets } from '@libp2p/websockets'
 import { LevelDatastore } from 'datastore-level'
@@ -190,7 +191,8 @@ const node = await createLibp2p({
     yamux()
   ],
   connectionEncrypters: [
-    noise()
+    noise(),
+    tls()
   ],
   metrics: prometheusMetrics(),
   services

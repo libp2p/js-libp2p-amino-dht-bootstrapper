@@ -11,3 +11,5 @@ snapshot-dir
 config/grafana/grafana.db
 config/grafana/alerting
 js-libp2p-datastore
+config.json
+listening-addrs.txt
