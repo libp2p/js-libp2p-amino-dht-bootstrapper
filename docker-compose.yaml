@@ -1,6 +1,7 @@
 volumes:
   prometheus_data: {}
   grafana_data: {}
+  bootstrapper_datastore: {}
 
 services:
   bootstrapper:
@@ -20,7 +21,8 @@ services:
       - NODE_OPTIONS="--inspect=0.0.0.0"
     volumes:
       - ./config.json:/config.json
-    command: node --config /config.json --enable-kademlia --enable-autonat --api-host=0.0.0.0
+      - bootstrapper_datastore:/datastore
+    command: node --config /config.json --enable-kademlia --enable-autonat --api-host=0.0.0.0 --datastore=/datastore
 
   prometheus:
     restart: unless-stopped
