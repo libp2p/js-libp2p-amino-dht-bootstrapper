@@ -82,6 +82,11 @@ const options = {
     default: '127.0.0.1',
     type: 'string'
   },
+  datastore: {
+    description: 'The path to the libp2p datastore directory',
+    default: 'datastore',
+    type: 'string'
+  },
   help: {
     description: 'Show help text',
     type: 'boolean'
@@ -102,6 +107,7 @@ const {
   'metrics-port': argMetricsPort,
   'api-port': argApiPort,
   'api-host': argApiHost,
+  datastore: argDatastore,
   help: argHelp
 } = args.values
 
@@ -154,7 +160,7 @@ if (argEnableAutonat === true) {
 }
 
 const node = await createLibp2p({
-  datastore: new LevelDatastore('datastore'),
+  datastore: new LevelDatastore(argDatastore ?? options.datastore.default),
   privateKey,
   addresses: {
     announceFilter: (addrs) => {

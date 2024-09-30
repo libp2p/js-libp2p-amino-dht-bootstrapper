@@ -21,8 +21,8 @@ services:
       - NODE_OPTIONS="--inspect=0.0.0.0"
     volumes:
       - ./config.json:/config.json
-      - bootstrapper_datastore:/app/datastore
-    command: node --config /config.json --enable-kademlia --enable-autonat --api-host=0.0.0.0
+      - bootstrapper_datastore:/datastore
+    command: node --config /config.json --enable-kademlia --enable-autonat --api-host=0.0.0.0 --datastore=/datastore
 
   prometheus:
     restart: unless-stopped
