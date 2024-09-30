@@ -1,3 +1,9 @@
+## [1.5.21](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.20...v1.5.21) (2024-09-30)
+
+### Bug Fixes
+
+* update kad patch with metric name ([45bc26f](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/45bc26fec34c854704a3022fd4875fef9dbe9cd0))
+
 ## [1.5.20](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.19...v1.5.20) (2024-09-30)
 
 ### Bug Fixes
