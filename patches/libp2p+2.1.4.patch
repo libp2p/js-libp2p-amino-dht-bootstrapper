@@ -240,8 +240,7 @@ index ab0ba1d..0000000
 \ No newline at end of file
 diff --git a/node_modules/libp2p/src/.DS_Store b/node_modules/libp2p/src/.DS_Store
 new file mode 100644
-index 0000000..77cb7f1
-Binary files /dev/null and b/node_modules/libp2p/src/.DS_Store differ
+index 0000000..e69de29
 diff --git a/node_modules/libp2p/src/connection-manager/index.ts b/node_modules/libp2p/src/connection-manager/index.ts
 index abe34f3..3d12445 100644
 --- a/node_modules/libp2p/src/connection-manager/index.ts
