@@ -154,7 +154,7 @@ if (argEnableAutonat === true) {
 }
 
 const node = await createLibp2p({
-  datastore: new LevelDatastore('js-libp2p-datastore'),
+  datastore: new LevelDatastore('datastore'),
   privateKey,
   addresses: {
     announceFilter: (addrs) => {
