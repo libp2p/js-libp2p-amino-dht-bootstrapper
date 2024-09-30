@@ -4,8 +4,6 @@ import { createServer } from 'node:http'
 import { decode } from 'node:querystring'
 import { getHeapSnapshot } from 'node:v8'
 import { enable } from '@libp2p/logger'
-// @ts-expect-error no types
-import log from 'why-is-node-running'
 
 export interface RpcServerOptions {
   apiPort?: number
@@ -39,9 +37,12 @@ const resources: Record<string, Record<string, Parameters<typeof createServer>[1
       })
 
       const stream = getHeapSnapshot()
-      res.on('drain', () => {
-        stream.resume()
+
+      // destroy stream if the request is cancelled
+      req.on('end', () => {
+        stream.destroy()
       })
+
       stream.on('data', (buf) => {
         const sendMore = res.write(buf)
 
@@ -50,6 +51,11 @@ const resources: Record<string, Record<string, Parameters<typeof createServer>[1
           stream.pause()
         }
       })
+      // start sending data again when the send buffer empties
+      res.on('drain', () => {
+        stream.resume()
+      })
+
       stream.on('end', () => {
         res.end()
       })
@@ -74,14 +80,6 @@ const resources: Record<string, Record<string, Parameters<typeof createServer>[1
 
       // change the logging settings
       enable(query.namespace)
-
-      res.writeHead(200, { 'Content-Type': 'text/plain' })
-      res.end('OK')
-    }
-  },
-  '/api/v0/nodejs/handles': {
-    GET: (req, res) => {
-      log()
 
       res.writeHead(200, { 'Content-Type': 'text/plain' })
       res.end('OK')
