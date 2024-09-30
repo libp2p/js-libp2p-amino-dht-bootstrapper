@@ -14,7 +14,8 @@ RUN npm ci --quiet
 
 ENV NODE_ENV production
 
-COPY . ./
+COPY src ./src
+COPY tsconfig.json ./
 RUN npm run build
 RUN npm prune --omit=dev
 
