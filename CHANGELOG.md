@@ -1,3 +1,9 @@
+## [1.5.19](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.18...v1.5.19) (2024-09-30)
+
+### Bug Fixes
+
+* remove why-is-node-running ([46f6e70](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/46f6e70123082a19ee180d2aa1c1fe93784211f1))
+
 ## [1.5.18](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.17...v1.5.18) (2024-09-29)
 
 ### Bug Fixes
