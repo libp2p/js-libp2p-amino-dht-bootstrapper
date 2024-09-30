@@ -1,3 +1,9 @@
+## [1.5.20](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.19...v1.5.20) (2024-09-30)
+
+### Bug Fixes
+
+* update tcp patch and patch kad-dht with more ping metrics ([58c8153](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/58c8153f7755d9c9c8c2805e9dcda31fc532baa5))
+
 ## [1.5.19](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.18...v1.5.19) (2024-09-30)
 
 ### Bug Fixes
