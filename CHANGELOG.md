@@ -1,3 +1,13 @@
+## [1.6.0](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.21...v1.6.0) (2024-09-30)
+
+### Features
+
+* add persistent datastore ([#162](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/162)) ([fd90738](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/fd90738e4ebce2f513e18fb055bf5f338dcacb32))
+
+### Bug Fixes
+
+* update deps ([d65fcd1](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/d65fcd123c682adb99b477f57e6e6398d3b28c28))
+
 ## [1.5.21](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.20...v1.5.21) (2024-09-30)
 
 ### Bug Fixes
