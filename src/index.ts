@@ -32,7 +32,7 @@ import { versionsMetrics } from './services/versions-metrics.js'
 import { readConfig } from './utils/load-config.js'
 import type { PrivateKey } from '@libp2p/interface'
 import type { Multiaddr } from '@multiformats/multiaddr'
-import type { ServiceFactoryMap } from 'libp2p'
+import type { Libp2pOptions, ServiceFactoryMap } from 'libp2p'
 
 process.addListener('uncaughtException', (err) => {
   console.error(err)
@@ -61,6 +61,10 @@ const options = {
   },
   'enable-autonat': {
     description: 'Whether to run the libp2p Autonat protocol',
+    type: 'boolean'
+  },
+  'enable-tls': {
+    description: 'Whether to enable the tls connection encrypter',
     type: 'boolean'
   },
   'metrics-path': {
@@ -104,6 +108,7 @@ const {
   config: configFilename,
   'enable-kademlia': argEnableKademlia,
   'enable-autonat': argEnableAutonat,
+  'enable-tls': argEnableTls,
   'metrics-path': argMetricsPath,
   'metrics-port': argMetricsPort,
   'api-port': argApiPort,
@@ -128,6 +133,29 @@ if (!peerIdFromString(config.Identity.PeerID).equals(peerIdFromPrivateKey(privat
   throw new Error('Config Identity.PeerId doesn\'t match Identity.PrivKey')
 }
 
+const metricsServer = createServer((req, res) => {
+  if (req.url === argMetricsPath && req.method === 'GET') {
+    register.metrics()
+      .then((metrics) => {
+        res.writeHead(200, { 'Content-Type': 'text/plain' })
+        res.end(metrics)
+      }, (err) => {
+        console.error('could not read metrics', err)
+        res.writeHead(500, { 'Content-Type': 'text/plain' })
+        res.end('Internal Server Error')
+      })
+  } else {
+    res.writeHead(404, { 'Content-Type': 'text/plain' })
+    res.end('Not Found')
+  }
+})
+const metricsPort = parseInt(argMetricsPort ?? options['metrics-port'].default, 10)
+await new Promise<void>((resolve) => metricsServer.listen(metricsPort, '0.0.0.0', resolve))
+
+console.info('Metrics server listening', `0.0.0.0:${argMetricsPort}${argMetricsPath}`)
+
+await createRpcServer({ apiPort: parseInt(argApiPort ?? options['api-port'].default, 10), apiHost: argApiHost })
+
 const services: ServiceFactoryMap = {
   circuitRelay: circuitRelayServer(),
   bootstrap: bootstrap({
@@ -147,20 +175,7 @@ const services: ServiceFactoryMap = {
   versionsMetrics: versionsMetrics()
 }
 
-if (argEnableKademlia === true) {
-  console.info('Enabling Kademlia DHT')
-  services.dht = kadDHT({
-    protocol: '/ipfs/kad/1.0.0',
-    peerInfoMapper: removePrivateAddressesMapper
-  })
-}
-
-if (argEnableAutonat === true) {
-  console.info('Enabling Autonat')
-  services.autonat = autoNAT()
-}
-
-const node = await createLibp2p({
+const libp2pOptions: Libp2pOptions = {
   datastore: new LevelDatastore(argDatastore ?? options.datastore.default),
   privateKey,
   addresses: {
@@ -196,7 +211,27 @@ const node = await createLibp2p({
   ],
   metrics: prometheusMetrics(),
   services
-})
+}
+
+if (argEnableKademlia === true) {
+  console.info('Enabling Kademlia DHT')
+  services.dht = kadDHT({
+    protocol: '/ipfs/kad/1.0.0',
+    peerInfoMapper: removePrivateAddressesMapper
+  })
+}
+
+if (argEnableAutonat === true) {
+  console.info('Enabling Autonat')
+  services.autonat = autoNAT()
+}
+
+if (argEnableTls === true) {
+  console.info('Enabling TLS connection encryption')
+  libp2pOptions.connectionEncrypters?.push(tls())
+}
+
+const node = await createLibp2p(libp2pOptions)
 
 console.info('libp2p is running')
 console.info('PeerId', node.peerId.toString())
@@ -215,26 +250,3 @@ const waitForPublicInterval = setInterval(() => {
     console.info('Waiting for public listening addresses...')
   }
 }, 1000)
-
-const metricsServer = createServer((req, res) => {
-  if (req.url === argMetricsPath && req.method === 'GET') {
-    register.metrics()
-      .then((metrics) => {
-        res.writeHead(200, { 'Content-Type': 'text/plain' })
-        res.end(metrics)
-      }, (err) => {
-        console.error('could not read metrics', err)
-        res.writeHead(500, { 'Content-Type': 'text/plain' })
-        res.end('Internal Server Error')
-      })
-  } else {
-    res.writeHead(404, { 'Content-Type': 'text/plain' })
-    res.end('Not Found')
-  }
-})
-const metricsPort = parseInt(argMetricsPort ?? options['metrics-port'].default, 10)
-await new Promise<void>((resolve) => metricsServer.listen(metricsPort, '0.0.0.0', resolve))
-
-console.info('Metrics server listening', `0.0.0.0:${argMetricsPort}${argMetricsPath}`)
-
-await createRpcServer({ apiPort: parseInt(argApiPort ?? options['api-port'].default, 10), apiHost: argApiHost })
