@@ -1,3 +1,9 @@
+## [1.6.2](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.6.1...v1.6.2) (2024-10-02)
+
+### Bug Fixes
+
+* update kad-dht patch ([ddee21a](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/ddee21af1de1d9f115fe9cc056dcb96071507cc6))
+
 ## [1.6.1](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.6.0...v1.6.1) (2024-10-02)
 
 ### Bug Fixes
