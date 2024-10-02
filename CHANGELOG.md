@@ -1,3 +1,13 @@
+## [1.6.1](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.6.0...v1.6.1) (2024-10-02)
+
+### Bug Fixes
+
+* patch dht to ping peers before adding ([b68c9a9](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/b68c9a91fae2c8d4b58b851a6e0d5fd9b505a846))
+
+### Trivial Changes
+
+* update config ([6a6c03f](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/6a6c03f279fb17791153222063b9c3fd59773133))
+
 ## [1.6.0](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.21...v1.6.0) (2024-09-30)
 
 ### Features
