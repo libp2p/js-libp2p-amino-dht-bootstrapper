@@ -1,3 +1,9 @@
+## [1.6.3](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.6.2...v1.6.3) (2024-10-07)
+
+### Bug Fixes
+
+* remove patches and update deps ([efc9ae9](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/efc9ae9bce74320118646f4d29a07e34dae48491))
+
 ## [1.6.2](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.6.1...v1.6.2) (2024-10-02)
 
 ### Bug Fixes
