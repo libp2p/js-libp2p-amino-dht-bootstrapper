@@ -11,6 +11,10 @@
   "bugs": {
     "url": "https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues"
   },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "bin": {
     "amino": "./bin/amino.js",
     "health-check": "./bin/amino-health-check.js"
@@ -33,6 +37,7 @@
   "eslintConfig": {
     "extends": "ipfs",
     "parserOptions": {
+      "project": true,
       "sourceType": "module"
     }
   },
