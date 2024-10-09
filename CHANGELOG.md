@@ -1,3 +1,176 @@
+## [1.6.3](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.6.2...v1.6.3) (2024-10-07)
+
+### Bug Fixes
+
+* remove patches and update deps ([efc9ae9](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/efc9ae9bce74320118646f4d29a07e34dae48491))
+
+## [1.6.2](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.6.1...v1.6.2) (2024-10-02)
+
+### Bug Fixes
+
+* update kad-dht patch ([ddee21a](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/ddee21af1de1d9f115fe9cc056dcb96071507cc6))
+
+## [1.6.1](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.6.0...v1.6.1) (2024-10-02)
+
+### Bug Fixes
+
+* patch dht to ping peers before adding ([b68c9a9](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/b68c9a91fae2c8d4b58b851a6e0d5fd9b505a846))
+
+### Trivial Changes
+
+* update config ([6a6c03f](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/6a6c03f279fb17791153222063b9c3fd59773133))
+
+## [1.6.0](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.21...v1.6.0) (2024-09-30)
+
+### Features
+
+* add persistent datastore ([#162](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/162)) ([fd90738](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/fd90738e4ebce2f513e18fb055bf5f338dcacb32))
+
+### Bug Fixes
+
+* update deps ([d65fcd1](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/d65fcd123c682adb99b477f57e6e6398d3b28c28))
+
+## [1.5.21](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.20...v1.5.21) (2024-09-30)
+
+### Bug Fixes
+
+* update kad patch with metric name ([45bc26f](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/45bc26fec34c854704a3022fd4875fef9dbe9cd0))
+
+## [1.5.20](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.19...v1.5.20) (2024-09-30)
+
+### Bug Fixes
+
+* update tcp patch and patch kad-dht with more ping metrics ([58c8153](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/58c8153f7755d9c9c8c2805e9dcda31fc532baa5))
+
+## [1.5.19](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.18...v1.5.19) (2024-09-30)
+
+### Bug Fixes
+
+* remove why-is-node-running ([46f6e70](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/46f6e70123082a19ee180d2aa1c1fe93784211f1))
+
+## [1.5.18](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.17...v1.5.18) (2024-09-29)
+
+### Bug Fixes
+
+* patch tcp to add error handler early ([61cf659](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/61cf659e64fbf9927d0bd9d2fb78e34c906c07bb))
+
+## [1.5.17](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.16...v1.5.17) (2024-09-29)
+
+### Bug Fixes
+
+* add patches ([7fac58a](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/7fac58a0611cee86b0fb4b54734def74960558fc))
+* patch libp2p to report pending outgoing ([b8a056a](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/b8a056a9e770f8ff1d44e45e1162077de2896ef8))
+
+## [1.5.16](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.15...v1.5.16) (2024-09-29)
+
+### Bug Fixes
+
+* patch tcp for simpler closing and count outbound pending conns ([1ebf1ea](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/1ebf1ea755067ebbde7186ee624d507c2ed771b1))
+
+## [1.5.15](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.14...v1.5.15) (2024-09-29)
+
+### Bug Fixes
+
+* patch tcp to destroy sockets on connect error ([2fd0d94](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/2fd0d9442fe69eb7e28878b500285e0bc0764fd4))
+
+## [1.5.14](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.13...v1.5.14) (2024-09-28)
+
+### Bug Fixes
+
+* patch tcp to destroy sockets without remote addr/port ([5d90b55](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/5d90b55d27293d4fcb122eef9714752723b377fb))
+
+## [1.5.13](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.12...v1.5.13) (2024-09-28)
+
+### Bug Fixes
+
+* patch tcp to not half-close, just destroy ([5492131](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/5492131682b99be26e53012071f4241b6993cc99))
+
+## [1.5.12](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.11...v1.5.12) (2024-09-28)
+
+### Bug Fixes
+
+* patch tcp to disable keepalive ([64f261e](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/64f261edbae11384cffae8aeea99603002a7b48d))
+
+## [1.5.11](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.10...v1.5.11) (2024-09-28)
+
+### Bug Fixes
+
+* patch tcp to reduce default timeout ([104fe15](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/104fe158c8f8042b060c5bf6a42c130cf0f227dc))
+* patch tcp to report socket connect ([0e935bb](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/0e935bb8a0a8d2dc2dbf1aaeeb5b42af09b2ac44))
+
+## [1.5.10](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.9...v1.5.10) (2024-09-28)
+
+### Bug Fixes
+
+* disable tls ([5ea7176](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/5ea717667dc7145b2233ea4ea208e376c556a028))
+
+## [1.5.9](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.8...v1.5.9) (2024-09-27)
+
+### Bug Fixes
+
+* add rpc endpoint for logging active resources ([#160](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/160)) ([bde4ea1](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/bde4ea19f3df1c6ab36c21053d62546a436d8402))
+
+## [1.5.8](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.7...v1.5.8) (2024-09-26)
+
+### Bug Fixes
+
+* add wss to transport count ([4a3667d](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/4a3667d33a5cd7a1a54edaa3fd5a74f7f57734fe))
+
+## [1.5.7](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.6...v1.5.7) (2024-09-26)
+
+### Bug Fixes
+
+* patch libp2p to test for connection status before storing ([#158](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/158)) ([3447856](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/3447856f14480c5792d15b9cbecde612f9667127))
+
+## [1.5.6](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.5...v1.5.6) (2024-09-25)
+
+### Bug Fixes
+
+* update deps and remove patches ([#157](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/157)) ([35d797c](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/35d797c309a3830193bef81d8621cf033e22dd13))
+
+### Trivial Changes
+
+* update dashboard ([58302c7](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/58302c7b2fe6c9121ac4e4955403f7f19862fdb1))
+* update dashboard ([9e2c804](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/9e2c8045e5f23f9967d867889869dd6853bb229c))
+
+## [1.5.5](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.4...v1.5.5) (2024-09-25)
+
+### Bug Fixes
+
+* update patches ([efeb421](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/efeb421f5e45650f6667a1a826daf71f65e512a5))
+
+## [1.5.4](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.3...v1.5.4) (2024-09-25)
+
+### Bug Fixes
+
+* update patches ([10a3991](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/10a399133c34da3001b03548d3b92f7b5f221dda))
+
+## [1.5.3](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.2...v1.5.3) (2024-09-25)
+
+### Bug Fixes
+
+* patch libp2p to have quieter logging, enable extra metrics ([#156](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/156)) ([4d7729e](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/4d7729ef73875563df28ea455d569470f03c81a7))
+* restore host networking ([013cb04](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/013cb04c132bbb409f225587dd439e8d3626148e))
+
+## [1.5.2](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.1...v1.5.2) (2024-09-24)
+
+### Bug Fixes
+
+* update libp2p deps ([#155](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/155)) ([927cbd2](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/927cbd2262d6d95c920aaa0befca8048ea06d0e3))
+
+## [1.5.1](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.5.0...v1.5.1) (2024-09-24)
+
+### Bug Fixes
+
+* download heapdump instead of writing to disk ([#153](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/153)) ([38cf657](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/38cf657f5d6d91e783214279285b8f4cea2cb482))
+* simplify docker image with single stage build ([#154](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/154)) ([1921e35](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/1921e3566ba79f1d5dae926a2821c12c1ed7debb))
+
+## [1.5.0](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.4.2...v1.5.0) (2024-09-24)
+
+### Features
+
+* add dynamic logging to js bootstrapper ([#152](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/152)) ([2493b1b](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/2493b1bce9e3a0cbb433b02c0859e8920c24c1ec))
+
 ## [1.4.2](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.4.1...v1.4.2) (2024-09-23)
 
 ### Bug Fixes

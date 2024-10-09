@@ -1,6 +1,7 @@
 volumes:
   prometheus_data: {}
   grafana_data: {}
+  bootstrapper_datastore: {}
 
 services:
   bootstrapper:
@@ -15,13 +16,13 @@ services:
       - 4102:4102
       - 4001:4001
       - 4003:4003
+      - 9229:9229
     environment:
-      - CONFIG_FLAGS=""
+      - NODE_OPTIONS="--inspect=0.0.0.0"
     volumes:
       - ./config.json:/config.json
-      - ./snapshot-dir:/app/snapshot-dir
-    command: node dist/src/index.js --config /config.json --enable-kademlia --enable-autonat
-    network_mode: host
+      - bootstrapper_datastore:/datastore
+    command: node --config /config.json --enable-kademlia --enable-autonat --enable-tls --api-host=0.0.0.0 --datastore=/datastore
 
   prometheus:
     restart: unless-stopped
