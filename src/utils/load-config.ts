@@ -1,6 +1,5 @@
 import { readFileSync } from 'node:fs'
-import type { BootstrapInit } from '@libp2p/bootstrap'
-import type { AddressManagerInit, ConnectionManagerInit } from 'libp2p'
+import type { BootstrapConfig } from './default-config.js'
 
 export function readConfig (filepath: string): BootstrapConfig {
   const configString = readFileSync(filepath, 'utf8')
@@ -20,16 +19,6 @@ function validateConfig (config: any): config is BootstrapConfig {
   validateKey(config.identity, 'peerId', 'identity.peerId')
   validateKey(config.identity, 'privKey', 'identity.privKey')
   return true
-}
-
-export interface BootstrapConfig {
-  addresses: Omit<AddressManagerInit, 'announceFilter'>
-  connectionManager: ConnectionManagerInit
-  bootstrap: BootstrapInit
-  identity: {
-    peerId: string
-    privKey: string
-  }
 }
 
 function validateKey (config: any, key: string, path: string): void {
