@@ -22,7 +22,7 @@ export async function getConfigPath (): Promise<string> {
 
 /**
  * check if DEFAULT_CONFIG_NAME exists, if it does, use it automatically
- * if not, copy example-config.json to ~/.config.json
+ * if not, copy `defaultConfig` to `${CONFIG_FOLDER}/config.json`
  * create a private key and peer ID and add it to the config
  */
 export async function autoConfig (configPathArg?: string): Promise<BootstrapConfig> {
@@ -43,7 +43,6 @@ export async function autoConfig (configPathArg?: string): Promise<BootstrapConf
     console.info('Config file found')
     return config
   } catch {
-    // eslint-disable-next-line no-console
     console.info('No config file found, generating one automatically...')
   }
 
