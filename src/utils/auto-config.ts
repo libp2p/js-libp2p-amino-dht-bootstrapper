@@ -12,12 +12,9 @@ import { defaultConfig, type BootstrapConfig } from './default-config.js'
 import { readConfig } from './load-config.js'
 import { encodePrivateKey } from './peer-id.js'
 
-export const DEFAULT_CONFIG_NAME = 'config.json'
-
 export const CONFIG_FOLDER = join(homedir(), '.config', '@libp2p', 'amino-dht-bootstrapper')
-export async function getConfigPath (): Promise<string> {
-  return join(CONFIG_FOLDER, DEFAULT_CONFIG_NAME)
-}
+export const DEFAULT_CONFIG_NAME = 'config.json'
+export const CONFIG_PATH = join(CONFIG_FOLDER, DEFAULT_CONFIG_NAME)
 
 /**
  * check if DEFAULT_CONFIG_NAME exists, if it does, use it automatically
@@ -35,10 +32,9 @@ export async function autoConfig (configPathArg?: string): Promise<BootstrapConf
     return readConfig(configFilepath)
   }
 
-  const configPath = await getConfigPath()
-  console.info('Checking for config file at %s', configPath)
+  console.info('Checking for config file at %s', CONFIG_PATH)
   try {
-    const config = readConfig(configPath)
+    const config = readConfig(CONFIG_PATH)
     console.info('Config file found')
     return config
   } catch {
@@ -63,8 +59,8 @@ export async function autoConfig (configPathArg?: string): Promise<BootstrapConf
     configJson.privateKey = encodePrivateKey(libp2pGeneratedPrivateKey)
 
     console.info('Writing config file')
-    await writeFile(configPath, JSON.stringify(configJson, null, 2))
-    console.info('Config file created successfully at %s', configPath)
+    await writeFile(CONFIG_PATH, JSON.stringify(configJson, null, 2))
+    console.info('Config file created successfully at %s', CONFIG_PATH)
     return configJson
   } catch (e) {
     console.error('Error creating config', e)
