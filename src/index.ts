@@ -2,18 +2,15 @@
 
 import { writeFileSync } from 'node:fs'
 import { createServer } from 'node:http'
-import { isAbsolute, join } from 'node:path'
 import { parseArgs } from 'node:util'
 import { noise } from '@chainsafe/libp2p-noise'
 import { yamux } from '@chainsafe/libp2p-yamux'
 import { autoNAT } from '@libp2p/autonat'
 import { bootstrap } from '@libp2p/bootstrap'
 import { circuitRelayServer } from '@libp2p/circuit-relay-v2'
-import { privateKeyFromProtobuf } from '@libp2p/crypto/keys'
 import { dcutr } from '@libp2p/dcutr'
 import { identify, identifyPush } from '@libp2p/identify'
 import { kadDHT, removePrivateAddressesMapper } from '@libp2p/kad-dht'
-import { peerIdFromPrivateKey, peerIdFromString } from '@libp2p/peer-id'
 import { ping } from '@libp2p/ping'
 import { prometheusMetrics } from '@libp2p/prometheus-metrics'
 import { tcp } from '@libp2p/tcp'
@@ -23,14 +20,13 @@ import { webSockets } from '@libp2p/websockets'
 import { LevelDatastore } from 'datastore-level'
 import { createLibp2p } from 'libp2p'
 import { register } from 'prom-client'
-import { fromString as uint8ArrayFromString } from 'uint8arrays/from-string'
 import { createRpcServer } from './create-rpc-server.js'
 import { connectionsByEncrypterMetrics } from './services/connections-by-encrypter-metrics.js'
 import { connectionsByMultiplexerMetrics } from './services/connections-by-multiplexer-metrics.js'
 import { connectionsByTransportMetrics } from './services/connections-by-transport-metrics.js'
 import { versionsMetrics } from './services/versions-metrics.js'
-import { readConfig } from './utils/load-config.js'
-import type { PrivateKey } from '@libp2p/interface'
+import { autoConfig } from './utils/auto-config.js'
+import { decodePrivateKey } from './utils/peer-id.js'
 import type { Multiaddr } from '@multiformats/multiaddr'
 import type { Libp2pOptions, ServiceFactoryMap } from 'libp2p'
 
@@ -38,11 +34,6 @@ process.addListener('uncaughtException', (err) => {
   console.error(err)
   process.exit(1)
 })
-
-function decodePeerId (privkeyStr: string): PrivateKey {
-  const privkeyBytes = uint8ArrayFromString(privkeyStr, 'base64pad')
-  return privateKeyFromProtobuf(privkeyBytes)
-}
 
 function writeListeningAddrsToFile (maddrs: Multiaddr[]): void {
   const addrs = maddrs.map((ma) => ma.toString())
@@ -105,7 +96,7 @@ const args = parseArgs({
 })
 
 const {
-  config: configFilename,
+  config: argConfigFilename,
   'enable-kademlia': argEnableKademlia,
   'enable-autonat': argEnableAutonat,
   'enable-tls': argEnableTls,
@@ -122,16 +113,9 @@ if (argHelp === true) {
   process.exit(0)
 }
 
-if (configFilename == null) {
-  throw new Error('--config must be provided')
-}
-const configFilepath = isAbsolute(configFilename) ? configFilename : join(process.cwd(), configFilename)
-const config = readConfig(configFilepath)
+const config = await autoConfig(argConfigFilename)
 
-const privateKey = decodePeerId(config.Identity.PrivKey)
-if (!peerIdFromString(config.Identity.PeerID).equals(peerIdFromPrivateKey(privateKey))) {
-  throw new Error('Config Identity.PeerId doesn\'t match Identity.PrivKey')
-}
+const privateKey = decodePrivateKey(config.privateKey)
 
 const metricsServer = createServer((req, res) => {
   if (req.url === argMetricsPath && req.method === 'GET') {
@@ -159,7 +143,7 @@ await createRpcServer({ apiPort: parseInt(argApiPort ?? options['api-port'].defa
 const services: ServiceFactoryMap = {
   circuitRelay: circuitRelayServer(),
   bootstrap: bootstrap({
-    list: config.Bootstrap
+    ...config.bootstrap
   }),
   identify: identify({
     agentVersion: 'js-libp2p-bootstrapper'
@@ -179,16 +163,14 @@ const libp2pOptions: Libp2pOptions = {
   datastore: new LevelDatastore(argDatastore ?? options.datastore.default),
   privateKey,
   addresses: {
+    ...config.addresses,
     announceFilter: (addrs) => {
       // filter out private IP addresses
       return addrs.filter((addr) => {
         const nodeAddress = addr.nodeAddress()
         return isPrivateIp(nodeAddress.address) !== true
       })
-    },
-    listen: config.Addresses.Swarm,
-    announce: config.Addresses.Announce,
-    noAnnounce: config.Addresses.NoAnnounce
+    }
   },
   connectionManager: config.connectionManager,
   connectionGater: {
