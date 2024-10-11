@@ -10,14 +10,12 @@ export function readConfig (filepath: string): BootstrapConfig {
 
 function validateConfig (config: any): config is BootstrapConfig {
   validateKey(config, 'bootstrap', 'bootstrap')
-  validateKey(config, 'bootstrap', 'bootstrap.list')
+  validateKey(config.bootstrap, 'list', 'bootstrap.list')
   validateKey(config, 'addresses', 'addresses')
   validateKey(config.addresses, 'listen', 'addresses.listen')
   validateKey(config.addresses, 'announce', 'addresses.announce')
   validateKey(config.addresses, 'noAnnounce', 'addresses.noAnnounce')
-  validateKey(config, 'identity', 'identity')
-  validateKey(config.identity, 'peerId', 'identity.peerId')
-  validateKey(config.identity, 'privKey', 'identity.privKey')
+  validateKey(config, 'privateKey', 'privateKey')
   return true
 }
 

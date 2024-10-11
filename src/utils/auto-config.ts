@@ -8,7 +8,6 @@ import { writeFile, mkdir, access, constants } from 'node:fs/promises'
 import { homedir } from 'node:os'
 import { join, isAbsolute } from 'node:path'
 import { generateKeyPair } from '@libp2p/crypto/keys'
-import { peerIdFromPrivateKey } from '@libp2p/peer-id'
 import { defaultConfig, type BootstrapConfig } from './default-config.js'
 import { readConfig } from './load-config.js'
 import { encodePrivateKey } from './peer-id.js'
@@ -61,8 +60,7 @@ export async function autoConfig (configPathArg?: string): Promise<BootstrapConf
 
     console.info('Generating private key and peer ID...')
     const libp2pGeneratedPrivateKey = await generateKeyPair('Ed25519')
-    configJson.identity.privKey = encodePrivateKey(libp2pGeneratedPrivateKey)
-    configJson.identity.peerId = peerIdFromPrivateKey(libp2pGeneratedPrivateKey).toString()
+    configJson.privateKey = encodePrivateKey(libp2pGeneratedPrivateKey)
 
     console.info('Writing config file')
     await writeFile(configPath, JSON.stringify(configJson, null, 2))

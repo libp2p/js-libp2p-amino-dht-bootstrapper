@@ -11,7 +11,6 @@ import { circuitRelayServer } from '@libp2p/circuit-relay-v2'
 import { dcutr } from '@libp2p/dcutr'
 import { identify, identifyPush } from '@libp2p/identify'
 import { kadDHT, removePrivateAddressesMapper } from '@libp2p/kad-dht'
-import { peerIdFromPrivateKey, peerIdFromString } from '@libp2p/peer-id'
 import { ping } from '@libp2p/ping'
 import { prometheusMetrics } from '@libp2p/prometheus-metrics'
 import { tcp } from '@libp2p/tcp'
@@ -116,10 +115,7 @@ if (argHelp === true) {
 
 const config = await autoConfig(argConfigFilename)
 
-const privateKey = decodePrivateKey(config.identity.privKey)
-if (!peerIdFromString(config.identity.peerId).equals(peerIdFromPrivateKey(privateKey))) {
-  throw new Error('Config Identity.PeerId doesn\'t match Identity.PrivKey')
-}
+const privateKey = decodePrivateKey(config.privateKey)
 
 const metricsServer = createServer((req, res) => {
   if (req.url === argMetricsPath && req.method === 'GET') {
