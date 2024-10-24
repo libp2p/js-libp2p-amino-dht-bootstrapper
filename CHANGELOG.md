@@ -1,3 +1,13 @@
+## [1.7.0](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.6.3...v1.7.0) (2024-10-24)
+
+### Features
+
+* create config automatically if not provided ([#151](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/151)) ([f869934](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/f8699348e510123aa81ab29473b439a9fabf234a))
+
+### Trivial Changes
+
+* update project ([1a49861](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/1a49861d7d507991b142f99b9cc5195f97c7d8f1))
+
 ## [1.6.3](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.6.2...v1.6.3) (2024-10-07)
 
 ### Bug Fixes
