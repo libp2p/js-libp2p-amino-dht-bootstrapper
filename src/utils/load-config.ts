@@ -1,43 +1,22 @@
 import { readFileSync } from 'node:fs'
-import type { ConnectionManagerInit } from 'libp2p'
+import type { BootstrapConfig } from './default-config.js'
 
 export function readConfig (filepath: string): BootstrapConfig {
   const configString = readFileSync(filepath, 'utf8')
   const config = JSON.parse(configString)
-  validateKuboConfig(config)
+  validateConfig(config)
   return config
 }
 
-function validateKuboConfig (config: any): config is KuboConfig {
-  validateKey(config, 'Bootstrap', 'Bootstrap')
-  validateKey(config, 'Addresses', 'Addresses')
-  validateKey(config.Addresses, 'Swarm', 'Addresses.Swarm')
-  validateKey(config.Addresses, 'Announce', 'Addresses.Announce')
-  validateKey(config.Addresses, 'NoAnnounce', 'Addresses.NoAnnounce')
-  validateKey(config, 'Identity', 'Identity')
-  validateKey(config.Identity, 'PeerID', 'Identity.PeerID')
-  validateKey(config.Identity, 'PrivKey', 'Identity.PrivKey')
+function validateConfig (config: any): config is BootstrapConfig {
+  validateKey(config, 'bootstrap', 'bootstrap')
+  validateKey(config.bootstrap, 'list', 'bootstrap.list')
+  validateKey(config, 'addresses', 'addresses')
+  validateKey(config.addresses, 'listen', 'addresses.listen')
+  validateKey(config.addresses, 'announce', 'addresses.announce')
+  validateKey(config.addresses, 'noAnnounce', 'addresses.noAnnounce')
+  validateKey(config, 'privateKey', 'privateKey')
   return true
-}
-
-/**
- * Subset of options that we care about from the kubo config
- */
-interface KuboConfig {
-  Bootstrap: string[]
-  Addresses: {
-    Swarm: string[]
-    Announce: string[]
-    NoAnnounce: string[]
-  }
-  Identity: {
-    PeerID: string
-    PrivKey: string
-  }
-}
-
-type BootstrapConfig = KuboConfig & {
-  connectionManager: ConnectionManagerInit
 }
 
 function validateKey (config: any, key: string, path: string): void {

@@ -13,3 +13,4 @@ config/grafana/alerting
 js-libp2p-datastore
 config.json
 listening-addrs.txt
+datastore
