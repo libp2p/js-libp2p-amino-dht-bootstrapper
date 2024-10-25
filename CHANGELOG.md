@@ -1,3 +1,9 @@
+## [1.7.1](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.7.0...v1.7.1) (2024-10-25)
+
+### Bug Fixes
+
+* update all deps ([#202](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/202)) ([14656ab](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/14656abb314a71be11521460b55083d0ea6a5dd9))
+
 ## [1.7.0](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.6.3...v1.7.0) (2024-10-24)
 
 ### Features
