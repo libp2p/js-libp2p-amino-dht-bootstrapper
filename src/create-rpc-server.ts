@@ -18,22 +18,32 @@ const resources: Record<string, Record<string, Parameters<typeof createServer>[1
         res.writeHead(503, { 'Content-Type': 'text/plain' })
         res.end('Service Unavailable')
 
+        console.info('RPC /api/v0/nodejs/gc - garbage collection is not enabled')
+
         return
       }
 
+      const start = Date.now()
+      console.info('RPC /api/v0/nodejs/gc - performing garbage collection')
+
       // force nodejs to run garbage collection
       globalThis.gc?.()
+
+      console.info(`RPC /api/v0/nodejs/gc - performed garbage collection in ${Date.now() - start}ms`)
       res.writeHead(200, { 'Content-Type': 'text/plain' })
       res.end('OK')
     }
   },
   '/api/v0/nodejs/heapdump': {
     GET: (req, res) => {
+      const start = Date.now()
+      console.info('RPC /api/v0/nodejs/heapdump - creating heap snapshot')
+
       // force nodejs to generate a heapdump
       // you can analyze the heapdump with https://github.com/facebook/memlab#heap-analysis-and-investigation to get some really useful insights
       res.writeHead(200, {
         'Content-Type': 'application/json',
-        'Content-Disposition': `attachment; filename="${(new Date()).toISOString()}.heapsnapshot"`
+        'Content-Disposition': `attachment; filename="amino-${process.pid}-${(new Date()).toISOString()}.heapsnapshot"`
       })
 
       const stream = getHeapSnapshot()
@@ -58,6 +68,7 @@ const resources: Record<string, Record<string, Parameters<typeof createServer>[1
 
       stream.on('end', () => {
         res.end()
+        console.info(`RPC /api/v0/nodejs/heapdump - created heap snapshot in ${Date.now() - start}ms`)
       })
     }
   },
@@ -73,9 +84,9 @@ const resources: Record<string, Record<string, Parameters<typeof createServer>[1
       }
 
       if (query.namespace.trim() === '') {
-        console.info('Disable logging')
+        console.info('RPC /api/v0/nodejs/log - Disable logging')
       } else {
-        console.info('Enable logging with namespace', query.namespace)
+        console.info('RPC /api/v0/nodejs/log - Enable logging with namespace', query.namespace)
       }
 
       // change the logging settings
