@@ -1,3 +1,9 @@
+## [1.7.3](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.7.2...v1.7.3) (2024-10-28)
+
+### Bug Fixes
+
+* update deps and add logging ([cde8fa5](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/cde8fa59db8c23eaad3057ff86be4e89d1fe427a))
+
 ## [1.7.2](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.7.1...v1.7.2) (2024-10-25)
 
 ### Bug Fixes
