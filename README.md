@@ -149,19 +149,25 @@ $ docker build . --tag amino
 ### Running the docker image (once built):
 
 ```sh
-$ docker run -v $(pwd)/bootstrapper-config.json:/config.json -it amino --config /config.json
+$ docker run -it amino
+```
+
+By default, the config file is stored at `$HOME/.config/@libp2p/amino-dht-bootstrapper/config.json`. You can mount this file into the container by running:
+
+```sh
+$ docker run -v $HOME/.config/@libp2p/amino-dht-bootstrapper/:/root/.config/@libp2p/amino-dht-bootstrapper/ -it amino
 ```
 
 To pass args:
 
 ```sh
-$ docker run -v $(pwd)/bootstrapper-config.json:/config.json -it amino --config /config.json [--enable-kademlia] [--enable-autonat]
+$ docker run -it amino [--enable-kademlia] [--enable-autonat]
 ```
 
 To expose the metrics port:
 
 ```sh
-$ docker run -v $(pwd)/bootstrapper-config.json:/config.json -p 8888:8888 -it amino --config /config.json
+$ docker run -p 8888:8888 -it amino
 ```
 
 ### Running the docker image with monitoring:
