@@ -1,3 +1,16 @@
+## [1.7.4](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.7.3...v1.7.4) (2024-10-29)
+
+### Documentation
+
+* fix readme startup instructions ([#204](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/204)) ([9d0618f](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/9d0618f41774c362360cabc24253fc4744a99532)), closes [#203](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/203)
+
+### Dependencies
+
+* bump @libp2p/websockets from 9.0.10 to 9.0.11 ([#208](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/208)) ([d6dbc35](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/d6dbc3559d226e5f00450adbe8f8474727bae802))
+* bump @multiformats/multiaddr-matcher from 1.3.0 to 1.4.0 ([#205](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/205)) ([25b0a37](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/25b0a37811fd707876e035f8d2180cad6a71279c))
+* bump libp2p from 2.2.0 to 2.2.1 ([#206](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/206)) ([71bb2e6](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/71bb2e684b9987db52f4ad4d2b8ea6286ac88b66))
+* **dev:** bump aegir from 44.1.4 to 45.0.0 ([#207](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/207)) ([b3a140f](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/b3a140ff8868531705974ff8bd89bf7423dff094))
+
 ## [1.7.3](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.7.2...v1.7.3) (2024-10-28)
 
 ### Bug Fixes
