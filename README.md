@@ -5,7 +5,7 @@
 [![codecov](https://img.shields.io/codecov/c/github/libp2p/js-libp2p-amino-dht-bootstrapper.svg?style=flat-square)](https://codecov.io/gh/libp2p/js-libp2p-amino-dht-bootstrapper)
 [![CI](https://img.shields.io/github/actions/workflow/status/libp2p/js-libp2p-amino-dht-bootstrapper/js-test-and-release.yml?branch=main\&style=flat-square)](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/actions/workflows/js-test-and-release.yml?query=branch%3Amain)
 
-> Run an Amino DHT boostrapper with js-libp2p
+> Run an Amino DHT bootstrapper with js-libp2p
 
 # Install
 
