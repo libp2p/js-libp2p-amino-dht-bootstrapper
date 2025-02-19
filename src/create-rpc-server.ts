@@ -3,6 +3,7 @@
 import { createServer } from 'node:http'
 import { decode } from 'node:querystring'
 import { getHeapSnapshot } from 'node:v8'
+import { setTimeout } from 'timers/promises'
 import { enable } from '@libp2p/logger'
 
 export interface RpcServerOptions {
@@ -36,40 +37,47 @@ const resources: Record<string, Record<string, Parameters<typeof createServer>[1
   },
   '/api/v0/nodejs/heapdump': {
     GET: (req, res) => {
-      const start = Date.now()
-      console.info('RPC /api/v0/nodejs/heapdump - creating heap snapshot')
+      void Promise.resolve()
+        .then(async () => {
+          global.gc?.()
+          await setTimeout(1000)
+          global.gc?.()
 
-      // force nodejs to generate a heapdump
-      // you can analyze the heapdump with https://github.com/facebook/memlab#heap-analysis-and-investigation to get some really useful insights
-      res.writeHead(200, {
-        'Content-Type': 'application/json',
-        'Content-Disposition': `attachment; filename="amino-${process.pid}-${(new Date()).toISOString()}.heapsnapshot"`
-      })
+          const start = new Date()
+          console.info('RPC /api/v0/nodejs/heapdump - creating heap snapshot')
 
-      const stream = getHeapSnapshot()
+          // force nodejs to generate a heapdump
+          // you can analyze the heapdump with https://github.com/facebook/memlab#heap-analysis-and-investigation to get some really useful insights
+          res.writeHead(200, {
+            'Content-Type': 'application/json',
+            'Content-Disposition': `attachment; filename="amino-${process.pid}-${formatDate(start)}.heapsnapshot"`
+          })
 
-      // destroy stream if the request is cancelled
-      req.on('end', () => {
-        stream.destroy()
-      })
+          const stream = getHeapSnapshot()
 
-      stream.on('data', (buf) => {
-        const sendMore = res.write(buf)
+          // destroy stream if the request is cancelled
+          req.on('end', () => {
+            stream.destroy()
+          })
 
-        // respect backpressure
-        if (!sendMore) {
-          stream.pause()
-        }
-      })
-      // start sending data again when the send buffer empties
-      res.on('drain', () => {
-        stream.resume()
-      })
+          stream.on('data', (buf) => {
+            const sendMore = res.write(buf)
 
-      stream.on('end', () => {
-        res.end()
-        console.info(`RPC /api/v0/nodejs/heapdump - created heap snapshot in ${Date.now() - start}ms`)
-      })
+            // respect backpressure
+            if (!sendMore) {
+              stream.pause()
+            }
+          })
+          // start sending data again when the send buffer empties
+          res.on('drain', () => {
+            stream.resume()
+          })
+
+          stream.on('end', () => {
+            res.end()
+            console.info(`RPC /api/v0/nodejs/heapdump - created heap snapshot in ${Date.now() - start.getTime()}ms`)
+          })
+        })
     }
   },
   '/api/v0/nodejs/log': {
@@ -145,4 +153,12 @@ export async function createRpcServer ({ apiPort, apiHost }: RpcServerOptions): 
   await new Promise<void>((resolve) => apiServer.listen(apiPort, apiHost, resolve))
 
   console.info(`RPC api listening on: ${apiHost}:${apiPort}`)
+}
+
+function formatDate (date: Date): string {
+  function pad (num: number): string {
+    return num.toString().padStart(2, '0')
+  }
+
+  return `${date.getFullYear()}-${date.getMonth().toString().padStart(2, '0')}-${pad(date.getDate())}-${pad(date.getHours())}-${pad(date.getMinutes())}-${pad(date.getSeconds())}`
 }
