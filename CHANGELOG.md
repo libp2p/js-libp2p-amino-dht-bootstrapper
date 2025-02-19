@@ -1,3 +1,13 @@
+## [1.8.1](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.0...v1.8.1) (2025-02-19)
+
+### Bug Fixes
+
+* improve heapdump ([#304](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/304)) ([49bf754](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/49bf7547e59f387700dd4e9c04fc3f67d68c0779))
+
+### Trivial Changes
+
+* group libp2p dep updates ([bcb98cf](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/bcb98cf83e99bd2e15192fc5d71138e4322173fb))
+
 ## [1.8.0](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.7.5...v1.8.0) (2025-02-19)
 
 ### Features
