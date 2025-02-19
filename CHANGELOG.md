@@ -1,3 +1,13 @@
+## [1.8.0](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.7.5...v1.8.0) (2025-02-19)
+
+### Features
+
+* add webrtc transports ([#303](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/303)) ([91bc77f](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/91bc77f719ea85c9eade3f5aff619b231096e344))
+
+### Documentation
+
+* fix bootstrapper typo in readme ([#283](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/283)) ([7e01909](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/7e019094f2bd2d0a34d0c4bccfcef3dea9840635))
+
 ## [1.7.5](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.7.4...v1.7.5) (2025-02-19)
 
 ### Dependencies
