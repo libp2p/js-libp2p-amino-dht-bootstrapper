@@ -16,6 +16,7 @@ import { prometheusMetrics } from '@libp2p/prometheus-metrics'
 import { tcp } from '@libp2p/tcp'
 import { tls } from '@libp2p/tls'
 import { isPrivateIp } from '@libp2p/utils/private-ip'
+import { webRTC, webRTCDirect } from '@libp2p/webrtc'
 import { webSockets } from '@libp2p/websockets'
 import { LevelDatastore } from 'datastore-level'
 import { createLibp2p } from 'libp2p'
@@ -182,6 +183,8 @@ const libp2pOptions: Libp2pOptions = {
   },
   transports: [
     webSockets(),
+    webRTC(),
+    webRTCDirect(),
     tcp()
   ],
   streamMuxers: [
