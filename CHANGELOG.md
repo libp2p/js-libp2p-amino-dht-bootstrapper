@@ -1,3 +1,10 @@
+## [1.8.3](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.2...v1.8.3) (2025-02-20)
+
+### Bug Fixes
+
+* expose webrtc-direct port ([04fdf18](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/04fdf18dc5eef89737847bf71407b523800e66be))
+* expose webrtc-direct port ([94cffe5](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/94cffe5083bf461cae0a5756fc4cc3b2ac453484))
+
 ## [1.8.2](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.1...v1.8.2) (2025-02-20)
 
 ### Bug Fixes
