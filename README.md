@@ -119,7 +119,7 @@ A config file will be generated for you automatically, and stored at `$HOME/.con
       "/ip4/0.0.0.0/tcp/4001",
       "/ip6/::/tcp/4004/ws",
       "/ip6/::/tcp/4001",
-      "/ip4/0.0.0.0/udp/4002/webrtc"
+      "/ip4/0.0.0.0/udp/4002/webrtc-direct"
     ]
   },
   "bootstrap": {
