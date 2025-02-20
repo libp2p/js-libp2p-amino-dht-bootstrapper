@@ -3,11 +3,12 @@
     "Announce": [],
     "NoAnnounce": [],
     "Swarm": [
-      "/ip4/0.0.0.0/tcp/4003/ws",
       "/ip4/0.0.0.0/tcp/4001",
-      "/ip6/::/tcp/4004/ws",
+      "/ip4/0.0.0.0/tcp/4002/ws",
+      "/ip4/0.0.0.0/udp/4003/webrtc",
       "/ip6/::/tcp/4001",
-      "/ip4/0.0.0.0/udp/4002/webrtc"
+      "/ip6/::/tcp/4002/ws",
+      "/ip6/::/udp/4003/webrtc"
     ]
   },
   "Bootstrap": [
