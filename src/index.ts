@@ -20,6 +20,7 @@ import { webRTC, webRTCDirect } from '@libp2p/webrtc'
 import { webSockets } from '@libp2p/websockets'
 import { LevelDatastore } from 'datastore-level'
 import { createLibp2p } from 'libp2p'
+import { userAgent } from 'libp2p/user-agent'
 import { register } from 'prom-client'
 import { createRpcServer } from './create-rpc-server.js'
 import { connectionsByEncrypterMetrics } from './services/connections-by-encrypter-metrics.js'
@@ -30,6 +31,8 @@ import { autoConfig } from './utils/auto-config.js'
 import { decodePrivateKey } from './utils/peer-id.js'
 import type { Multiaddr } from '@multiformats/multiaddr'
 import type { Libp2pOptions, ServiceFactoryMap } from 'libp2p'
+// @ts-expect-error no types
+import info from '../package.json' assert { type: 'json' }
 
 process.addListener('uncaughtException', (err) => {
   console.error(err)
@@ -141,14 +144,14 @@ console.info('Metrics server listening', `0.0.0.0:${argMetricsPort}${argMetricsP
 
 await createRpcServer({ apiPort: parseInt(argApiPort ?? options['api-port'].default, 10), apiHost: argApiHost })
 
+const agentVersion = `${info.name}/${info.version} ${userAgent()}`
+
 const services: ServiceFactoryMap = {
   circuitRelay: circuitRelayServer(),
   bootstrap: bootstrap({
     ...config.bootstrap
   }),
-  identify: identify({
-    agentVersion: 'js-libp2p-bootstrapper'
-  }),
+  identify: identify(),
   identifyPush: identifyPush(),
   ping: ping(),
   dcutr: dcutr(),
@@ -159,9 +162,14 @@ const services: ServiceFactoryMap = {
   connectionsByMultiplexerMetrics: connectionsByMultiplexerMetrics(),
   versionsMetrics: versionsMetrics()
 }
-
+{
+  agentVersion: 'js-libp2p-bootstrapper'
+}
 const libp2pOptions: Libp2pOptions = {
   datastore: new LevelDatastore(argDatastore ?? options.datastore.default),
+  nodeInfo: {
+    userAgent: agentVersion
+  },
   privateKey,
   addresses: {
     ...config.addresses,
