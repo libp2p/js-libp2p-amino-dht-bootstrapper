@@ -16,6 +16,7 @@ services:
       - 4102:4102
       - 4001:4001
       - 4003:4003
+      - 4005:4005
       - 9229:9229
     environment:
       - NODE_OPTIONS="--inspect=0.0.0.0"
