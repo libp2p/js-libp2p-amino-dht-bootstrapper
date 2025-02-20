@@ -1,3 +1,9 @@
+## [1.8.2](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.1...v1.8.2) (2025-02-20)
+
+### Bug Fixes
+
+* include circuit relay transport ([#305](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/305)) ([e746ca6](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/e746ca6764894e843a99175e67e43ddf3980e756))
+
 ## [1.8.1](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.0...v1.8.1) (2025-02-19)
 
 ### Bug Fixes
