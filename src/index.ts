@@ -116,8 +116,6 @@ if (argHelp === true) {
 
 const config = await autoConfig(argConfigFilename)
 
-console.info('loaded config', config)
-
 const privateKey = decodePrivateKey(config.privateKey)
 
 const metricsServer = createServer((req, res) => {
