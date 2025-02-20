@@ -7,7 +7,7 @@ import { noise } from '@chainsafe/libp2p-noise'
 import { yamux } from '@chainsafe/libp2p-yamux'
 import { autoNAT } from '@libp2p/autonat'
 import { bootstrap } from '@libp2p/bootstrap'
-import { circuitRelayServer } from '@libp2p/circuit-relay-v2'
+import { circuitRelayServer, circuitRelayTransport } from '@libp2p/circuit-relay-v2'
 import { dcutr } from '@libp2p/dcutr'
 import { identify, identifyPush } from '@libp2p/identify'
 import { kadDHT, removePrivateAddressesMapper } from '@libp2p/kad-dht'
@@ -182,6 +182,7 @@ const libp2pOptions: Libp2pOptions = {
     }
   },
   transports: [
+    circuitRelayTransport(),
     webSockets(),
     webRTC(),
     webRTCDirect(),
