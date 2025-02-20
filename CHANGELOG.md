@@ -1,3 +1,9 @@
+## [1.8.6](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.5...v1.8.6) (2025-02-20)
+
+### Bug Fixes
+
+* do not print config ([896eae7](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/896eae7d58d521939d105914502999a89db738d1))
+
 ## [1.8.5](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.4...v1.8.5) (2025-02-20)
 
 ### Bug Fixes
