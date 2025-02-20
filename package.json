@@ -1,6 +1,6 @@
 {
   "name": "@libp2p/amino-dht-bootstrapper",
-  "version": "1.8.4",
+  "version": "1.8.5",
   "description": "Run an Amino DHT bootstrapper with js-libp2p",
   "license": "Apache-2.0 OR MIT",
   "homepage": "https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper#readme",
