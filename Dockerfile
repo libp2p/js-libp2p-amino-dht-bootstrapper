@@ -1,4 +1,4 @@
-FROM --platform=${BUILDPLATFORM} node:20-slim
+FROM --platform=${BUILDPLATFORM} node:22-slim
 
 # Install dependencies required for running the app
 RUN apt-get update && \
