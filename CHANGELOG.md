@@ -1,3 +1,16 @@
+## [1.8.7](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.6...v1.8.7) (2025-02-22)
+
+### Bug Fixes
+
+* print version on startup ([f15eb84](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/f15eb84dcf72a082d4a05691b0977751c8b86c7a))
+* report agent string with more information ([4b6b94c](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/4b6b94cc75ac570c47548ba88b2ff748e9ed4e31))
+* update deps ([3edc5fd](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/3edc5fd80403097af367b6f02ff1e247bba1ab5a))
+
+### Trivial Changes
+
+* fix build ([fa19031](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/fa190311b8bff515c90f4b8ca537d951e304ef53))
+* update node ([1285860](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/1285860d757bfc3f52253a5115a64da77ec72ba3))
+
 ## [1.8.6](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.5...v1.8.6) (2025-02-20)
 
 ### Bug Fixes
