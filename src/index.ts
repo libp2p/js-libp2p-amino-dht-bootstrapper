@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 
-// @ts-expect-error no types
 import { writeFileSync } from 'node:fs'
 import { createServer } from 'node:http'
 import { parseArgs } from 'node:util'
@@ -23,6 +22,7 @@ import { LevelDatastore } from 'datastore-level'
 import { createLibp2p } from 'libp2p'
 import { userAgent } from 'libp2p/user-agent'
 import { register } from 'prom-client'
+// @ts-expect-error no types
 import info from '../package.json' with { type: 'json' }
 import { createRpcServer } from './create-rpc-server.js'
 import { connectionsByEncrypterMetrics } from './services/connections-by-encrypter-metrics.js'
