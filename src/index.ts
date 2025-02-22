@@ -117,6 +117,10 @@ if (argHelp === true) {
   process.exit(0)
 }
 
+const agentVersion = `${info.name}/${info.version} ${userAgent()}`
+
+console.info('Starting', agentVersion)
+
 const config = await autoConfig(argConfigFilename)
 
 const privateKey = decodePrivateKey(config.privateKey)
@@ -143,8 +147,6 @@ await new Promise<void>((resolve) => metricsServer.listen(metricsPort, '0.0.0.0'
 console.info('Metrics server listening', `0.0.0.0:${argMetricsPort}${argMetricsPath}`)
 
 await createRpcServer({ apiPort: parseInt(argApiPort ?? options['api-port'].default, 10), apiHost: argApiHost })
-
-const agentVersion = `${info.name}/${info.version} ${userAgent()}`
 
 const services: ServiceFactoryMap = {
   circuitRelay: circuitRelayServer(),
