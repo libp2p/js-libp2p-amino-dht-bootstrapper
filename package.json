@@ -157,7 +157,7 @@
     "@libp2p/tcp": "^10.1.2",
     "@libp2p/tls": "^2.0.16",
     "@libp2p/utils": "^6.5.4",
-    "@libp2p/webrtc": "^5.2.2",
+    "@libp2p/webrtc": "^5.2.3",
     "@libp2p/websockets": "^9.2.2",
     "@multiformats/multiaddr": "^12.4.0",
     "@multiformats/multiaddr-matcher": "^1.6.0",
