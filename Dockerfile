@@ -13,6 +13,7 @@ COPY patches ./patches
 RUN npm ci --quiet
 
 ENV NODE_ENV production
+ENV NODE_OPTIONS="--inspect=0.0.0.0"
 
 COPY src ./src
 COPY tsconfig.json ./
@@ -31,6 +32,8 @@ EXPOSE 4005
 EXPOSE 8888
 # RPC api
 EXPOSE 8899
+# Node.js debugger
+EXPOSE 9229
 
 # Use tini to handle signals properly, see https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md#handling-kernel-signals
 ENTRYPOINT ["/usr/bin/tini", "-p", "SIGKILL", "--", "node", "--expose-gc", "dist/src/index.js" ]
