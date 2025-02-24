@@ -1,16 +1,13 @@
 name: Publish docker images
 
 on:
-  push:
+  workflow_run:
+    workflows:
+      - 'test & maybe release'
+    types:
+      - completed
     branches:
       - main
-  pull_request:
-  workflow_dispatch:
-    inputs:
-      push:
-        description: 'Push to registry'
-        required: false
-        default: 'false'
 
 jobs:
   publish:
@@ -45,6 +42,6 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          push: ${{ github.event_name == 'push' || github.event.inputs.push == 'true' }}
+          push: ${{ github.event_name == 'workflow_run' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
