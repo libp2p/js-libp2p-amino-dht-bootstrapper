@@ -1,3 +1,9 @@
+## [1.8.11](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.10...v1.8.11) (2025-02-25)
+
+### Bug Fixes
+
+* use workflow_run to publish docker images ([#308](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/308)) ([f62709a](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/f62709aee7a1fbfd8066fec0d2a9f25dfe2268c4)), closes [#161](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/161)
+
 ## [1.8.10](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.9...v1.8.10) (2025-02-24)
 
 ### Dependencies
