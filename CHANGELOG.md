@@ -1,3 +1,9 @@
+## [1.8.14](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.13...v1.8.14) (2025-02-26)
+
+### Bug Fixes
+
+* pass ipv6 only ([2739844](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/2739844b2259c9005092dac9eb4085bd3c7bffb6))
+
 ## [1.8.13](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.12...v1.8.13) (2025-02-26)
 
 ### Bug Fixes
