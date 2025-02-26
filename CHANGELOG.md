@@ -1,3 +1,9 @@
+## [1.8.15](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.14...v1.8.15) (2025-02-26)
+
+### Bug Fixes
+
+* apply to ws too ([7a64704](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/7a6470437077d263ac4ee5f6a0231341cfc5571c))
+
 ## [1.8.14](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.13...v1.8.14) (2025-02-26)
 
 ### Bug Fixes
