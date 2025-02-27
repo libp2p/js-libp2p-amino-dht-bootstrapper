@@ -1,3 +1,9 @@
+## [1.8.17](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.16...v1.8.17) (2025-02-27)
+
+### Bug Fixes
+
+* use crypto/peer-store prerelease ([7a53063](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/7a53063390f6b9ee2bc6d8ff3cce8354c2ea88d9))
+
 ## [1.8.16](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.15...v1.8.16) (2025-02-27)
 
 ### Bug Fixes
