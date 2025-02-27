@@ -103,7 +103,6 @@ const {
   config: argConfigFilename,
   'enable-kademlia': argEnableKademlia,
   'enable-autonat': argEnableAutonat,
-  'enable-tls': argEnableTls,
   'metrics-path': argMetricsPath,
   'metrics-port': argMetricsPort,
   'api-port': argApiPort,
