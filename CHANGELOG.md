@@ -1,3 +1,9 @@
+## [1.8.16](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.15...v1.8.16) (2025-02-27)
+
+### Bug Fixes
+
+* prefer tls ([340aef2](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/340aef28b180b0bf06f0d7c2a8a815d4621d311d))
+
 ## [1.8.15](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.14...v1.8.15) (2025-02-26)
 
 ### Bug Fixes
