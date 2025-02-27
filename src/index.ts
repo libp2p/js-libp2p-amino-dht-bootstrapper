@@ -200,6 +200,7 @@ const libp2pOptions: Libp2pOptions = {
     yamux()
   ],
   connectionEncrypters: [
+    tls(),
     noise()
   ],
   metrics: prometheusMetrics(),
@@ -217,11 +218,6 @@ if (argEnableKademlia === true) {
 if (argEnableAutonat === true) {
   console.info('Enabling Autonat')
   services.autonat = autoNAT()
-}
-
-if (argEnableTls === true) {
-  console.info('Enabling TLS connection encryption')
-  libp2pOptions.connectionEncrypters?.push(tls())
 }
 
 const node = await createLibp2p(libp2pOptions)
