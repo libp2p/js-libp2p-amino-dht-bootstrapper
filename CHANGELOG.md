@@ -1,3 +1,13 @@
+## [1.8.18](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.17...v1.8.18) (2025-02-28)
+
+### Bug Fixes
+
+* update tls events ([52a8737](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/52a87371278066f3f68d05b9056c825fe196cb80))
+
+### Trivial Changes
+
+* reduce routing table size, use pre-releases ([119cdf8](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/119cdf81c69ae38a23fecbcb6989a0fb02879d72))
+
 ## [1.8.17](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.16...v1.8.17) (2025-02-27)
 
 ### Bug Fixes
