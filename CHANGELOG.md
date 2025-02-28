@@ -1,3 +1,10 @@
+## [1.8.19](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.18...v1.8.19) (2025-02-28)
+
+### Bug Fixes
+
+* noise first ([c2ee6d6](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/c2ee6d64ee3d95bcc5d31a80f35544fa4e57db77))
+* update tls patch ([13a8ea3](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/13a8ea36a3692fba3aec4464e046be10d823c893))
+
 ## [1.8.18](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.17...v1.8.18) (2025-02-28)
 
 ### Bug Fixes
