@@ -199,8 +199,8 @@ const libp2pOptions: Libp2pOptions = {
     yamux()
   ],
   connectionEncrypters: [
-    tls(),
-    noise()
+    noise(),
+    tls()
   ],
   metrics: prometheusMetrics(),
   services
