@@ -1,3 +1,9 @@
+## [1.8.22](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.21...v1.8.22) (2025-03-01)
+
+### Bug Fixes
+
+* reduce routing table size ([3e0e5af](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/3e0e5af49b1cd95d729d13aa252091775e5c2154))
+
 ## [1.8.21](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.20...v1.8.21) (2025-03-01)
 
 ### Bug Fixes
