@@ -211,8 +211,8 @@ if (argEnableKademlia === true) {
   services.dht = kadDHT({
     protocol: '/ipfs/kad/1.0.0',
     peerInfoMapper: removePrivateAddressesMapper,
-    // (8 ^ 2) * 20 = max 1280 peers in the routing table
-    prefixLength: 8
+    // (2 ^ 6) * 20 = max 1280 peers in the routing table
+    prefixLength: 6
   })
 }
 
