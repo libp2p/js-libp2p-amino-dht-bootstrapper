@@ -211,7 +211,7 @@ if (argEnableKademlia === true) {
   services.dht = kadDHT({
     protocol: '/ipfs/kad/1.0.0',
     peerInfoMapper: removePrivateAddressesMapper,
-    prefixLength: 64
+    prefixLength: 10
   })
 }
 
