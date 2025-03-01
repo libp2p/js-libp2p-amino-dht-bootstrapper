@@ -1,3 +1,9 @@
+## [1.8.20](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.19...v1.8.20) (2025-03-01)
+
+### Bug Fixes
+
+* adjust prefix size ([c549d2a](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/c549d2ad1e12d5cc29caabcb5c27bc112c3b2da1))
+
 ## [1.8.19](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.18...v1.8.19) (2025-02-28)
 
 ### Bug Fixes
