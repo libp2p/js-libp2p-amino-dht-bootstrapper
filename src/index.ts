@@ -199,8 +199,8 @@ const libp2pOptions: Libp2pOptions = {
     yamux()
   ],
   connectionEncrypters: [
-    noise(),
-    tls()
+    tls(),
+    noise()
   ],
   metrics: prometheusMetrics(),
   services
@@ -210,9 +210,7 @@ if (argEnableKademlia === true) {
   console.info('Enabling Kademlia DHT')
   services.dht = kadDHT({
     protocol: '/ipfs/kad/1.0.0',
-    peerInfoMapper: removePrivateAddressesMapper,
-    // (2 ^ 6) * 20 = max 1280 peers in the routing table
-    prefixLength: 6
+    peerInfoMapper: removePrivateAddressesMapper
   })
 }
 
