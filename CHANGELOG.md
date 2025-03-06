@@ -1,3 +1,9 @@
+## [1.8.27](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.26...v1.8.27) (2025-03-06)
+
+### Bug Fixes
+
+* patch it-merge and it-queueless-pushable ([177804e](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/177804eeeec2f617bf4d84fe93291c877f55bc80))
+
 ## [1.8.26](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.25...v1.8.26) (2025-03-04)
 
 ### Bug Fixes
