@@ -1,3 +1,9 @@
+## [1.8.28](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.27...v1.8.28) (2025-03-06)
+
+### Bug Fixes
+
+* patch it-merge ([8b6b46f](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/8b6b46f0cfc7efe85a8e4778846f190c1b0e6911))
+
 ## [1.8.27](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.8.26...v1.8.27) (2025-03-06)
 
 ### Bug Fixes
