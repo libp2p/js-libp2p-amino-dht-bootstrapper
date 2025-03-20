@@ -87,6 +87,11 @@ const options = {
     default: 'datastore',
     type: 'string'
   },
+  'peer-log': {
+    description: 'Enable logging connected peers and their user agents',
+    default: false,
+    type: 'boolean'
+  },
   help: {
     description: 'Show help text',
     type: 'boolean'
@@ -108,6 +113,7 @@ const {
   'api-port': argApiPort,
   'api-host': argApiHost,
   datastore: argDatastore,
+  'peer-log': argPeerLog,
   help: argHelp
 } = args.values
 
@@ -238,3 +244,29 @@ const waitForPublicInterval = setInterval(() => {
     console.info('Waiting for public listening addresses...')
   }
 }, 1000)
+
+// replicate https://github.com/ipfs/kubo/blob/97527472fe4c037bb897aa2c7d4e0b2243b58f85/plugin/plugins/peerlog/peerlog.go
+if (argPeerLog) {
+  node.addEventListener('peer:connect', (evt) => {
+    console.info(JSON.stringify({
+      level: 'info',
+      ts: new Date().toISOString(),
+      logger: 'plugin/peerlog',
+      caller: 'peerlog/peerlog.go:51',
+      msg: 'connected',
+      peer: evt.detail.toString()
+    }))
+  })
+
+  node.addEventListener('peer:identify', (evt) => {
+    console.info(JSON.stringify({
+      level: 'info',
+      ts: new Date().toISOString(),
+      logger: 'plugin/peerlog',
+      caller: 'peerlog/peerlog.go:56',
+      msg: 'identified',
+      peer: evt.detail.peerId.toString(),
+      agent: evt.detail.agentVersion
+    }))
+  })
+}
