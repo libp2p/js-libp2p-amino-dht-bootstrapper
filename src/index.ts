@@ -32,7 +32,7 @@ import { versionsMetrics } from './services/versions-metrics.js'
 import { autoConfig } from './utils/auto-config.js'
 import { decodePrivateKey } from './utils/peer-id.js'
 import type { Multiaddr } from '@multiformats/multiaddr'
-import type { Libp2pOptions, ServiceFactoryMap } from 'libp2p'
+import type { Libp2pOptions } from 'libp2p'
 
 process.addListener('uncaughtException', (err) => {
   console.error(err)
@@ -153,7 +153,7 @@ console.info('Metrics server listening', `0.0.0.0:${argMetricsPort}${argMetricsP
 
 await createRpcServer({ apiPort: parseInt(argApiPort ?? options['api-port'].default, 10), apiHost: argApiHost })
 
-const services: ServiceFactoryMap = {
+const services: Record<string, any> = {
   circuitRelay: circuitRelayServer(),
   bootstrap: bootstrap({
     ...config.bootstrap
