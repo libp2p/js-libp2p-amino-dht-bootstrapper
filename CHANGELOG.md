@@ -1,3 +1,9 @@
+## [1.9.2](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.1...v1.9.2) (2025-04-10)
+
+### Dependencies
+
+* bump image-size from 1.2.0 to 1.2.1 ([#316](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/316)) ([e8cbd0a](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/e8cbd0a26f9b3fabed9924e129061a566c5b2a8f))
+
 ## [1.9.1](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.0...v1.9.1) (2025-04-10)
 
 ### Bug Fixes
