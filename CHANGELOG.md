@@ -1,3 +1,9 @@
+## [1.9.3](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.2...v1.9.3) (2025-04-17)
+
+### Bug Fixes
+
+* add keychain ([a8e7263](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/a8e7263ed0e5b0832a3e9a7af035c48d7c3231d8))
+
 ## [1.9.2](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.1...v1.9.2) (2025-04-10)
 
 ### Dependencies
