@@ -11,6 +11,7 @@ import { circuitRelayServer, circuitRelayTransport } from '@libp2p/circuit-relay
 import { dcutr } from '@libp2p/dcutr'
 import { identify, identifyPush } from '@libp2p/identify'
 import { kadDHT, removePrivateAddressesMapper } from '@libp2p/kad-dht'
+import { keychain } from '@libp2p/keychain'
 import { ping } from '@libp2p/ping'
 import { prometheusMetrics } from '@libp2p/prometheus-metrics'
 import { tcp } from '@libp2p/tcp'
@@ -162,6 +163,7 @@ const services: Record<string, any> = {
   identifyPush: identifyPush(),
   ping: ping(),
   dcutr: dcutr(),
+  keychain: keychain(),
 
   // extra metrics
   connectionsByTransportMetrics: connectionsByTransportMetrics(),
