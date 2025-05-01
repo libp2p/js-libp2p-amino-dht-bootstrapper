@@ -218,7 +218,8 @@ if (argEnableKademlia === true) {
   console.info('Enabling Kademlia DHT')
   services.dht = kadDHT({
     protocol: '/ipfs/kad/1.0.0',
-    peerInfoMapper: removePrivateAddressesMapper
+    peerInfoMapper: removePrivateAddressesMapper,
+    prefixLength: 4
   })
 }
 
