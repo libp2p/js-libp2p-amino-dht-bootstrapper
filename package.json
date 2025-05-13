@@ -168,7 +168,7 @@
     "uint8arrays": "^5.1.0"
   },
   "devDependencies": {
-    "aegir": "^45.1.1",
+    "aegir": "^46.0.1",
     "patch-package": "^8.0.0"
   }
 }
