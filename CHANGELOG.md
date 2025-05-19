@@ -1,3 +1,13 @@
+## [1.9.6](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.5...v1.9.6) (2025-05-19)
+
+### Trivial Changes
+
+* update dependabot ([be4cc77](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/be4cc777bb1289b3fc305bc4c332eb13e281d86a))
+
+### Dependencies
+
+* update deps ([075b409](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/075b409a631d67b8b0ba3ca729a09e98fb7cd199))
+
 ## [1.9.5](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.4...v1.9.5) (2025-05-19)
 
 ### Dependencies
