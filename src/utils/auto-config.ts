@@ -8,9 +8,10 @@ import { writeFile, mkdir, access, constants } from 'node:fs/promises'
 import { homedir } from 'node:os'
 import { join, isAbsolute } from 'node:path'
 import { generateKeyPair } from '@libp2p/crypto/keys'
-import { defaultConfig, type BootstrapConfig } from './default-config.js'
+import { defaultConfig } from './default-config.js'
 import { readConfig } from './load-config.js'
 import { encodePrivateKey } from './peer-id.js'
+import type { BootstrapConfig } from './default-config.js'
 
 export const CONFIG_FOLDER = join(homedir(), '.config', '@libp2p', 'amino-dht-bootstrapper')
 export const DEFAULT_CONFIG_NAME = 'config.json'
