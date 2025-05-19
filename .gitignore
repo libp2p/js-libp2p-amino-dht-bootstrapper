@@ -14,3 +14,5 @@ js-libp2p-datastore
 config.json
 listening-addrs.txt
 datastore
+.tmp-compiled-docs
+tsconfig-doc-check.aegir.json
