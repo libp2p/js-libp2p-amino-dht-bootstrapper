@@ -12,9 +12,10 @@ import { yamux } from '@chainsafe/libp2p-yamux'
 import { ping } from '@libp2p/ping'
 import { tcp } from '@libp2p/tcp'
 import { webSockets } from '@libp2p/websockets'
-import { multiaddr, type Multiaddr } from '@multiformats/multiaddr'
+import { multiaddr } from '@multiformats/multiaddr'
 import { createLibp2p } from 'libp2p'
 import type { PeerId } from '@libp2p/interface'
+import type { Multiaddr } from '@multiformats/multiaddr'
 
 // load the addresses the bootstrapper is listening on
 const target: PeerId | Multiaddr | Multiaddr[] = readFileSync('listening-addrs.txt', 'utf8')
