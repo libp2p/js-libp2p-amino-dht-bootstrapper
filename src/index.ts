@@ -23,7 +23,6 @@ import { LevelDatastore } from 'datastore-level'
 import { createLibp2p } from 'libp2p'
 import { userAgent } from 'libp2p/user-agent'
 import { register } from 'prom-client'
-// @ts-expect-error no types
 import info from '../package.json' with { type: 'json' }
 import { createRpcServer } from './create-rpc-server.js'
 import { connectionsByEncrypterMetrics } from './services/connections-by-encrypter-metrics.js'
@@ -152,8 +151,6 @@ await new Promise<void>((resolve) => metricsServer.listen(metricsPort, '0.0.0.0'
 
 console.info('Metrics server listening', `0.0.0.0:${argMetricsPort}${argMetricsPath}`)
 
-await createRpcServer({ apiPort: parseInt(argApiPort ?? options['api-port'].default, 10), apiHost: argApiHost })
-
 const services: Record<string, any> = {
   circuitRelay: circuitRelayServer(),
   bootstrap: bootstrap({
@@ -232,6 +229,8 @@ const node = await createLibp2p(libp2pOptions)
 
 console.info('libp2p is running')
 console.info('PeerId', node.peerId.toString())
+
+await createRpcServer({ apiPort: parseInt(argApiPort ?? options['api-port'].default, 10), apiHost: argApiHost, libp2p: node })
 
 const waitForPublicInterval = setInterval(() => {
   const maddrs = node.getMultiaddrs()
