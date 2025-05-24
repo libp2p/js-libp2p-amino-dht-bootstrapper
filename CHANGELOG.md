@@ -1,3 +1,9 @@
+## [1.9.7](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.6...v1.9.7) (2025-05-24)
+
+### Bug Fixes
+
+* add api to start/stop libp2p ([12269c7](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/12269c7d0e51b1281f8cb9494b2289b4ddef1314))
+
 ## [1.9.6](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.5...v1.9.6) (2025-05-19)
 
 ### Trivial Changes
