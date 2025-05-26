@@ -1,3 +1,12 @@
+## [1.9.8](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.7...v1.9.8) (2025-05-26)
+
+### Bug Fixes
+
+* better abort signal support ([9dc5a51](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/9dc5a51a38eeffbffda287112bde5d38f1103349))
+* patch crypto correctly ([3a4e0f9](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/3a4e0f9120a43bd4e1fda0833d0174f76142bb04))
+* patch to check signal before starting async work ([852a33b](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/852a33bc25f658cef94c30140bee9f4bcbdda5ee))
+* signals again ([e179944](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/e1799444b91c454b155a49276146661048b55eee))
+
 ## [1.9.7](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.6...v1.9.7) (2025-05-24)
 
 ### Bug Fixes
