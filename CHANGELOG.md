@@ -1,3 +1,9 @@
+## [1.9.9](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.8...v1.9.9) (2025-05-26)
+
+### Bug Fixes
+
+* empty peer add map on stop ([1194d8e](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/1194d8e3e1738137d4889ad6fcc076fbaba55af2))
+
 ## [1.9.8](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.7...v1.9.8) (2025-05-26)
 
 ### Bug Fixes
