@@ -1,3 +1,13 @@
+## [1.9.13](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.12...v1.9.13) (2025-05-29)
+
+### Bug Fixes
+
+* update kad-dht patch ([84e4baf](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/84e4bafddffdbd466c2a9c1983484f374a5a9d03))
+
+### Trivial Changes
+
+* try js crypto ([93d02c1](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/93d02c184b0e2fcdf1930fc150975d45a3804bed))
+
 ## [1.9.12](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.11...v1.9.12) (2025-05-29)
 
 ### Bug Fixes
