@@ -3,7 +3,7 @@
 import { writeFileSync } from 'node:fs'
 import { createServer } from 'node:http'
 import { parseArgs } from 'node:util'
-import { noise } from '@chainsafe/libp2p-noise'
+import { noise, pureJsCrypto } from '@chainsafe/libp2p-noise'
 import { yamux } from '@chainsafe/libp2p-yamux'
 import { autoNAT } from '@libp2p/autonat'
 import { bootstrap } from '@libp2p/bootstrap'
@@ -205,7 +205,9 @@ const libp2pOptions: Libp2pOptions = {
   ],
   connectionEncrypters: [
     tls(),
-    noise()
+    noise({
+      crypto: pureJsCrypto
+    })
   ],
   metrics: prometheusMetrics(),
   services
