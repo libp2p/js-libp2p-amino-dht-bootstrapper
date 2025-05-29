@@ -178,5 +178,12 @@
   "devDependencies": {
     "aegir": "^47.0.14",
     "patch-package": "^8.0.0"
+  },
+  "overrides": {
+    "@libp2p/crypto": "next",
+    "@libp2p/interface": "next",
+    "@libp2p/peer-id": "next",
+    "@libp2p/logger": "next",
+    "@libp2p/utils": "next"
   }
 }
