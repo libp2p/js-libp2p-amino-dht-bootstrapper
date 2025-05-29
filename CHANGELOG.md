@@ -1,3 +1,9 @@
+## [1.9.15](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.14...v1.9.15) (2025-05-29)
+
+### Bug Fixes
+
+* yolo peerstore ([c4afbc3](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/c4afbc3ea735e509c9e3603191f43a69b1776dce))
+
 ## [1.9.14](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.13...v1.9.14) (2025-05-29)
 
 ### Bug Fixes
