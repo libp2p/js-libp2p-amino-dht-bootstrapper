@@ -1,3 +1,9 @@
+## [1.9.18](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.17...v1.9.18) (2025-05-30)
+
+### Bug Fixes
+
+* pass metrics to peer store ([66518f7](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/66518f7816651ad23c84df3cdb526fcbaa89312c))
+
 ## [1.9.17](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.16...v1.9.17) (2025-05-30)
 
 ### Bug Fixes
