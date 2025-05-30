@@ -1,3 +1,9 @@
+## [1.9.22](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.21...v1.9.22) (2025-05-30)
+
+### Bug Fixes
+
+* time out incoming rpc ([f8ddffb](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/f8ddffb815954d88d51a76863a6f2fcf7aef146e))
+
 ## [1.9.21](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.20...v1.9.21) (2025-05-30)
 
 ### Bug Fixes
