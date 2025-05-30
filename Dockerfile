@@ -20,8 +20,7 @@ COPY tsconfig.json ./
 RUN npm run build
 RUN npm prune --omit=dev
 
-# disable healthcheck to allow taking heap snapshots
-# HEALTHCHECK --interval=60s --timeout=30s --start-period=10s CMD node dist/src/health-check.js
+HEALTHCHECK --interval=60s --timeout=30s --start-period=10s CMD node dist/src/health-check.js
 
 # tcp
 EXPOSE 4001
