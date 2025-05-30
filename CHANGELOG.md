@@ -1,3 +1,9 @@
+## [1.9.21](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.20...v1.9.21) (2025-05-30)
+
+### Bug Fixes
+
+* avoid stringify ([b6b8372](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/b6b83729496b014ea99df0a34e7a2d52249ece54))
+
 ## [1.9.20](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.19...v1.9.20) (2025-05-30)
 
 ### Bug Fixes
