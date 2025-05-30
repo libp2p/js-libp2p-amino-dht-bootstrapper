@@ -1,3 +1,9 @@
+## [1.9.20](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.19...v1.9.20) (2025-05-30)
+
+### Bug Fixes
+
+* gigo multiaddr ([9cc7470](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/9cc74707e6db988570a4b1a3ef57189bccd86d5d))
+
 ## [1.9.19](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.18...v1.9.19) (2025-05-30)
 
 ### Bug Fixes
