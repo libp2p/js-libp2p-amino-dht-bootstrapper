@@ -1,3 +1,9 @@
+## [1.9.17](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.16...v1.9.17) (2025-05-30)
+
+### Bug Fixes
+
+* disable healthcheck and use default crypto ([9ef4794](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/9ef4794226a83ce9b4e622a889f8a408f7e378ae))
+
 ## [1.9.16](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.15...v1.9.16) (2025-05-30)
 
 ### Bug Fixes
