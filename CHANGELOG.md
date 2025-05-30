@@ -1,3 +1,9 @@
+## [1.9.19](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.18...v1.9.19) (2025-05-30)
+
+### Bug Fixes
+
+* skip decode ([200b805](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/200b805ae326ea0dad61d5d541109db6a296075e))
+
 ## [1.9.18](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.17...v1.9.18) (2025-05-30)
 
 ### Bug Fixes
