@@ -1,3 +1,9 @@
+## [1.9.24](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.23...v1.9.24) (2025-05-31)
+
+### Bug Fixes
+
+* remove providers lock ([15e6087](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/15e6087c7a17734fdefbf4b472d4ffecd0d00085))
+
 ## [1.9.23](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.22...v1.9.23) (2025-05-30)
 
 ### Bug Fixes
