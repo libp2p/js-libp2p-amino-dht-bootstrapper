@@ -1,3 +1,9 @@
+## [1.9.25](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.24...v1.9.25) (2025-06-01)
+
+### Bug Fixes
+
+* switch mortice queue implementation ([6f2812b](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/6f2812bebdb6b0cc46de9896936fa97007665760))
+
 ## [1.9.24](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.23...v1.9.24) (2025-05-31)
 
 ### Bug Fixes
