@@ -1,0 +1,24 @@
+diff --git a/node_modules/@libp2p/peer-store/dist/src/store.js b/node_modules/@libp2p/peer-store/dist/src/store.js
+index 15eac87..75991e0 100644
+--- a/node_modules/@libp2p/peer-store/dist/src/store.js
++++ b/node_modules/@libp2p/peer-store/dist/src/store.js
+@@ -69,6 +69,7 @@ export class PersistentStore {
+     maybeRemoveLock(peerId, lock) {
+         lock.refs--;
+         if (lock.refs === 0) {
++            lock.lock.cleanUp();
+             this.locks.delete(peerId);
+         }
+     }
+diff --git a/node_modules/@libp2p/peer-store/src/store.ts b/node_modules/@libp2p/peer-store/src/store.ts
+index e1860d1..ebd3a61 100644
+--- a/node_modules/@libp2p/peer-store/src/store.ts
++++ b/node_modules/@libp2p/peer-store/src/store.ts
+@@ -105,6 +105,7 @@ export class PersistentStore {
+     lock.refs--
+ 
+     if (lock.refs === 0) {
++      lock.lock.cleanUp()
+       this.locks.delete(peerId)
+     }
+   }
