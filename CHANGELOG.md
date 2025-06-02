@@ -1,3 +1,9 @@
+## [1.9.26](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.25...v1.9.26) (2025-06-02)
+
+### Bug Fixes
+
+* clean up locks ([a7d1ab1](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/a7d1ab100c88e0224949d52c292f340365d1260a))
+
 ## [1.9.25](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.24...v1.9.25) (2025-06-01)
 
 ### Bug Fixes
