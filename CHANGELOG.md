@@ -1,3 +1,9 @@
+## [1.9.28](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.27...v1.9.28) (2025-06-06)
+
+### Bug Fixes
+
+* patch multiaddr ([c092c4a](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/c092c4a026de498cdfa3612d1e947710c71ce54f))
+
 ## [1.9.27](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.26...v1.9.27) (2025-06-03)
 
 ### Bug Fixes
