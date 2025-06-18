@@ -166,7 +166,6 @@
   },
   "devDependencies": {
     "aegir": "^47.0.14",
-    "execa": "^9.6.0",
     "patch-package": "^8.0.0"
   }
 }

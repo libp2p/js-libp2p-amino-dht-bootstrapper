@@ -1422,7 +1422,7 @@ index fb941dd..964ed3f 100644
  import { PROTOCOL_ERRORS } from './constants.js'
 @@ -395,17 +396,16 @@ export class YamuxMuxer implements StreamMuxer {
    }
- 
+
    private async keepAliveLoop (): Promise<void> {
 -    const abortPromise = new Promise((_resolve, reject) => { this.closeController.signal.addEventListener('abort', reject, { once: true }) })
      this.log?.trace('muxer keepalive enabled interval=%s', this.config.keepAliveInterval)
