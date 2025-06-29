@@ -1,3 +1,19 @@
+## [1.9.31](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.30...v1.9.31) (2025-06-29)
+
+### Bug Fixes
+
+* add quic ([b88393a](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/b88393ae3ec3838666d8f60d34de0362d55e18c8))
+
+### Trivial Changes
+
+* bump aegir from 47.0.18 to 47.0.19 ([#342](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/342)) ([e592df0](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/e592df00dbc7b5c22119cfa8ff134e96ff315a70))
+* bump docker/build-push-action from 5 to 6 ([#327](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/327)) ([0088b8f](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/0088b8f7e6a160a7d077c91085a0d4e73e83c294))
+* linting ([8eecdc9](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/8eecdc93140f652b9143d6ab079c9d30867a44ad))
+
+### Dependencies
+
+* bump @chainsafe/libp2p-noise ([#341](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/issues/341)) ([7622bdd](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/7622bddb0fb391a9d812b22e2ed67ec4ca9c0012))
+
 ## [1.9.30](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.29...v1.9.30) (2025-06-25)
 
 ### Bug Fixes
