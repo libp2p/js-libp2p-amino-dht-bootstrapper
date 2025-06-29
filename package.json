@@ -135,7 +135,8 @@
     "test:node": "aegir test -t node --cov",
     "release": "aegir release",
     "dep-check": "aegir dep-check",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "start": "npm run build && node ./dist/src/index.js"
   },
   "dependencies": {
     "@chainsafe/libp2p-noise": "^16.1.0",
