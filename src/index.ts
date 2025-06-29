@@ -5,6 +5,7 @@ import { createServer } from 'node:http'
 import { parseArgs } from 'node:util'
 import { noise } from '@chainsafe/libp2p-noise'
 import { yamux } from '@chainsafe/libp2p-yamux'
+import { quic } from '@chainsafe/libp2p-quic'
 import { autoNAT } from '@libp2p/autonat'
 import { bootstrap } from '@libp2p/bootstrap'
 import { circuitRelayServer, circuitRelayTransport } from '@libp2p/circuit-relay-v2'
@@ -198,7 +199,8 @@ const libp2pOptions: Libp2pOptions = {
     webSockets(),
     webRTC(),
     webRTCDirect(),
-    tcp()
+    tcp(),
+    quic()
   ],
   streamMuxers: [
     yamux()
