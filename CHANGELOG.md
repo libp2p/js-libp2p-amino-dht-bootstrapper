@@ -1,3 +1,13 @@
+## [1.9.32](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.31...v1.9.32) (2025-06-29)
+
+### Bug Fixes
+
+* update example config ([c10f2ac](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/c10f2ac34796cdeb858649e53a062065ff3526e6))
+
+### Trivial Changes
+
+* patch quic ([8e75656](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/8e75656df4d2372aa0f547f3919c081e7a11b2a1))
+
 ## [1.9.31](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.30...v1.9.31) (2025-06-29)
 
 ### Bug Fixes
