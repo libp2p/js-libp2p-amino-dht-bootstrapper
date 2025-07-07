@@ -1,3 +1,9 @@
+## [1.9.34](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.33...v1.9.34) (2025-07-07)
+
+### Bug Fixes
+
+* record quic v1 connections ([6e1d5be](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/6e1d5bea14938d124e2f5a5818112497e9e484f1))
+
 ## [1.9.33](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.32...v1.9.33) (2025-07-07)
 
 ### Bug Fixes
