@@ -39,8 +39,6 @@ Options:
       --config <CONFIG>              Path to IPFS config file (required)
       --metrics-path <METRICS_PATH>  Metric endpoint path [default: /metrics]
       --metrics-port <PORT>          Metric endpoint path [default: 8888]
-      --enable-kademlia              Whether to run the libp2p Kademlia protocol and join the IPFS DHT
-      --enable-autonat               Whether to run the libp2p Autonat protocol
       --api-port <PORT>              Port to serve the RPC API [default: 8899]
       --api-host <HOST>              Host to serve the RPC API on [default: 127.0.0.1]
   -h, --help                         Print help
@@ -70,14 +68,6 @@ Please note that the RPC API server only listens on the loopback interface (127.
   "config": {
     "description": "Path to IPFS config file",
     "type": "string"
-  },
-  "enable-kademlia": {
-    "description": "Whether to run the libp2p Kademlia protocol and join the IPFS DHT",
-    "type": "boolean"
-  },
-  "enable-autonat": {
-    "description": "Whether to run the libp2p Autonat protocol",
-    "type": "boolean"
   },
   "metrics-path": {
     "description": "Metric endpoint path",

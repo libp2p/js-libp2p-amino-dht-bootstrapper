@@ -51,10 +51,6 @@ const options = {
     description: 'Path to IPFS config file',
     type: 'string'
   },
-  'enable-tls': {
-    description: 'Whether to enable the tls connection encrypter',
-    type: 'boolean'
-  },
   'metrics-path': {
     description: 'Metric endpoint path',
     default: '/metrics',
