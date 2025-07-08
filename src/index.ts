@@ -6,7 +6,7 @@ import { parseArgs } from 'node:util'
 import { noise } from '@chainsafe/libp2p-noise'
 import { quic } from '@chainsafe/libp2p-quic'
 import { yamux } from '@chainsafe/libp2p-yamux'
-import { autoNAT } from '@libp2p/autonat'
+import { autoNATv2 } from '@libp2p/autonat-v2'
 import { bootstrap } from '@libp2p/bootstrap'
 import { circuitRelayServer, circuitRelayTransport } from '@libp2p/circuit-relay-v2'
 import { dcutr } from '@libp2p/dcutr'
@@ -50,14 +50,6 @@ const options = {
   config: {
     description: 'Path to IPFS config file',
     type: 'string'
-  },
-  'enable-kademlia': {
-    description: 'Whether to run the libp2p Kademlia protocol and join the IPFS DHT',
-    type: 'boolean'
-  },
-  'enable-autonat': {
-    description: 'Whether to run the libp2p Autonat protocol',
-    type: 'boolean'
   },
   'enable-tls': {
     description: 'Whether to enable the tls connection encrypter',
@@ -107,8 +99,6 @@ const args = parseArgs({
 
 const {
   config: argConfigFilename,
-  'enable-kademlia': argEnableKademlia,
-  'enable-autonat': argEnableAutonat,
   'metrics-path': argMetricsPath,
   'metrics-port': argMetricsPort,
   'api-port': argApiPort,
@@ -162,6 +152,12 @@ const services: Record<string, any> = {
   ping: ping(),
   dcutr: dcutr(),
   keychain: keychain(),
+  autoNATv2: autoNATv2(),
+  dht: kadDHT({
+    protocol: '/ipfs/kad/1.0.0',
+    peerInfoMapper: removePrivateAddressesMapper,
+    prefixLength: 4
+  }),
 
   // extra metrics
   connectionsByTransportMetrics: connectionsByTransportMetrics(),
@@ -211,20 +207,6 @@ const libp2pOptions: Libp2pOptions = {
   ],
   metrics: prometheusMetrics(),
   services
-}
-
-if (argEnableKademlia === true) {
-  console.info('Enabling Kademlia DHT')
-  services.dht = kadDHT({
-    protocol: '/ipfs/kad/1.0.0',
-    peerInfoMapper: removePrivateAddressesMapper,
-    prefixLength: 4
-  })
-}
-
-if (argEnableAutonat === true) {
-  console.info('Enabling Autonat')
-  services.autonat = autoNAT()
 }
 
 const node = await createLibp2p(libp2pOptions)
