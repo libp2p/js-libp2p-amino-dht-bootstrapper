@@ -1,3 +1,9 @@
+## [1.9.35](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.34...v1.9.35) (2025-07-08)
+
+### Bug Fixes
+
+* update deps ([b2806b4](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/b2806b4a6bf3407d8c362ae75923f7dc0dab93c4))
+
 ## [1.9.34](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.33...v1.9.34) (2025-07-07)
 
 ### Bug Fixes
