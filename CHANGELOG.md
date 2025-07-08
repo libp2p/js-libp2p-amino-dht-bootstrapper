@@ -1,3 +1,13 @@
+## [1.9.36](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.35...v1.9.36) (2025-07-08)
+
+### Bug Fixes
+
+* enable autonat v2 ([9ebd731](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/9ebd731e2a0722408748831420608d50f85762d2))
+
+### Trivial Changes
+
+* update readme ([a543179](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/a543179af009c013c26fb8932bd94782033f98b1))
+
 ## [1.9.35](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.34...v1.9.35) (2025-07-08)
 
 ### Bug Fixes
