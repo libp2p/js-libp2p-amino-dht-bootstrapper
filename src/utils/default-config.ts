@@ -15,11 +15,11 @@ export const defaultConfig: BootstrapConfig = {
     listen: [
       '/ip4/0.0.0.0/tcp/4001',
       '/ip4/0.0.0.0/tcp/4002/ws',
-      '/ip4/0.0.0.0/udp/4003/quic-v1',
+      // '/ip4/0.0.0.0/udp/4003/quic-v1',
       '/ip4/0.0.0.0/udp/4004/webrtc-direct',
       '/ip6/::/tcp/4001',
       '/ip6/::/tcp/4002/ws',
-      '/ip6/::/udp/4003/quic-v1',
+      // '/ip6/::/udp/4003/quic-v1',
       '/ip6/::/udp/4004/webrtc-direct'
     ]
   },

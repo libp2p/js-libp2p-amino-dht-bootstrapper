@@ -3,9 +3,6 @@
 import { writeFileSync } from 'node:fs'
 import { createServer } from 'node:http'
 import { parseArgs } from 'node:util'
-import { noise } from '@chainsafe/libp2p-noise'
-import { quic } from '@chainsafe/libp2p-quic'
-import { yamux } from '@chainsafe/libp2p-yamux'
 import { autoNATv2 } from '@libp2p/autonat-v2'
 import { bootstrap } from '@libp2p/bootstrap'
 import { circuitRelayServer, circuitRelayTransport } from '@libp2p/circuit-relay-v2'
@@ -13,13 +10,15 @@ import { dcutr } from '@libp2p/dcutr'
 import { identify, identifyPush } from '@libp2p/identify'
 import { kadDHT, removePrivateAddressesMapper } from '@libp2p/kad-dht'
 import { keychain } from '@libp2p/keychain'
+import { noise } from '@libp2p/noise'
 import { ping } from '@libp2p/ping'
 import { prometheusMetrics } from '@libp2p/prometheus-metrics'
 import { tcp } from '@libp2p/tcp'
 import { tls } from '@libp2p/tls'
-import { isPrivateIp } from '@libp2p/utils/private-ip'
+import { isPrivate } from '@libp2p/utils'
 import { webRTC, webRTCDirect } from '@libp2p/webrtc'
 import { webSockets } from '@libp2p/websockets'
+import { yamux } from '@libp2p/yamux'
 import { LevelDatastore } from 'datastore-level'
 import { createLibp2p } from 'libp2p'
 import { userAgent } from 'libp2p/user-agent'
@@ -173,17 +172,15 @@ const libp2pOptions: Libp2pOptions = {
     announceFilter: (addrs) => {
       // filter out private IP addresses
       return addrs.filter((addr) => {
-        const nodeAddress = addr.nodeAddress()
-        return isPrivateIp(nodeAddress.address) !== true
+        return !isPrivate(addr)
       })
     }
   },
   connectionManager: config.connectionManager,
   connectionGater: {
     // do not try to dial private addresses
-    denyDialMultiaddr (multiaddr) {
-      const nodeAddress = multiaddr.nodeAddress()
-      return isPrivateIp(nodeAddress.address) === true
+    denyDialMultiaddr (addr) {
+      return !isPrivate(addr)
     }
   },
   transports: [
@@ -191,8 +188,7 @@ const libp2pOptions: Libp2pOptions = {
     webSockets(),
     webRTC(),
     webRTCDirect(),
-    tcp(),
-    quic()
+    tcp()
   ],
   streamMuxers: [
     yamux()
@@ -213,15 +209,15 @@ console.info('PeerId', node.peerId.toString())
 await createRpcServer({ apiPort: parseInt(argApiPort ?? options['api-port'].default, 10), apiHost: argApiHost, libp2p: node })
 
 const waitForPublicInterval = setInterval(() => {
-  const maddrs = node.getMultiaddrs()
-  if (maddrs.length > 0) {
+  const addrs = node.getMultiaddrs()
+  if (addrs.length > 0) {
     console.info()
     console.info('libp2p listening on:')
     // output listening addresses every 10 seconds
-    maddrs.forEach((ma) => { console.info(`${ma.toString()}`) })
+    addrs.forEach((ma) => { console.info(`${ma.toString()}`) })
     console.info()
     clearInterval(waitForPublicInterval)
-    writeListeningAddrsToFile(maddrs)
+    writeListeningAddrsToFile(addrs)
   } else {
     console.info('Waiting for public listening addresses...')
   }

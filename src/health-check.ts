@@ -7,11 +7,11 @@
  * automatically execute it via the health-check DockerFile instruction
  */
 import { readFileSync } from 'node:fs'
-import { noise } from '@chainsafe/libp2p-noise'
-import { yamux } from '@chainsafe/libp2p-yamux'
+import { noise } from '@libp2p/noise'
 import { ping } from '@libp2p/ping'
 import { tcp } from '@libp2p/tcp'
 import { webSockets } from '@libp2p/websockets'
+import { yamux } from '@libp2p/yamux'
 import { multiaddr } from '@multiformats/multiaddr'
 import { createLibp2p } from 'libp2p'
 import type { PeerId } from '@libp2p/interface'
