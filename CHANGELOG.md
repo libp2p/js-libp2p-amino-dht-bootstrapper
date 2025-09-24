@@ -1,3 +1,13 @@
+## [2.0.0](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.36...v2.0.0) (2025-09-24)
+
+### ⚠ BREAKING CHANGES
+
+* now ships with libp2p v3, quic is disabled
+
+### Features
+
+* upgrade to libp2p v3 ([f694888](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/commit/f694888c581538df8998a23322e93e1f773a74dc))
+
 ## [1.9.36](https://github.com/libp2p/js-libp2p-amino-dht-bootstrapper/compare/v1.9.35...v1.9.36) (2025-07-08)
 
 ### Bug Fixes
